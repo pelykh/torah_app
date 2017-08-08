@@ -7,3 +7,8 @@ DatabaseCleaner.clean
     confirmed_at: DateTime.now
   )
 end
+
+
+10.times do |n|
+  Subject.create(name: "Subject#{n}")
+end
