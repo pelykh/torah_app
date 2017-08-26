@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   resources :chatrooms, only: [:index, :show]
   post "chatrooms/:user_id", to: "chatrooms#create", as: "new_chatroom"
+
+  mount ActionCable.server => '/cable'
 end
