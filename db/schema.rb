@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808065624) do
+ActiveRecord::Schema.define(version: 20170826085629) do
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "interests", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +24,25 @@ ActiveRecord::Schema.define(version: 20170808065624) do
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_interests_on_subject_id"
     t.index ["user_id"], name: "index_interests_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "chatroom_id"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "participatings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chatroom_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["chatroom_id"], name: "index_participatings_on_chatroom_id"
+    t.index ["user_id"], name: "index_participatings_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|

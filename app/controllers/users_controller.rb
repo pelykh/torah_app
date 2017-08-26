@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:add_subject]
+
   def index
     @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    @chatroom = Chatroom.find_by_participants(current_user, @user)
   end
 
   def add_subject
