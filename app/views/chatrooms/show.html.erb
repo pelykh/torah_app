@@ -1,4 +1,4 @@
-<div id="messages" data-chat-room-id="<%= @chatroom.id %>">
+<div id="messages" data-chatroom-id="<%= @chatroom.id %>">
   <%= render @messages %>
 </div>
 
@@ -10,3 +10,9 @@
 
   <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
 <% end %>
+
+<button id="call-button">Call</button>
+<div id="webcam-preview"></div>
+<div id="participant-webcams"></div>
+
+<script src="//media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>

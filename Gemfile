@@ -36,8 +36,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'omniauth'
+gem 'twilio-ruby'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'byebug', platform: :mri
