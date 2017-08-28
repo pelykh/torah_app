@@ -28,45 +28,58 @@ jQuery(document).on("turbolinks:load", function() {
       showWebcamPreview()
 
       room.participants.forEach(participant => {
+        createParticipantDivifNeeded(participant)
         participant.on('trackAdded', function(track){
-          showTrack(track)
+          showTrackifNeeded(participant, track)
         })
-        showParticipantWebcam(participant)
       });
 
       room.on('participantConnected', function(participant) {
         console.log('A remote Participant connected: ', participant)
+        createParticipantDivifNeeded(participant)
         participant.on('trackAdded', function(track){
-          showTrack(track)
+          showTrackifNeeded(participant, track)
         })
       })
 
-      room.on('participantConnected', function(participant) {
-        console.log('A remote Participant connected: ', participant)
-        showParticipantWebcam(participant)
+      room.on('participantDisonnected', function(participant) {
+        console.log('A remote Participant disconnected: ', participant)
+        $(`.webcam[data-identity='${participant.identity}']`).remove()
       })
     }, function(error) {
         console.error('Unable to connect to Room: ' +  error.message)
     })
   }
 
-  function showTrack(track) {
-    document.getElementById('participant-webcams').appendChild(track.attach())
+  function showTrackifNeeded(participant, track) {
+    var webcamDiv = $(`.webcam[data-identity='${participant.identity}']`)
+    webcamDiv.find("video").remove()
+    webcamDiv.find("audio").remove()
+    webcamDiv.append(track.attach())
+  }
+
+  function participantWebcamDiv(participant) {
+    var webcam = document.createElement("div")
+    webcam.dataset.identity = participant.identity
+    webcam.className = "webcam"
+    return webcam
   }
 
   function showWebcamPreview() {
+    var webcamDiv = $("#webcam-preview")
+    if (webcamDiv.has("video").length)
+      return false
     Twilio.Video.createLocalTracks().then(function(localTracks) {
-      var localMediaContainer = document.getElementById('webcam-preview');
       localTracks.forEach(function(track) {
-        localMediaContainer.appendChild(track.attach())
+        webcamDiv.append(track.attach())
       })
     })
   }
 
-  function showParticipantWebcam(participant) {
-    participant.tracks.forEach(track => {
-      showTrack(track)
-    })
+  function createParticipantDivifNeeded(participant) {
+    if ($(`.webcam[data-identity='${participant.identity}']`).length)
+      return false
+    $("#participants-webcams").append(participantWebcamDiv(participant))
   }
 
   $("#call-button").on("click", function(e) {
@@ -74,8 +87,15 @@ jQuery(document).on("turbolinks:load", function() {
 
     getToken(chatroom_id).then(function(data) {
       makeCall(chatroom_id, data.token)
+      App.global_chat.start_video_call(chatroom_id)
     })
+  })
 
+  $("#messages").on("click", ".video-call-link", function(){
+    var chatroom_id = $("#messages").data("chatroom-id")
 
+    getToken(chatroom_id).then(function(data) {
+      makeCall(chatroom_id, data.token)
+    })
   })
 })

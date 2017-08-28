@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+.video-call-link {
+  color: blue;
+}
+
+.video-call-link:hover {
+  cursor: pointer;
+}
+
+#video-chat {
+  position:relative;
+  width: 1000px;
+}
+
+#webcam-preview {
+  width:300px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  video {
+    width:inherit;
+  }
+
+}
+
+#participants-webcams {
+  width:1000px;
+
+  .webcam {
+    width:inherit;
+    video {
+      width:inherit;
+    }
+  }
+}

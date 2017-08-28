@@ -22,6 +22,9 @@ jQuery(document).on 'turbolinks:load', ->
       send_message: (message, chatroom_id) ->
         @perform 'send_message', message: message, chatroom_id: chatroom_id
 
+      start_video_call: (chatroom_id) ->
+        @perform 'start_video_call', chatroom_id: chatroom_id
+
   $('#new_message').submit (e) ->
     $this = $(this)
     textarea = $this.find('#message_body')
