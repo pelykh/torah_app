@@ -12,16 +12,16 @@ jQuery(document).on('turbolinks:load', function() {
       channel: 'ChatroomsChannel',
       chatroom_id: chatroom_id
     }, {
-    received(data) {
+    received: function(data) {
       messages.append(data['message']);
       messages_to_bottom();
     },
 
-    send_message(message, chatroom_id) {
+    send_message: function(message, chatroom_id) {
       this.perform('send_message', {message, chatroom_id});
     },
 
-    start_video_call(chatroom_id) {
+    start_video_call: function(chatroom_id) {
       this.perform('start_video_call', {chatroom_id});
     }
   });
