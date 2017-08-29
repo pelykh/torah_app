@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'omniauth'
 gem 'twilio-ruby'
+gem 'dotenv-rails'
 
 group :production do
  gem 'pg'
@@ -44,7 +45,6 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'byebug', platform: :mri
