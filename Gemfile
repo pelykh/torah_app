@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -38,7 +38,12 @@ gem 'devise'
 gem 'omniauth'
 gem 'twilio-ruby'
 
+group :production do
+ gem 'pg'
+end
+
 group :development, :test do
+  gem 'sqlite3'
   gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
@@ -57,6 +62,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
