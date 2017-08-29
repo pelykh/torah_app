@@ -38,6 +38,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'twilio-ruby'
 gem 'dotenv-rails'
+gem 'database_cleaner'
 
 group :production do
  gem 'pg'
@@ -45,7 +46,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'database_cleaner'
+
   gem 'factory_girl_rails'
   gem 'byebug', platform: :mri
 end
