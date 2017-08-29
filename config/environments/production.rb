@@ -83,4 +83,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.web_socket_server_url = "wss://torah-app.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://torah-app.herokuapp.com', 'http://torah-app.herokuapp.com']
+
 end
