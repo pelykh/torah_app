@@ -9,9 +9,6 @@ class MessageBroadcastJob < ApplicationJob
   private
 
   def render_message(message)
-    "<div class='message'>
-      #{message.body}
-      <span class='text-muted'>#{message.user.email} at #{message.created_at}</span><br>
-    </div>"
+    ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
   end
 end

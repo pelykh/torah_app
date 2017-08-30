@@ -70,7 +70,14 @@ jQuery(document).on('turbolinks:load', function() {
         .then(createRoom, roomErrors);
     });
 
+    showVideoChat();
+
     App.global_chat.start_video_call(chatroom_id);
+  }
+
+  function showVideoChat() {
+    $('#video-chat').show().addClass('col-lg-8');
+    $('#chatroom').addClass('col-lg-4');
   }
 
   $('#call-button').on('click', connectToVideoChat);

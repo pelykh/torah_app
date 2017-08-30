@@ -1,19 +1,21 @@
-<div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-  <%= render @messages %>
-</div>
-
-<%= form_for @message, url: '#' do |f| %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: 'form-control' %>
+<div id= "chatroom">
+  <div id="messages"  data-chatroom-id="<%= @chatroom.id %>" >
+    <%= render @messages %>
   </div>
 
-  <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
-<% end %>
+  <%= form_for @message, url: '#' do |f| %>
+    <div class="form-group">
+      <%= f.text_area :body, class: 'form-control', rows: 3, placeholder: "Write a reply..." %>
+    </div>
 
-<button id="call-button">Call</button>
+    <%= f.submit "Send", class: 'btn-primary pull-right', data: { disable_with: false } %>
+  <% end %>
+  <button id="call-button">Call</button>
+</div>
+
+
 <div id="video-chat">
-  <div id="participants-webcams"></div>
+  <div id="participants-webcams" class= "col-lg-12"></div>
   <div id="webcam-preview"></div>
 </div>
 
