@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :chatrooms, through: :participatings
   has_many :messages
 
+  validates :name, length: { in: 6..20 }
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :timeoutable, :lockable, :omniauthable

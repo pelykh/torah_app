@@ -3,7 +3,7 @@
 <ul class="list-group">
   <% @users.each do |user| %>
     <li class="list-group-item">
-      <%= link_to user.email, user %>
+      <%= link_to user.name, user %>
     </li>
   <% end %>
 </ul>

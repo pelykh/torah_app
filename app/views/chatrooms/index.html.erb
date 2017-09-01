@@ -8,7 +8,7 @@
   <tbody>
     <% @chatrooms.each do |chatroom| %>
       <tr>
-        <td><%= link_to "test", chatroom %></td>
+        <td><%= link_to chatroom.participants_name_without(@current_user), chatroom %></td>
       </tr>
     <% end %>
   </tbody>

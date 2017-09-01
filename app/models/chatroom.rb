@@ -12,4 +12,14 @@ class Chatroom < ApplicationRecord
       chat.users.select{ |user| user.id == user_b.id }.any?
     end.first
   end
+
+  def participants_name_without(user)
+    name = ""
+    users.each do |u|
+      unless user == u
+        name <<  u.name + " "
+      end
+    end
+    return name
+  end
 end
