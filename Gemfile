@@ -40,6 +40,7 @@ gem 'omniauth'
 gem 'twilio-ruby'
 gem 'dotenv-rails'
 gem 'database_cleaner'
+gem 'carrierwave', '~> 1.0'
 
 group :production do
  gem 'pg'

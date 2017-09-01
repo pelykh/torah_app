@@ -28,9 +28,20 @@
   }
 }
 
+#users-list {
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
 .msg {
   padding:5px;
   margin:0;
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
 
   .time {
       color:#bfbfbf;
@@ -41,8 +52,14 @@
     font-weight: 700;
   }
 }
+
 #messages {
   padding:10px;
   max-height: 400px;
   overflow: auto;
+}
+
+.profile-avatar {
+  max-height: 400px;
+  max-width: 400px;
 }

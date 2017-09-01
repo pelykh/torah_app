@@ -1,9 +1,15 @@
 <h1>Users</h1>
 
-<ul class="list-group">
+<ul id="users-list" class="list-group">
   <% @users.each do |user| %>
     <li class="list-group-item">
-      <%= link_to user.name, user %>
+        <%= link_to user, class: "pull-left"   do %>
+          <%= image_tag(user.avatar_url, class: "media-object avatar") %>
+        <% end %>
+
+        <%= link_to user do %>
+          <%= user.name %>
+        <% end %>
     </li>
   <% end %>
 </ul>
