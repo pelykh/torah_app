@@ -5,10 +5,12 @@
   <%= subject.name %>
   <%= link_to 'Show', subject %>
   <%= link_to 'Edit', edit_subject_path(subject) %>
-  <% if current_user.interests.find_by(subject_id: subject.id)%>
-    <%= link_to 'Unlike', "remove_subject/#{subject.id}", method: :delete %>
-  <% else %>
-    <%= link_to 'Like', "add_subject/#{subject.id}", method: :post %>
+  <% if current_user %>
+    <% if current_user.interests.find_by(subject_id: subject.id)%>
+      <%= link_to 'Unlike', "remove_subject/#{subject.id}", method: :delete %>
+    <% else %>
+      <%= link_to 'Like', "add_subject/#{subject.id}", method: :post %>
+    <%end%>
   <%end%>
   <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
 </li>
