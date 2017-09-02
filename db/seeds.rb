@@ -12,6 +12,13 @@ DatabaseCleaner.clean_with(:truncation)
 end
 
 
-10.times do |n|
-  Subject.create!(name: "Subject#{n}")
+3.times do |n|
+  p subject = Subject.create!(name: "Subject#{n}")
+  3.times do |k|
+    p children  = subject.children.create!(name: "Subject#{n} #{k}")
+    3.times do |m|
+      p children.children.create!(name: "Subject#{n} #{k} #{m}")
+    end
+  end
+
 end

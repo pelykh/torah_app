@@ -1,0 +1,10 @@
+<li class="list-group-item">
+  <% if subject.children.exists? %>
+    <%= render partial: "nested_subjects", locals: { subjects: subject.children, parent_id: subject.id } %>
+  <% end %>
+  <%= subject.name %>
+  <%= link_to 'Show', subject %>
+  <%= link_to 'Edit', edit_subject_path(subject) %>
+  <%= link_to 'Like', "add_subject/#{subject.id}", method: :post %>
+  <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
+</li>
