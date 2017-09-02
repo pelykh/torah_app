@@ -1,0 +1,9 @@
+<li class="list-group-item">
+    <%= link_to user, class: "pull-left" do %>
+      <%= image_tag(user.avatar_url, class: "avatar") %>
+    <% end %>
+
+    <%= link_to user do %>
+      <%= user.name %>
+    <% end %>
+</li>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :subjects
   resources :users, only: [:show, :index]
   post "add_subject/:id", to: "users#add_subject"
+  delete "remove_subject/:id", to: "users#remove_subject"
 
   resources :chatrooms, only: [:index, :show]
   post "chatrooms/:user_id", to: "chatrooms#create", as: "new_chatroom"

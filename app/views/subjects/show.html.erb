@@ -1,8 +1,9 @@
-
-<p>
-  <strong>Name:</strong>
-  <%= @subject.name %>
-</p>
+<h1><%= @subject.name %></h1>
 
 <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <%= link_to 'Back', subjects_path %>
+
+<h2> Interested users </h2>
+<ul id="users-list" class="list-group">
+  <%= render @subject.users %>
+</ul>
