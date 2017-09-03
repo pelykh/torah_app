@@ -1,4 +1,4 @@
-jQuery(document).on('turbolinks:load', function() {
+jQuery(document).on('turbolinks:load', () => {
   const chatroom_id = $('#messages').data('chatroom-id');
 
   function getToken(chatroom_id) {

@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     interest = current_user.interests.find_by(subject_id: subject.id)
     unless interest
       Interest.create(user_id: current_user.id, subject_id: subject.id)
-      redirect_to subjects_url, notice: 'Subject was successfully added to your favorites.'
+      head :created and return
     else
-      redirect_to subjects_url, notice: 'You already have added that subject to your favorites.'
+      head :bad_request and return
     end
   end
 
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     interest = current_user.interests.find_by(subject_id: subject.id)
     if interest
       interest.destroy
-      redirect_to subjects_url, notice: 'Subject was successfully deleted from your favorites.'
+      head :no_content and return
     else
-      redirect_to subjects_url, notice: 'You already have alreay deleted that subject from your favorites.'
+      head :bad_request and return
     end
   end
 

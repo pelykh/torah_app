@@ -7,9 +7,9 @@
   <%= link_to 'Edit', edit_subject_path(subject) %>
   <% if current_user %>
     <% if current_user.interests.find_by(subject_id: subject.id)%>
-      <%= link_to 'Unlike', remove_subject_path(subject.id), method: :delete %>
+      <%= link_to 'Unlike',"#", class: "unlike-button", data: { id: subject.id } %>
     <% else %>
-      <%= link_to 'Like', add_subject_path(subject.id), method: :post %>
+      <%= link_to 'Like',"#", class: "like-button", data: { id: subject.id }  %>
     <%end%>
   <%end%>
   <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
