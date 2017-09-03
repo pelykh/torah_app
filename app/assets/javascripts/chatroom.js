@@ -97,6 +97,7 @@ jQuery(document).on('turbolinks:load', function() {
     });
 
     showVideoChat();
+    startCallTimer();
 
     App.global_chat.start_video_call(chatroom_id);
   }
@@ -115,6 +116,31 @@ jQuery(document).on('turbolinks:load', function() {
     $('#video-chat').hide().removeClass('col-lg-8');
     $('#chatroom').removeClass('col-lg-4');
   }
+
+  function startCallTimer() {
+    const timer = $('#call-timer')
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    var timerId = setInterval(() => {
+      seconds ++;
+      if(seconds == 60) {
+        seconds = 0;
+        minutes ++;
+      }
+      if(minutes == 60) {
+        minutes = 0;
+        hours ++;
+      }
+      timer.text(`${hours}:${minutes}:${seconds}`);
+
+    }, 1000);
+    $('#hang-up-button').on('click', () => {
+      clearInterval(timerId);
+      timer.text('');
+    });
+  }
+
 
   $('#call-button').on('click', connectToVideoChat);
 

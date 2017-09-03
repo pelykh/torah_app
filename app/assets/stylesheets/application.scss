@@ -13,16 +13,21 @@
   display: none;
   height: 400px;
 
-  #hang-up-button {
-    width: 32px;
+  #chat-controls {
     position: absolute;
     right: 50%;
     bottom: 10px;
 
-    &:hover {
-      cursor: pointer;
+    #hang-up-button {
+      width: 32px;
+    
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
+
+
   #webcam-preview {
     position: absolute;
     right: 10px;
