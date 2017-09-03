@@ -7,3 +7,6 @@
     <%= link_to "Send message", new_chatroom_path(@user.id), method: :post %>
   <% end %>
 <% end %>
+
+<h2>Interested subjects</h2>
+<%= render @user.subjects %>
