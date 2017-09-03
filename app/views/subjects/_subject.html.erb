@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <% if subject.children.exists? %>
+  <% if local_assigns[:without_nested].nil? && subject.children.exists? %>
     <%= render partial: "nested_subjects", locals: { subjects: subject.children, parent_id: subject.id } %>
   <% end %>
   <%= subject.name %>
@@ -12,5 +12,6 @@
       <%= link_to 'Like',"#", class: "like-button", data: { id: subject.id }  %>
     <%end%>
   <%end%>
+
   <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
 </li>
