@@ -22,8 +22,8 @@ class ChatroomsController < ApplicationController
       ENV["ACCOUNT_SID"],
       ENV["API_KEY_SID"],
       ENV["API_KEY_SECRET"],
-      identity: current_user.email)
-      
+      identity: "#{current_user.name}_#{current_user.id}")
+
     grant = Twilio::JWT::AccessToken::VideoGrant.new
     grant.room = "chatroom_#{params["chatroom_id"]}"
     token.add_grant(grant)

@@ -14,7 +14,19 @@ jQuery(document).on('turbolinks:load', function() {
 
     room.on('participantConnected', connectParticipant);
 
-    room.on('participantDisonnected', disconnectParticipant);
+    room.on('participantDisconnected', disconnectParticipant);
+
+    room.on('disconnected', removeLocalTracks);
+
+    $('#hang-up-button').on('click', () => disconnectFromVideoChat(room));
+  }
+
+  function removeLocalTracks(room) {
+    room.localParticipant.tracks.forEach(track => {
+      var attachedElements = track.detach();
+      attachedElements.forEach(element => element.remove());
+    });
+    console.log('You have been disconected from Room');
   }
 
   function roomErrors(error) {
@@ -28,12 +40,19 @@ jQuery(document).on('turbolinks:load', function() {
 
   function disconnectParticipant(participant) {
     console.log('A remote Participant disconnected: ', participant);
+    hideParticipant(participant);
+    showDisconnectedParticipantInChat(participant);
+  }
+
+  function showDisconnectedParticipantInChat(participant) {
+    const name = participant.identity.split("_", 1)
+    $('#messages').append(`<span>${name} has disconnected from video chat</span>`)
   }
 
   function showParticipant(participant){
     let div = findParticipantDiv(participant);
     if (div) {
-      div.innerHTML = "";
+      div.innerHTML = '';
     } else {
       div = participantDiv(participant);
       $('#participants-webcams').append(div);
@@ -42,6 +61,13 @@ jQuery(document).on('turbolinks:load', function() {
     participant.on('trackAdded', (track) => {
       div.appendChild(track.attach());
     });
+  }
+
+  function hideParticipant(participant){
+    let div = findParticipantDiv(participant);
+    if (div) {
+      div.remove();
+    }
   }
 
   function findParticipantDiv(participant) {
@@ -75,9 +101,19 @@ jQuery(document).on('turbolinks:load', function() {
     App.global_chat.start_video_call(chatroom_id);
   }
 
+  function disconnectFromVideoChat(room) {
+    hideVideoChat();
+    room.disconnect();
+  }
+
   function showVideoChat() {
     $('#video-chat').show().addClass('col-lg-8');
     $('#chatroom').addClass('col-lg-4');
+  }
+
+  function hideVideoChat() {
+    $('#video-chat').hide().removeClass('col-lg-8');
+    $('#chatroom').removeClass('col-lg-4');
   }
 
   $('#call-button').on('click', connectToVideoChat);

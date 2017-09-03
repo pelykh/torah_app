@@ -10,7 +10,7 @@ class StartVideoCallBroadcastJob < ApplicationJob
 
   def video_call_message(user)
     %(<div>
-        <span>#{user.email} has joined to video chat.</span>
+        <span>#{user.name} has joined to video chat.</span>
         <span class="video-call-link"> Click here to join </span>
       </div>)
   end
