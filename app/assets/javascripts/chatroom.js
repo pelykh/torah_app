@@ -145,4 +145,12 @@ jQuery(document).on('turbolinks:load', function() {
   $('#call-button').on('click', connectToVideoChat);
 
   $('#messages').on('click', '.video-call-link', connectToVideoChat);
+
+  $('#participants-webcams').on('DOMSubtreeModified', () => {
+    if($('.webcam').length < 1) {
+      $('#no-participants').show();
+    } else {
+     $('#no-participants').hide();
+    }
+  });
 });

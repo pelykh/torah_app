@@ -20,7 +20,7 @@
 
     #hang-up-button {
       width: 32px;
-    
+
       &:hover {
         cursor: pointer;
       }
@@ -36,9 +36,18 @@
       height: 150px;
     }
   }
+
   #participants-webcams {
+    height: 400px;
+
     video {
       width: 100%;
+    }
+
+    #no-participants {
+      position: absolute;
+      top: 50%;
+      transform: translateX(50%);
     }
   }
 }
