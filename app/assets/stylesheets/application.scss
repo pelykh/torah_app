@@ -82,6 +82,17 @@
   padding:10px;
   max-height: 400px;
   overflow: auto;
+
+  .edit-message {
+    display: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .edit-form {
+    display: none;
+  }
 }
 
 .profile-avatar {

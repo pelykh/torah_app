@@ -21,7 +21,11 @@
             <li><%= link_to "Subjects", subjects_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Profile", current_user %></li>
+            <li><%= link_to current_user do %>
+               <div id="current_user" data-id="<%= current_user.id %>">
+                 Profile
+               </div>
+            <% end %></li>
             <li><%= link_to "Settings", edit_user_registration_path %></li>
             <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
           </ul>

@@ -1,6 +1,8 @@
 <div id= "chatroom">
   <div id="messages"  data-chatroom-id="<%= @chatroom.id %>" >
-    <%= render @messages %>
+    <% @messages.each do |message| %>
+      <%= render message, with_edit_form: current_user == message.user.id %>
+    <% end %>
   </div>
 
   <%= form_for @message, url: '#' do |f| %>
