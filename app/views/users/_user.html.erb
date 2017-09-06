@@ -1,6 +1,7 @@
-<li class="list-group-item">
+<li class="list-group-item clearfix">
     <%= link_to user, class: "pull-left" do %>
       <%= image_tag(user.avatar_url, class: "avatar") %>
+      <div class="status"><div class="<%= user.status %>"></div></div>
     <% end %>
 
     <%= link_to user do %>

@@ -57,6 +57,33 @@
     width: 32px;
     height: 32px;
   }
+
+  .pull-left {
+    position: relative;
+
+    .status {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+	    width: 10px;
+	    height: 10px;
+
+      .online {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: chartreuse;
+      }
+
+      .offline {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: grey;
+      }
+    }
+  }
 }
 
 .msg {
@@ -93,9 +120,45 @@
   .edit-form {
     display: none;
   }
+
+  .pull-left {
+    position: relative;
+
+    .status {
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+      border-radius: 50%;
+	    width: 10px;
+	    height: 10px;
+
+      .online {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: chartreuse;
+      }
+
+      .offline {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: grey;
+      }
+    }
+  }
 }
 
 .profile-avatar {
   max-height: 400px;
   max-width: 400px;
+}
+
+.status {
+  .online {
+    color: green;
+  }
+  .offline {
+    color: grey;
+  }
 }

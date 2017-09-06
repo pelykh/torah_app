@@ -1,5 +1,6 @@
 <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
 <h2><%= @user.name %></h2>
+<div class="status"><div class="<%= @user.status %>"><%= @user.status %></div></div>
 <% unless @current_user == @user %>
   <% if @chatroom %>
     <%= link_to "Go to dialog", chatroom_path(@chatroom.id) %>

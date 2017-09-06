@@ -2,6 +2,7 @@
 
     <%= link_to message.user, class: "pull-left" do %>
       <%= image_tag(message.user.avatar_url, class: "media-object avatar") %>
+      <div class="status"><div class="<%= message.user.status %>"></div></div>
     <% end %>
 
     <div class="media-body">

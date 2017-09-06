@@ -7,7 +7,8 @@ DatabaseCleaner.clean_with(:truncation)
     email: "email#{n}@gmail.com",
     name: "namee#{n}",
     password: "111111",
-    confirmed_at: DateTime.now
+    confirmed_at: DateTime.now,
+    status: 0
   )
 end
 
