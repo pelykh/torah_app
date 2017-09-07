@@ -22,6 +22,8 @@ jQuery(document).on('turbolinks:load', function() {
       const message = $(data['message']);
       if (message.data('author-id') == current_user_id) {
         message.find('.edit-message').show();
+      } else {
+        playNewMessageSound();
       }
       const oldMessage = document.querySelector(`.msg[data-id="${data['id']}"]`)
       if (oldMessage) {
@@ -44,6 +46,11 @@ jQuery(document).on('turbolinks:load', function() {
       this.perform('start_video_call', {chatroom_id});
     }
   });
+
+  function playNewMessageSound() {
+    const audio = new Audio(`${window.location.origin}/sounds/new_message.mp3`);
+    audio.play();
+  }
 
   function openMessageEditForm(e) {
     const message = $(e.target).parents('.msg');
