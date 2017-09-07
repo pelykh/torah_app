@@ -1,15 +1,8 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @chatrooms.each do |chatroom| %>
-      <tr>
-        <td><%= link_to chatroom.participants_name_without(@current_user), chatroom %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2>Chatrooms</h2>
+<ul id="chatrooms-list" class="list-group">
+  <% @chatrooms.each do |chatroom| %>
+    <li class="list-group-item clearfix">
+      <td><%= link_to chatroom.participants_name_without(@current_user), chatroom %></td>
+    </li>
+  <% end %>
+</ul>

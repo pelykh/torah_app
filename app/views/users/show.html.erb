@@ -1,32 +1,42 @@
+<div class="col-lg-5">
 <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
-<h2><%= @user.name %></h2>
-<div class="status"><div class="<%= @user.status %>"><%= @user.status %></div></div>
+</div>
+<div class="col-lg-7">
+  <h2><%= @user.name %></h2>
+  <div class="status"><div class="<%= @user.status %>"><%= @user.status %></div></div>
 
-<% unless @current_user && @current_user == @user %>
-  <% case @user.relation_with @current_user%>
-    <% when "friends" %>
-      <div> Already your friend </div>
-      <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn-danger", method: :delete %>
-    <% when "not_friends" %>
-      <div> Not friend yet</div>
-      <%= button_to "Add to friends", add_friend_path(@user), class: "btn-success" %>
-    <% when "invited_user" %>
-      <div> Not accepted your invite yet </div>
-      <%= button_to "Cancel invite", remove_friend_path(@user), class: "btn-danger",method: :delete %>
-    <% when "invited_by_user" %>
-      <div> Want's to be your friend </div>
-      <%= button_to "Accept invite", add_friend_path(@user), class: "btn-success" %>
+  <% if @current_user && @current_user != @user %>
+    <div id="relation-with-user">
+      <% case @user.relation_with @current_user%>
+        <% when "friends" %>
+          <p> Already your friend </p>
+          <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn btn-danger", method: :delete %>
+        <% when "not_friends" %>
+          <p> Not friend yet</p>
+          <%= button_to "Add to friends", add_friend_path(@user), class: "btn btn-success" %>
+        <% when "invited_user" %>
+          <p> Not accepted your invite yet </p>
+          <%= button_to "Cancel invite", remove_friend_path(@user), class: "btn btn-danger",method: :delete %>
+        <% when "invited_by_user" %>
+          <p> Want's to be your friend </p>
+          <%= button_to "Accept invite", add_friend_path(@user), class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <div>
+      <% if @chatroom %>
+        <%= button_to "Go to dialog", chatroom_path(@chatroom.id), class: "btn btn-primary", method: :get %>
+      <% else %>
+        <%= button_to "Send message", new_chatroom_path(@user.id), class: "btn btn-primary" %>
+      <% end %>
+    </div>
   <% end %>
 
-  <% if @chatroom %>
-    <%= button_to "Go to dialog", chatroom_path(@chatroom.id), class: "btn-primary", method: :get %>
-  <% else %>
-    <%= button_to "Send message", new_chatroom_path(@user.id), class: "btn-primary" %>
-  <% end %>
-<% end %>
+</div>
+<div class="col-lg-12">
+  <h2>Interested subjects</h2>
 
-<h2>Interested subjects</h2>
-
-<ul id= "subjects-list" class="list-group">
-  <%= render @user.subjects, without_nested: true %>
-</ul>
+  <ul id= "subjects-list" class="list-group">
+    <%= render @user.subjects, without_nested: true %>
+    <%= "Not interested in something yet" unless @user.subjects.any?%>
+  </ul>
+</div>

@@ -22,7 +22,7 @@
               <%= message.body %>
             </div>
             <div class="edit-form">
-              <button class="btn-danger edit-form-cancel">Cancel</button>
+              <button class="btn btn-danger edit-form-cancel">Cancel</button>
               <%= form_for message, url: '#' do |f| %>
                 <div class="form-group">
                   <%= f.text_area :body, class: 'form-control' %>
@@ -30,7 +30,7 @@
 
                 <%= f.hidden_field :id, value: message.id %>
 
-                <%= f.submit "Update", class: 'btn-primary pull-right' %>
+                <%= f.submit "Update", class: 'btn btn-primary pull-right' %>
               <% end %>
             </div>
         </div>

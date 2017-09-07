@@ -15,3 +15,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+jQuery(document).on('turbolinks:load', function() {
+  if ($('#subjects-list').length > 0) {
+    $('#subjects-list').on('click', '.glyphicon-chevron-down', (e) => {
+      $(e.target).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+    });
+
+    $('#subjects-list').on('click', '.glyphicon-chevron-up', (e) => {
+      $(e.target).toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
+    });
+  }
+});

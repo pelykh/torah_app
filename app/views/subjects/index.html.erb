@@ -1,6 +1,6 @@
 <h1>Subjects</h1>
 
-<%= link_to 'New Subject', new_subject_path %>
+<%= button_to 'New Subject', new_subject_path, class: "btn btn-primary", method: "get" %>
 
 <ul id= "subjects-list" class="list-group">
   <%= render @subjects%>

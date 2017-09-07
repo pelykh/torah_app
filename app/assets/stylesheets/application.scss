@@ -150,8 +150,12 @@
 }
 
 .profile-avatar {
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#relation-with-user {
+  margin-bottom: 10px;
 }
 
 .status {
@@ -161,4 +165,8 @@
   .offline {
     color: grey;
   }
+}
+
+#subjects-list {
+  margin-top: 10px;
 }
