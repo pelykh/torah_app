@@ -32,6 +32,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_friend
+    user = User.find(params[:id])
+    if user
+      current_user.friendships.create(friend_id: user.id)
+      redirect_to user
+    end
+  end
+
+  def remove_friend
+    user = User.find(params[:id])
+    if user
+      current_user.friendships.find_by(friend_id: user.id).destroy
+      redirect_to user
+    end
+  end
+
   private
 
   def user_params

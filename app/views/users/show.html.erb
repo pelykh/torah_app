@@ -1,11 +1,27 @@
 <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
 <h2><%= @user.name %></h2>
 <div class="status"><div class="<%= @user.status %>"><%= @user.status %></div></div>
-<% unless @current_user == @user %>
+
+<% unless @current_user && @current_user == @user %>
+  <% case @user.relation_with @current_user%>
+    <% when "friends" %>
+      <div> Already your friend </div>
+      <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn-danger", method: :delete %>
+    <% when "not_friends" %>
+      <div> Not friend yet</div>
+      <%= button_to "Add to friends", add_friend_path(@user), class: "btn-success" %>
+    <% when "invited_user" %>
+      <div> Not accepted your invite yet </div>
+      <%= button_to "Cancel invite", remove_friend_path(@user), class: "btn-danger",method: :delete %>
+    <% when "invited_by_user" %>
+      <div> Want's to be your friend </div>
+      <%= button_to "Accept invite", add_friend_path(@user), class: "btn-success" %>
+  <% end %>
+
   <% if @chatroom %>
-    <%= link_to "Go to dialog", chatroom_path(@chatroom.id) %>
+    <%= button_to "Go to dialog", chatroom_path(@chatroom.id), class: "btn-primary", method: :get %>
   <% else %>
-    <%= link_to "Send message", new_chatroom_path(@user.id), method: :post %>
+    <%= button_to "Send message", new_chatroom_path(@user.id), class: "btn-primary" %>
   <% end %>
 <% end %>
 

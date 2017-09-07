@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :subjects, through: :interests
   has_many :chatrooms, through: :participatings
   has_many :messages
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   validates :name, length: { in: 6..20 }
 
@@ -32,4 +34,19 @@ class User < ApplicationRecord
   def away
     update_attribute(:status, 2)
   end
+
+  def relation_with user
+    invited_by_user = Friendship.find_by(user_id: id, friend_id: user.id)
+    has_invited_user = Friendship.find_by(user_id: user.id, friend_id: id)
+    return "friends" if has_invited_user && invited_by_user
+    return "invited_user" if has_invited_user && !invited_by_user
+    return "invited_by_user" if !has_invited_user && invited_by_user
+    return "not_friends" if !has_invited_user && !invited_by_user
+  end
+
+  def have_sent_friend_invite? user
+    friendship = Friendship.find_by(user_id: user.id, friend_id: id)
+     friendship ? true : false
+  end
+
 end
