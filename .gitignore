@@ -17,5 +17,5 @@
 /tmp
 
 .env
-
+./covarage
 /public/uploads
