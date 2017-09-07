@@ -7,7 +7,7 @@
 
   <% if @current_user && @current_user != @user %>
     <div id="relation-with-user">
-      <% case @user.relation_with @current_user%>
+      <% case @current_user.relation_with @user %>
         <% when "friends" %>
           <p> Already your friend </p>
           <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn btn-danger", method: :delete %>
