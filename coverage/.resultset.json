@@ -61,6 +61,7 @@
         null,
         null,
         1,
+        1,
         null,
         1,
         null,
@@ -579,13 +580,13 @@
         1,
         1,
         1,
-        7,
-        7,
+        17,
+        17,
         null,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/friendship.rb": [
+      "/home/andriy/rails/torah_app/spec/factories/friendships.rb": [
         1,
         1,
         1,
@@ -593,19 +594,43 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/participating.rb": [
+      "/home/andriy/rails/torah_app/spec/factories/interests.rb": [
         1,
         1,
         1,
         1,
+        null,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/factories/messages.rb": [
+        1,
+        1,
+        8,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/factories/participatings.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/factories/subjects.rb": [
+        1,
+        1,
+        9,
         null,
         null
       ],
       "/home/andriy/rails/torah_app/spec/factories/users.rb": [
         1,
         1,
-        40,
-        40,
+        79,
+        79,
         1,
         1,
         1,
@@ -744,6 +769,113 @@
         null,
         null
       ],
+      "/home/andriy/rails/torah_app/spec/models/friendship_spec.rb": [
+        1,
+        null,
+        1,
+        4,
+        null,
+        2,
+        null,
+        2,
+        2,
+        null
+      ],
+      "/home/andriy/rails/torah_app/app/models/friendship.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/models/interest_spec.rb": [
+        1,
+        null,
+        1,
+        4,
+        null,
+        2,
+        null,
+        2,
+        2,
+        null
+      ],
+      "/home/andriy/rails/torah_app/app/models/interest.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/models/message_spec.rb": [
+        1,
+        null,
+        1,
+        8,
+        null,
+        2,
+        null,
+        2,
+        null,
+        2,
+        2,
+        null,
+        2,
+        2,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/home/andriy/rails/torah_app/app/models/message.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        2,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/models/participating_spec.rb": [
+        1,
+        null,
+        1,
+        4,
+        null,
+        2,
+        null,
+        2,
+        2,
+        null
+      ],
+      "/home/andriy/rails/torah_app/app/models/participating.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/models/subject_spec.rb": [
+        1,
+        null,
+        1,
+        6,
+        null,
+        2,
+        null,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "/home/andriy/rails/torah_app/app/models/subject.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
       "/home/andriy/rails/torah_app/spec/models/user_spec.rb": [
         1,
         null,
@@ -835,41 +967,27 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/participating.rb": [
-        1,
-        1,
-        1,
-        null
-      ],
-      "/home/andriy/rails/torah_app/app/models/message.rb": [
-        1,
+      "/home/andriy/rails/torah_app/app/jobs/message_broadcast_job.rb": [
         1,
         1,
         null,
         1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/interest.rb": [
-        1,
-        1,
-        1,
-        null
-      ],
-      "/home/andriy/rails/torah_app/app/models/subject.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
-      "/home/andriy/rails/torah_app/app/models/friendship.rb": [
-        1,
-        1,
+      "/home/andriy/rails/torah_app/app/jobs/application_job.rb": [
         1,
         null
       ]
     },
-    "timestamp": 1504797327
+    "timestamp": 1504799241
   }
 }
