@@ -4,6 +4,6 @@ FactoryGirl.define do
     email    { Faker::Internet.email }
     password "111111"
     confirmed_at DateTime.now
-    status 0
+    status "offline"
   end
 end

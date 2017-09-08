@@ -48,6 +48,12 @@ RSpec.describe User, type: :model do
 
   it { should define_enum_for(:status).with({ offline: 0, online: 1, away: 2 }) }
 
+  it "returns online users on online scope" do
+    FactoryGirl.create(:user)
+    FactoryGirl.create(:user, status: "online")
+    expect(User.online.count).to eql(1)
+  end
+
   it "changes status to online on appear" do
      expect{subject.appear}.to change{subject.status}.from("offline").to("online")
   end

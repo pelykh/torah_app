@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  scope :online, -> { where(status: "online") }
+
   enum status: {
     offline: 0,
     online: 1,

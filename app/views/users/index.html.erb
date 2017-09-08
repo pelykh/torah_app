@@ -1,5 +1,13 @@
 <h1>Users</h1>
 
+<div id="filters">
+  <div class="form-group">
+    <input type="text" class="form-control" id="name" disabled>
+  </div>
+  <div class="checkbox">
+    <label><input id="online-checkbox" type="checkbox">online</label>
+  </div>
+</div>
+
 <ul id="users-list" class="list-group">
-  <%= render @users %>
 </ul>

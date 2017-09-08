@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:add_subject]
+  before_action :authenticate_user!, only: [:add_subject, :remove_subject]
 
   def index
-    @users = User.all
+  end
+
+  def fetch_users
+    if filters[:online] == "true"
+      @users = User.online.all
+    else
+      @users = User.all
+    end
+    render @users
   end
 
   def show
@@ -50,8 +58,12 @@ class UsersController < ApplicationController
 
   private
 
+  def filters
+    params[:filters]? params.require(:filters).permit(:online) : {}
+  end
+
   def user_params
-    pararm.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
 end

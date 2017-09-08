@@ -41,6 +41,7 @@
         1,
         1,
         1,
+        1,
         null,
         null,
         null,
@@ -629,8 +630,8 @@
       "/home/andriy/rails/torah_app/spec/factories/users.rb": [
         1,
         1,
-        79,
-        79,
+        81,
+        81,
         1,
         1,
         1,
@@ -643,9 +644,11 @@
         1,
         1,
         1,
+        1,
+        1,
+        1,
         null,
-        1,
-        1,
+        null,
         1,
         null,
         1,
@@ -661,6 +664,8 @@
       ],
       "/home/andriy/rails/torah_app/app/models/user.rb": [
         1,
+        1,
+        null,
         1,
         null,
         null,
@@ -740,6 +745,30 @@
       ],
       "/home/andriy/rails/torah_app/app/helpers/subjects_helper.rb": [
         1,
+        null
+      ],
+      "/home/andriy/rails/torah_app/spec/support/database_cleaner.rb": [
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        49,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        49,
+        null,
+        null,
+        1,
+        49,
+        null,
         null
       ],
       "/home/andriy/rails/torah_app/app/models/chatroom.rb": [
@@ -928,6 +957,12 @@
         2,
         null,
         1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
         4,
         null,
         null,
@@ -988,6 +1023,6 @@
         null
       ]
     },
-    "timestamp": 1504799241
+    "timestamp": 1504879123
   }
 }
