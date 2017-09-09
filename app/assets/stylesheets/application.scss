@@ -52,7 +52,7 @@
   }
 }
 
-#users-list {
+#users-list, #interested-users-list {
   .avatar {
     width: 32px;
     height: 32px;
@@ -169,4 +169,9 @@
 
 #subjects-list {
   margin-top: 10px;
+}
+
+#sort {
+  display: inline-block;
+  width: auto;
 }

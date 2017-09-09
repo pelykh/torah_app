@@ -2,7 +2,7 @@ require 'database_cleaner'
 
 DatabaseCleaner.clean_with(:truncation)
 
-10.times do |n|
+100.times do |n|
   p User.create!(
     email: "email#{n}@gmail.com",
     name: "namee#{n}",

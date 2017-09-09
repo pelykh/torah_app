@@ -54,6 +54,12 @@ RSpec.describe User, type: :model do
     expect(User.online.count).to eql(1)
   end
 
+  it "returns sorted users by param on sort scope" do
+    2.times { FactoryGirl.create(:user) }
+    expect(User.sort("newest").first).to eql(User.last)
+    expect(User.sort("oldest").first).to eql(User.first)
+  end
+
   it "changes status to online on appear" do
      expect{subject.appear}.to change{subject.status}.from("offline").to("online")
   end

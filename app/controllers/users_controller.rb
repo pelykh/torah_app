@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   def fetch_users
     if filters[:online] == "true"
-      @users = User.online.all
+      @users = User.sort(params[:sort]).online
     else
-      @users = User.all
+      @users = User.sort(params[:sort])
     end
     render @users
   end

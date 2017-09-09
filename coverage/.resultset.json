@@ -630,8 +630,8 @@
       "/home/andriy/rails/torah_app/spec/factories/users.rb": [
         1,
         1,
-        81,
-        81,
+        83,
+        83,
         1,
         1,
         1,
@@ -665,6 +665,7 @@
       "/home/andriy/rails/torah_app/app/models/user.rb": [
         1,
         1,
+        2,
         null,
         1,
         null,
@@ -706,6 +707,19 @@
         3,
         2,
         1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        0,
+        null,
+        1,
+        null,
+        0,
+        null,
         null,
         null
       ],
@@ -755,7 +769,7 @@
         null,
         null,
         1,
-        49,
+        50,
         null,
         null,
         1,
@@ -763,11 +777,11 @@
         null,
         null,
         1,
-        49,
+        50,
         null,
         null,
         1,
-        49,
+        50,
         null,
         null
       ],
@@ -963,6 +977,12 @@
         null,
         null,
         1,
+        3,
+        1,
+        0,
+        null,
+        null,
+        1,
         4,
         null,
         null,
@@ -1023,6 +1043,6 @@
         null
       ]
     },
-    "timestamp": 1504879123
+    "timestamp": 1504965543
   }
 }

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   scope :online, -> { where(status: "online") }
-
+  scope :sort, -> (param) { sort_by(param) }
+  
   enum status: {
     offline: 0,
     online: 1,
@@ -41,5 +42,18 @@ class User < ApplicationRecord
     return "invited_user" if has_invited_user && !invited_by_user
     return "invited_by_user" if !has_invited_user && invited_by_user
     return "not_friends" if !has_invited_user && !invited_by_user
+  end
+
+  private
+
+  def self.sort_by param
+    case param
+     when "newest"
+       order(created_at: :desc)
+     when "oldest"
+       order(created_at: :asc)
+     else
+       order(created_at: :asc)
+    end
   end
 end
