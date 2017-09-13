@@ -17,6 +17,21 @@ class ChatroomsController < ApplicationController
     redirect_to @chatroom
   end
 
+  def add_participant
+    chatroom = Chatroom.find(params[:chatroom_id])
+    user = User.find(params[:user_id])
+    chatroom.add_participant(user)
+
+    ChatroomsChannel.add_participant(chatroom, current_user, user)
+  end
+
+
+
+  def fetch_users
+    chatroom = Chatroom.find(params[:chatroom_id])
+    render User.all, locals: { is_invite_link: true, chatroom: chatroom  }
+  end
+
   def generate_video_token
     token = Twilio::JWT::AccessToken.new(
       ENV["ACCOUNT_SID"],

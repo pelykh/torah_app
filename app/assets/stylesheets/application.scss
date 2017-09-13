@@ -11,7 +11,7 @@
 
 #video-chat {
   display: none;
-  height: 400px;
+  min-height: 400px;
 
   #chat-controls {
     position: absolute;
@@ -52,7 +52,7 @@
   }
 }
 
-#users-list, #interested-users-list {
+#users-list, #interested-users-list, #invite-users-list  {
   .avatar {
     width: 32px;
     height: 32px;
@@ -174,4 +174,8 @@
 #sort {
   display: inline-block;
   width: auto;
+}
+
+#invite-users-list {
+  display: none;
 }

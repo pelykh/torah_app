@@ -4,6 +4,7 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   def add_participant user
+    return nil if participatings.find_by(user_id: user.id)
     participatings.create(user_id: user.id)
   end
 

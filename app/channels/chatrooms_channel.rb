@@ -19,6 +19,31 @@ class ChatroomsChannel < ApplicationCable::Channel
   end
 
   def start_video_call
-    StartVideoCallBroadcastJob.perform_later(current_user, params['chatroom_id'])
+    ActionCable.server.broadcast "chatrooms_#{params['chatroom_id']}_channel",
+                                 message: video_call_message(current_user)
+  end
+
+  private
+
+  def video_call_message(user)
+    %(<div>
+        <span>#{user.name} has joined to video chat.</span>
+        <span class="video-call-link"> Click here to join </span>
+      </div>)
+  end
+
+  class << self
+    def add_participant(chatroom, current_user, user)
+      ActionCable.server.broadcast "chatrooms_#{chatroom.id}_channel",
+                                   message: add_participant_message(current_user, user)
+    end
+
+    private
+
+    def add_participant_message(current_user, user)
+      %(<div>
+          <span>#{current_user.name} has added #{user.name}.</span>
+        </div>)
+    end
   end
 end

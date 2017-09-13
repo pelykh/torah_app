@@ -1,4 +1,6 @@
 jQuery(document).on('turbolinks:load', () => {
+  if ($('#chatroom')){
+
   const chatroom_id = $('#messages').data('chatroom-id');
 
   function getToken(chatroom_id) {
@@ -77,7 +79,7 @@ jQuery(document).on('turbolinks:load', () => {
   function participantDiv(participant) {
     const div = document.createElement('div');
     div.dataset.identity = participant.identity;
-    div.className = 'webcam';
+    div.className = 'webcam col-lg-6';
     return div;
   }
 
@@ -141,6 +143,28 @@ jQuery(document).on('turbolinks:load', () => {
     });
   }
 
+  function fetchUsers() {
+    $.get(`/chatrooms/${chatroom_id}/fetch_users`)
+      .then((data) => {
+        $('#invite-users-list .list-group-item').remove();
+        $('#invite-users-list').append(data);
+      });
+  }
+
+  function toggleInviteList(e) {
+    e.preventDefault();
+    $('#invite-users-list').toggle();
+    $('#chatroom').toggle();
+    fetchUsers();
+  }
+
+  $('.invite-list-button').on('click', toggleInviteList);
+
+  $('#invite-users-list').on('click', '.add-user', () => {
+    console.log('test');
+    $('#invite-users-list').toggle();
+    $('#chatroom').toggle();
+  });
 
   $('#call-button').on('click', connectToVideoChat);
 
@@ -153,4 +177,4 @@ jQuery(document).on('turbolinks:load', () => {
      $('#no-participants').hide();
     }
   });
-});
+}});

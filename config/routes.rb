@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   post "add_subject/:id", to: "users#add_subject", as: "add_subject"
   delete "remove_subject/:id", to: "users#remove_subject", as: "remove_subject"
 
-  resources :chatrooms, only: [:index, :show]
+  resources :chatrooms, only: [:index, :show] do
+    post "add_participant/:user_id", to: "chatrooms#add_participant", as: "add_participant"
+    get "fetch_users", to: "chatrooms#fetch_users", as: "fetch_users"
+  end
   post "chatrooms/:user_id", to: "chatrooms#create", as: "new_chatroom"
 
   get "chatrooms/video_token/:chatroom_id", to: "chatrooms#generate_video_token"
