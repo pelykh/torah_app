@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   scope :online, -> { where(status: "online") }
   scope :sort, -> (param) { sort_by(param) }
-  
+
+  attribute :availability, :availability_type
+
   enum status: {
     offline: 0,
     online: 1,
@@ -35,6 +37,15 @@ class User < ApplicationRecord
     update_attribute(:status, 2)
   end
 
+  def is_available?
+    t = Time.now
+    availability.each do |day, v|
+      return true if t.method("#{day}?").call &&
+                      (v[:from].to_time..v[:to].to_time).cover?(t)
+    end
+    false
+  end
+
   def relation_with user
     has_invited_user = Friendship.find_by(user_id: id, friend_id: user.id)
     invited_by_user = Friendship.find_by(user_id: user.id, friend_id: id)
@@ -43,6 +54,7 @@ class User < ApplicationRecord
     return "invited_by_user" if !has_invited_user && invited_by_user
     return "not_friends" if !has_invited_user && !invited_by_user
   end
+
 
   private
 

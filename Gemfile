@@ -41,13 +41,11 @@ gem 'twilio-ruby'
 gem 'dotenv-rails'
 gem 'database_cleaner'
 gem 'carrierwave', '~> 1.0'
-
-group :production do
- gem 'pg'
-end
+gem 'pg'
+gem 'jquery-timepicker-rails'
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_girl_rails', '~> 4.5'
@@ -56,6 +54,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'rails-controller-testing'
   gem 'faker', '~> 1.6.1'
   gem 'simplecov', :require => false
 end

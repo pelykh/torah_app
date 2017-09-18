@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907064536) do
+ActiveRecord::Schema.define(version: 20170916153120) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.string   "timezone"
+    t.string   "monday"
+    t.string   "sunday"
+    t.string   "saturday"
+    t.string   "tuesday"
+    t.string   "wednesday"
+    t.string   "thursday"
+    t.string   "friday"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_availabilities_on_user_id", using: :btree
+  end
 
   create_table "chatrooms", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,8 +40,8 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
+    t.index ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+    t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
   end
 
   create_table "interests", force: :cascade do |t|
@@ -31,8 +49,8 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.integer  "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_interests_on_subject_id"
-    t.index ["user_id"], name: "index_interests_on_user_id"
+    t.index ["subject_id"], name: "index_interests_on_subject_id", using: :btree
+    t.index ["user_id"], name: "index_interests_on_user_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -41,8 +59,8 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "chatroom_id"
-    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "participatings", force: :cascade do |t|
@@ -50,8 +68,8 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.integer  "chatroom_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["chatroom_id"], name: "index_participatings_on_chatroom_id"
-    t.index ["user_id"], name: "index_participatings_on_user_id"
+    t.index ["chatroom_id"], name: "index_participatings_on_chatroom_id", using: :btree
+    t.index ["user_id"], name: "index_participatings_on_user_id", using: :btree
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -59,7 +77,7 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "parent_id"
-    t.index ["parent_id"], name: "index_subjects_on_parent_id"
+    t.index ["parent_id"], name: "index_subjects_on_parent_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,10 +103,18 @@ ActiveRecord::Schema.define(version: 20170907064536) do
     t.string   "name"
     t.string   "avatar"
     t.integer  "status",                 default: 0
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.string   "availability",           default: ""
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
 
+  add_foreign_key "availabilities", "users"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "interests", "subjects"
+  add_foreign_key "interests", "users"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participatings", "chatrooms"
+  add_foreign_key "participatings", "users"
 end

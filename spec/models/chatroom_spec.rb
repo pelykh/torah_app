@@ -6,11 +6,11 @@ RSpec.describe Chatroom, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   let(:participants) { subject.users }
 
-  it { should be_valid }
+  it { is_expected.to be_valid }
 
-  it { should have_many(:participatings).dependent(:destroy) }
-  it { should have_many(:users).through(:participatings) }
-  it { should have_many(:messages).dependent(:destroy) }
+  it { is_expected.to have_many(:participatings).dependent(:destroy) }
+  it { is_expected.to have_many(:users).through(:participatings) }
+  it { is_expected.to have_many(:messages).dependent(:destroy) }
 
   it "create participating with user on add_participant" do
     expect{subject.add_participant(user)}

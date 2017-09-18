@@ -30,23 +30,24 @@ RSpec.describe User, type: :model do
     inviter_user
   end
 
-  it { should be_valid }
+  it { is_expected.to be_valid }
 
-  it { should respond_to :name }
-  it { should validate_presence_of(:name) }
-  it { should validate_length_of(:name).is_at_least(6).is_at_most(20) }
+  it { is_expected.to respond_to :name }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_length_of(:name).is_at_least(6).is_at_most(20) }
 
-  it { should respond_to :email }
+  it { is_expected.to respond_to :email }
+  it { is_expected.to respond_to :availability }
 
-  it { should have_many(:interests).dependent(:destroy) }
-  it { should have_many(:participatings) }
-  it { should have_many(:subjects).through(:interests) }
-  it { should have_many(:chatrooms).through(:participatings) }
-  it { should have_many(:messages) }
-  it { should have_many(:friendships).dependent(:destroy) }
-  it { should have_many(:friends).through(:friendships) }
+  it { is_expected.to have_many(:interests).dependent(:destroy) }
+  it { is_expected.to have_many(:participatings) }
+  it { is_expected.to have_many(:subjects).through(:interests) }
+  it { is_expected.to have_many(:chatrooms).through(:participatings) }
+  it { is_expected.to have_many(:messages) }
+  it { is_expected.to have_many(:friendships).dependent(:destroy) }
+  it { is_expected.to have_many(:friends).through(:friendships) }
 
-  it { should define_enum_for(:status).with({ offline: 0, online: 1, away: 2 }) }
+  it { is_expected.to define_enum_for(:status).with({ offline: 0, online: 1, away: 2 }) }
 
   it "returns online users on online scope" do
     FactoryGirl.create(:user)
@@ -71,6 +72,26 @@ RSpec.describe User, type: :model do
 
   it "changes status to away on away" do
      expect{subject.away}.to change{subject.status}.from("offline").to("away")
+  end
+
+  it "returns user apperience time on when_will_be_available"
+
+  describe "#is_available?" do
+    context "when user is available now" do
+      it "returns true" do
+        subject.availability= {
+          sunday:    { from: "12:00am", to: "11:30pm" },
+          monday:    { from: "12:00am", to: "11:30pm" },
+          tuesday:   { from: "12:00am", to: "11:30pm" },
+          wednesday: { from: "12:00am", to: "11:30pm" },
+          thursday:  { from: "12:00am", to: "11:30pm" },
+          friday:    { from: "12:00am", to: "11:30pm" },
+          saturday:  { from: "12:00am", to: "11:30pm" }
+        }
+        subject.save
+        expect(subject.is_available?).to be_truthy
+      end
+    end
   end
 
   context "returns relation with other user on relation_with" do

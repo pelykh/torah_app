@@ -5,5 +5,6 @@ FactoryGirl.define do
     password "111111"
     confirmed_at DateTime.now
     status "offline"
+    availability ""
   end
 end

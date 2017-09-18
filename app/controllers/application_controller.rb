@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email,
-      :current_password, :avatar, :avatar_cache, :remove_avatar) }
+      :current_password, :avatar, :avatar_cache, :remove_avatar, availability: availability_params) }
+  end
+
+  def availability_params
+    [sunday: [:from, :to], monday: [:from, :to],
+    tuesday: [:from, :to], wednesday: [:from, :to],
+    thursday: [:from, :to], friday: [:from, :to],
+    saturday: [:from, :to]]
   end
 end

@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:add_subject, :remove_subject]
-
-  def index
-  end
+  before_action :authenticate_user!, only: [:add_subject, :remove_subject, :update_availability]
 
   def fetch_users
     if filters[:online] == "true"

@@ -14,6 +14,10 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.timepicker.js
+//= require Datepair
+//= require jquery.datepair.js
+//= require bootstrap-datepicker
 //= require_tree .
 
 jQuery(document).on('turbolinks:load', function() {
@@ -25,5 +29,13 @@ jQuery(document).on('turbolinks:load', function() {
     $('#subjects-list').on('click', '.glyphicon-chevron-up', (e) => {
       $(e.target).toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
     });
+  }
+
+  if ($('.edit_user').length > 0) {
+    $('input.time').timepicker({
+      'showDuration': true,
+      'timeFormat': 'g:ia'
+    });
+    $('.day').datepair();
   }
 });

@@ -1,38 +1,26 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/andriy/rails/torah_app/spec/models/chatroom_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/controllers/users_controller_spec.rb": [
         1,
         null,
         1,
-        8,
+        1,
         null,
-        2,
         3,
         null,
-        2,
-        null,
-        2,
-        2,
-        2,
-        null,
-        1,
-        2,
-        2,
-        null,
-        null,
         1,
         1,
+        2,
         null,
         null,
+        2,
         null,
-        1,
-        1,
-        null,
+        2,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/rails_helper.rb": [
+      "/Users/pelykh/projects/torah_app/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -100,16 +88,22 @@
         null,
         null,
         1,
+        null,
+        1,
+        3,
+        3,
+        3,
+        null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/environment.rb": [
+      "/Users/pelykh/projects/torah_app/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/application.rb": [
+      "/Users/pelykh/projects/torah_app/config/application.rb": [
         1,
         null,
         1,
@@ -122,18 +116,15 @@
         null,
         1,
         1,
-        null,
-        null,
-        null,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/boot.rb": [
+      "/Users/pelykh/projects/torah_app/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/spring.rb": [
+      "/Users/pelykh/projects/torah_app/config/spring.rb": [
         null,
         null,
         null,
@@ -141,7 +132,7 @@
         null,
         5
       ],
-      "/home/andriy/rails/torah_app/config/environments/test.rb": [
+      "/Users/pelykh/projects/torah_app/config/environments/test.rb": [
         1,
         null,
         null,
@@ -182,7 +173,7 @@
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/application_controller_renderer.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -190,7 +181,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/assets.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -203,7 +194,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/backtrace_silencers.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -212,14 +203,14 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/cookies_serializer.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/initializers/devise.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/devise.rb": [
         null,
         null,
         1,
@@ -498,13 +489,13 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/filter_parameter_logging.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/initializers/inflections.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -522,13 +513,13 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/mime_types.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/initializers/new_framework_defaults.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/new_framework_defaults.rb": [
         null,
         null,
         null,
@@ -556,12 +547,53 @@
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/initializers/session_store.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/home/andriy/rails/torah_app/config/initializers/wrap_parameters.rb": [
+      "/Users/pelykh/projects/torah_app/config/initializers/types.rb": [
+        1
+      ],
+      "/Users/pelykh/projects/torah_app/app/models/availability_type.rb": [
+        1,
+        null,
+        1,
+        73,
+        2,
+        2,
+        14,
+        null,
+        2,
+        null,
+        null,
+        1,
+        151,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        72,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/pelykh/projects/torah_app/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -577,7 +609,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/chatrooms.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/chatrooms.rb": [
         1,
         1,
         1,
@@ -587,7 +619,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/friendships.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/friendships.rb": [
         1,
         1,
         1,
@@ -595,7 +627,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/interests.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/interests.rb": [
         1,
         1,
         1,
@@ -603,7 +635,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/messages.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/messages.rb": [
         1,
         1,
         8,
@@ -612,7 +644,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/participatings.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/participatings.rb": [
         1,
         1,
         1,
@@ -620,25 +652,26 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/subjects.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/subjects.rb": [
         1,
         1,
         9,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/factories/users.rb": [
+      "/Users/pelykh/projects/torah_app/spec/factories/users.rb": [
         1,
         1,
-        83,
-        83,
+        87,
+        87,
+        1,
         1,
         1,
         1,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/config/routes.rb": [
+      "/Users/pelykh/projects/torah_app/config/routes.rb": [
         1,
         1,
         1,
@@ -655,6 +688,9 @@
         1,
         null,
         1,
+        1,
+        1,
+        null,
         1,
         null,
         1,
@@ -662,42 +698,53 @@
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/user.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/user.rb": [
         1,
         1,
+        3,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
         2,
         null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
+        0,
         null,
         null,
         1,
@@ -709,12 +756,13 @@
         1,
         null,
         null,
+        null,
         1,
         null,
         1,
-        1,
+        2,
         null,
-        0,
+        1,
         null,
         1,
         null,
@@ -723,12 +771,12 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/application_record.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/app/uploaders/avatar_uploader.rb": [
+      "/Users/pelykh/projects/torah_app/app/uploaders/avatar_uploader.rb": [
         1,
         1,
         null,
@@ -746,22 +794,25 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/helpers/application_helper.rb": [
-        1,
-        null
-      ],
-      "/home/andriy/rails/torah_app/app/helpers/messages_helper.rb": [
+      "/Users/pelykh/projects/torah_app/app/helpers/application_helper.rb": [
         1,
         1,
         0,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/helpers/subjects_helper.rb": [
+      "/Users/pelykh/projects/torah_app/app/helpers/messages_helper.rb": [
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/pelykh/projects/torah_app/app/helpers/subjects_helper.rb": [
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/support/database_cleaner.rb": [
+      "/Users/pelykh/projects/torah_app/spec/support/database_cleaner.rb": [
         1,
         null,
         1,
@@ -769,7 +820,7 @@
         null,
         null,
         1,
-        50,
+        54,
         null,
         null,
         1,
@@ -777,15 +828,134 @@
         null,
         null,
         1,
-        50,
+        54,
         null,
         null,
         1,
-        50,
+        54,
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/chatroom.rb": [
+      "/Users/pelykh/projects/torah_app/app/controllers/users_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/pelykh/projects/torah_app/app/controllers/application_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null
+      ],
+      "/Users/pelykh/projects/torah_app/spec/models/chatroom_spec.rb": [
+        1,
+        null,
+        1,
+        8,
+        null,
+        2,
+        3,
+        null,
+        2,
+        null,
+        2,
+        2,
+        2,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/pelykh/projects/torah_app/app/models/chatroom.rb": [
         1,
         1,
         1,
@@ -793,9 +963,11 @@
         null,
         1,
         1,
+        1,
         null,
         null,
         1,
+        3,
         null,
         3,
         1,
@@ -812,7 +984,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/friendship_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/friendship_spec.rb": [
         1,
         null,
         1,
@@ -824,13 +996,13 @@
         2,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/friendship.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/friendship.rb": [
         1,
         1,
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/interest_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/interest_spec.rb": [
         1,
         null,
         1,
@@ -842,13 +1014,13 @@
         2,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/interest.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/interest.rb": [
         1,
         1,
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/message_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/message_spec.rb": [
         1,
         null,
         1,
@@ -869,7 +1041,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/message.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/message.rb": [
         1,
         1,
         1,
@@ -879,7 +1051,7 @@
         2,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/participating_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/participating_spec.rb": [
         1,
         null,
         1,
@@ -891,13 +1063,13 @@
         2,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/participating.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/participating.rb": [
         1,
         1,
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/subject_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/subject_spec.rb": [
         1,
         null,
         1,
@@ -911,7 +1083,7 @@
         2,
         null
       ],
-      "/home/andriy/rails/torah_app/app/models/subject.rb": [
+      "/Users/pelykh/projects/torah_app/app/models/subject.rb": [
         1,
         1,
         1,
@@ -919,31 +1091,11 @@
         1,
         null
       ],
-      "/home/andriy/rails/torah_app/spec/models/user_spec.rb": [
+      "/Users/pelykh/projects/torah_app/spec/models/user_spec.rb": [
         1,
         null,
         1,
-        21,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
+        23,
         null,
         1,
         1,
@@ -952,12 +1104,33 @@
         1,
         null,
         null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        2,
+        null,
+        2,
+        2,
         2,
         null,
         2,
-        2,
-        2,
-        null,
         2,
         null,
         2,
@@ -979,7 +1152,7 @@
         1,
         3,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -993,6 +1166,26 @@
         null,
         1,
         4,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
         null,
         null,
         1,
@@ -1022,7 +1215,7 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/jobs/message_broadcast_job.rb": [
+      "/Users/pelykh/projects/torah_app/app/jobs/message_broadcast_job.rb": [
         1,
         1,
         null,
@@ -1038,11 +1231,11 @@
         null,
         null
       ],
-      "/home/andriy/rails/torah_app/app/jobs/application_job.rb": [
+      "/Users/pelykh/projects/torah_app/app/jobs/application_job.rb": [
         1,
         null
       ]
     },
-    "timestamp": 1504965543
+    "timestamp": 1505739908
   }
 }
