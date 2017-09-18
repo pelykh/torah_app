@@ -86,5 +86,5 @@ Rails.application.configure do
 
   config.web_socket_server_url = "wss://torah-app.herokuapp.com/cable"
   config.action_cable.allowed_request_origins = ['https://torah-app.herokuapp.com', 'http://torah-app.herokuapp.com']
-
+  config.serve_static_assets = true
 end
