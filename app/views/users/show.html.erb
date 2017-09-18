@@ -4,16 +4,8 @@
 <div class="col-lg-7">
   <h2><%= @user.name %></h2>
   <div class="status">
-    <div class="<%= @user.status %>"><%= @user.status %></div>
-    <%= @user.is_available? ? "Available": "Not available" %>
+    <div class="<%= @user.status %>"><%= @user.status %>, <%= @user.is_available? ? "available": "not available" %></div>
   </div>
-  <h3>Availability</h3>
-  <% @user.availability.each do |day, v| %>
-    <div class="col-lg-3">
-      <h4><%= day %></h4>
-      <p><%= "#{v[:from]}-#{v[:to]}" %></p>
-    </div>
-  <% end %>
 
   <% if @current_user && @current_user != @user %>
     <div id="relation-with-user">
@@ -40,6 +32,16 @@
       <% end %>
     </div>
   <% end %>
+
+  <div class="row">
+  <h3>Availability</h3>
+    <% @user.availability.each do |day, v| %>
+      <div class="col-lg-3">
+        <h4><%= day %></h4>
+        <p><%= "#{v[:from]}-#{v[:to]}" %></p>
+      </div>
+    <% end %>
+  </div>
 
 </div>
 <div class="col-lg-12">

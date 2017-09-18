@@ -1,34 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { FactoryGirl.build(:user) }
+  subject { FactoryGirl.create(:user) }
 
-  let(:invited_user) do
-    subject.save
-    invited_user = FactoryGirl.create(:user)
-    FactoryGirl.create(:friendship, user: subject, friend: invited_user)
-    invited_user
-  end
+  let(:invited_user) { FactoryGirl.create(:invited_user, user: subject) }
 
-  let(:friend) do
-    subject.save
-    friend = FactoryGirl.create(:user)
-    FactoryGirl.create(:friendship, user: subject, friend: friend)
-    FactoryGirl.create(:friendship, user: friend, friend: subject)
-    friend
-  end
+  let(:friend) { FactoryGirl.create(:friend, user: subject) }
 
-  let(:not_friend) do
-    subject.save
-    FactoryGirl.create(:user)
-  end
+  let(:not_friend) { FactoryGirl.create(:user) }
 
-  let(:inviter_user) do
-    subject.save
-    inviter_user = FactoryGirl.create(:user)
-    FactoryGirl.create(:friendship, user: inviter_user, friend: subject)
-    inviter_user
-  end
+  let(:inviter_user) { FactoryGirl.create(:inviter_user, user: subject) }
 
   it { is_expected.to be_valid }
 
@@ -55,11 +36,18 @@ RSpec.describe User, type: :model do
     expect(User.online.count).to eql(1)
   end
 
-  it "returns sorted users by param on sort scope" do
-    2.times { FactoryGirl.create(:user) }
-    expect(User.sort("newest").first).to eql(User.last)
-    expect(User.sort("oldest").first).to eql(User.first)
+  describe "sort scope" do
+    it "returns newest users on newest" do
+      2.times { FactoryGirl.create(:user) }
+      expect(User.sort("newest").first).to eql(User.last)
+    end
+
+    it "return oldest users on oldest" do
+      2.times { FactoryGirl.create(:user) }
+      expect(User.sort("oldest").first).to eql(User.first)
+    end
   end
+
 
   it "changes status to online on appear" do
      expect{subject.appear}.to change{subject.status}.from("offline").to("online")
@@ -79,7 +67,7 @@ RSpec.describe User, type: :model do
   describe "#is_available?" do
     context "when user is available now" do
       it "returns true" do
-        subject.availability= {
+        subject.availability = {
           sunday:    { from: "12:00am", to: "11:30pm" },
           monday:    { from: "12:00am", to: "11:30pm" },
           tuesday:   { from: "12:00am", to: "11:30pm" },
@@ -88,7 +76,6 @@ RSpec.describe User, type: :model do
           friday:    { from: "12:00am", to: "11:30pm" },
           saturday:  { from: "12:00am", to: "11:30pm" }
         }
-        subject.save
         expect(subject.is_available?).to be_truthy
       end
     end
