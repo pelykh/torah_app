@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :wrong_subject_id
 
   def index
     @subjects = Subject.includes(:children)
@@ -46,5 +47,10 @@ class SubjectsController < ApplicationController
 
     def subject_params
       params.require(:subject).permit(:name)
+    end
+
+    def wrong_subject_id
+      flash[:danger] = 'Wrong id provided'
+      redirect_to subjects_path
     end
 end

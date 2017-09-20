@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:add_subject, :remove_subject, :update_availability]
+  before_action :authenticate_user!, only: [:add_subject, :remove_subject, :update_availability, :add_friend, :remove_friend]
+  rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
   def fetch_users
     if filters[:online] == "true"
@@ -61,6 +62,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def wrong_user_id
+    flash[:danger] = 'Wrong id provided'
+    redirect_to users_path
   end
 
 end
