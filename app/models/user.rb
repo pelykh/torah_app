@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :messages
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+  has_many :lessons, foreign_key: :receiver_id, dependent: :destroy
+  has_many :lessons, foreign_key: :sender_id, dependent: :destroy
 
   validates :name, presence: true, length: { in: 6..20 }
 
@@ -35,6 +37,10 @@ class User < ApplicationRecord
 
   def away
     update_attribute(:status, 2)
+  end
+
+  def lessons
+    Lesson.where(sender: self).or(Lesson.where(receiver: self))
   end
 
   def is_available?

@@ -1,0 +1,39 @@
+<%= form_for [@user, @lesson], url: user_lessons_path do |f| %>
+  <% if @lesson.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+
+      <ul>
+      <% @lesson.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :sender_id %>
+  <%= f.hidden_field :receiver_id %>
+
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_field :message, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :subject_id %>
+    <%= f.text_field :subject_id, class: "form-control" %>
+  </div>
+
+  <div class="lesson form-group">
+    <%= f.label :starts_at %>
+    <%= f.text_field :starts_at, class: "time start" %>
+    <%= f.label :ends_at %>
+    <%= f.text_field :ends_at, class: "time end" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to user page', user_path(@lesson.receiver_id) %>

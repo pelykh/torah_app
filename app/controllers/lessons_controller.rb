@@ -1,0 +1,52 @@
+class LessonsController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+  end
+
+  def fetch_lessons
+    render current_user.lessons
+  end
+
+  def accept_invite
+    lesson = Lesson.find(params[:id])
+    if lesson.receiver == current_user
+      lesson.update_attribute(:confirmed_at, Time.now)
+      redirect_to user_lessons_path(current_user)
+    else
+      redirect_to user_lessons_path(current_user), notice: "You cannot accept his invite"
+    end
+  end
+
+  def decline_invite
+    lesson = Lesson.find(params[:id])
+    if lesson.receiver == current_user || lesson.sender == current_user
+      lesson.destroy
+      redirect_to user_lessons_path(current_user)
+    else
+      redirect_to user_lessons_path(current_user), notice: "You cannot decline this lesson"
+    end
+
+  end
+
+  def create
+    user = User.find(params[:user_id])
+    lesson = Lesson.new(lesson_params)
+    if lesson.save
+      redirect_to user, notice: "You have invited this user to study with you"
+    else
+      redirect_to new_user_lesson_url(user)
+    end
+  end
+
+  def new
+    @user = User.find(params[:user_id])
+    @lesson = Lesson.new(sender_id: current_user.id, receiver_id: @user.id)
+  end
+
+  private
+
+  def lesson_params
+    params.require(:lesson).permit(:message, :starts_at, :ends_at, :subject_id, :receiver_id, :sender_id)
+  end
+end

@@ -31,11 +31,12 @@ jQuery(document).on('turbolinks:load', function() {
     });
   }
 
-  if ($('.edit_user').length > 0) {
+  if ($('form').length > 0) {
     $('input.time').timepicker({
       'showDuration': true,
       'timeFormat': 'g:ia'
     });
+
     $('.day').datepair();
   }
 });

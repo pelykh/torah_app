@@ -8,7 +8,7 @@
   </div>
 
   <% if @current_user && @current_user != @user %>
-    <div id="relation-with-user">
+    <div id="relation-with-user" >
       <% case @current_user.relation_with @user %>
         <% when "friends" %>
           <p> Already your friend </p>
@@ -24,12 +24,15 @@
           <%= button_to "Accept invite", add_friend_path(@user), class: "btn btn-success" %>
       <% end %>
     </div>
-    <div>
+    <div class="chatroom-button">
       <% if @chatroom %>
         <%= button_to "Go to dialog", chatroom_path(@chatroom.id), class: "btn btn-primary", method: :get %>
       <% else %>
         <%= button_to "Send message", new_chatroom_path(@user.id), class: "btn btn-primary" %>
       <% end %>
+    </div>
+    <div>
+      <%= button_to "Invite to study", new_user_lesson_path(@user.id), class: "btn btn-info", method: :get %>
     </div>
   <% end %>
 

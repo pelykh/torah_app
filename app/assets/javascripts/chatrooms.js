@@ -1,5 +1,5 @@
 jQuery(document).on('turbolinks:load', () => {
-  if ($('#chatroom')){
+  if ($('#chatroom').length > 0){
 
   const chatroom_id = $('#messages').data('chatroom-id');
 

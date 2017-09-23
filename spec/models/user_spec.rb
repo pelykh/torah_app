@@ -14,11 +14,11 @@ RSpec.describe User, type: :model do
   it { is_expected.to be_valid }
 
   it { is_expected.to respond_to :name }
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_length_of(:name).is_at_least(6).is_at_most(20) }
-
   it { is_expected.to respond_to :email }
   it { is_expected.to respond_to :availability }
+
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_length_of(:name).is_at_least(6).is_at_most(20) }
 
   it { is_expected.to have_many(:interests).dependent(:destroy) }
   it { is_expected.to have_many(:participatings) }
@@ -27,6 +27,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:messages) }
   it { is_expected.to have_many(:friendships).dependent(:destroy) }
   it { is_expected.to have_many(:friends).through(:friendships) }
+  it { is_expected.to have_many(:lessons).dependent(:destroy) }
 
   it { is_expected.to define_enum_for(:status).with({ offline: 0, online: 1, away: 2 }) }
 

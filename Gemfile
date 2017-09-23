@@ -48,7 +48,7 @@ gem 'bootstrap-datepicker-rails'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.4'
-  gem 'factory_girl_rails', '~> 4.5'
+  gem 'factory_girl_rails', '~> 4.5', require: false
   gem 'capybara', '~> 2.5'
   gem 'faker', '~> 1.6.1'
 end

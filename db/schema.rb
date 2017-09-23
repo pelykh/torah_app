@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916153120) do
+ActiveRecord::Schema.define(version: 20170921100606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 20170916153120) do
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_interests_on_subject_id", using: :btree
     t.index ["user_id"], name: "index_interests_on_user_id", using: :btree
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.text     "message"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.integer  "subject_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "confirmed_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["receiver_id"], name: "index_lessons_on_receiver_id", using: :btree
+    t.index ["sender_id"], name: "index_lessons_on_sender_id", using: :btree
+    t.index ["subject_id"], name: "index_lessons_on_subject_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -114,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170916153120) do
   add_foreign_key "friendships", "users"
   add_foreign_key "interests", "subjects"
   add_foreign_key "interests", "users"
+  add_foreign_key "lessons", "subjects"
   add_foreign_key "messages", "users"
   add_foreign_key "participatings", "chatrooms"
   add_foreign_key "participatings", "users"

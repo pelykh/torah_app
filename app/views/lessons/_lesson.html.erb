@@ -1,0 +1,16 @@
+<li class="list-group-item clearfix">
+    <% if lesson.receiver.id == current_user.id %>
+      <h4><%= lesson.sender.name %> invites you to learn <%= lesson.subject.name %> together</h4>
+      <p><%= lesson.message %></p>
+      <% unless lesson.confirmed_at %>
+       <%= button_to "Accept", accept_lesson_invite_path(lesson.id), class: "btn btn-success" %>
+       <%= button_to "Decline", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+      <% end %>
+    <% else %>
+      <% unless lesson.confirmed_at %>
+      <h4>You invited <%= lesson.receiver.name %>to learn <%= lesson.subject.name %> together</h4>
+      <p><%= lesson.message %></p>
+      <%= button_to "Cancel", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+      <% end %>
+    <% end %>
+</li>
