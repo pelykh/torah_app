@@ -33,10 +33,19 @@ jQuery(document).on('turbolinks:load', function() {
 
   if ($('form').length > 0) {
     $('input.time').timepicker({
-      'showDuration': true,
-      'timeFormat': 'g:ia'
+      showDuration: true,
+      timeFormat: 'g:ia'
+    });
+    $('.lesson .time').timepicker('setTime', new Date());
+
+    $('input.date').datepicker({
+        format: 'yyyy-m-d',
+        autoclose: true,
+        startDate: '-0d',
+        todayHighlight: true
     });
 
     $('.day').datepair();
+    $('.lesson').datepair();
   }
 });

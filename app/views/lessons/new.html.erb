@@ -1,3 +1,17 @@
+<div class="row">
+<h3><%= @user.name %> availability</h3>
+  <% @user.availability.each do |day, v| %>
+    <div class="col-lg-3">
+      <h4><%= day %></h4>
+      <p><%= "#{v[:from]}-#{v[:to]}" %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Back to #{@user.name} profile", user_path(@lesson.receiver_id) %>
+
+<hr/>
+
 <%= form_for [@user, @lesson], url: user_lessons_path do |f| %>
   <% if @lesson.errors.any? %>
     <div id="error_explanation">
@@ -16,7 +30,7 @@
 
   <div class="form-group">
     <%= f.label :message %>
-    <%= f.text_field :message, class: "form-control" %>
+    <%= f.text_area :message, rows: 4,  class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -24,16 +38,20 @@
     <%= f.text_field :subject_id, class: "form-control" %>
   </div>
 
-  <div class="lesson form-group">
-    <%= f.label :starts_at %>
-    <%= f.text_field :starts_at, class: "time start" %>
-    <%= f.label :ends_at %>
-    <%= f.text_field :ends_at, class: "time end" %>
+  <div class="lesson">
+    <div class="form-group">
+      <%= f.label :starts_at %>
+      <%= f.text_field :starts_at_time, class: "time start" %>
+      <%= f.text_field :starts_at_date, class: "date start" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :ends_at %>
+      <%= f.text_field :ends_at_time, class: "time end" %>
+      <%= f.text_field :ends_at_date, class: "date end" %>
+    </div>
   </div>
 
   <div class="actions">
     <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>
-
-<%= link_to 'Back to user page', user_path(@lesson.receiver_id) %>

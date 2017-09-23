@@ -1,4 +1,5 @@
 class LessonsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :wrong_id
   before_action :authenticate_user!
 
   def index
@@ -47,6 +48,12 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.require(:lesson).permit(:message, :starts_at, :ends_at, :subject_id, :receiver_id, :sender_id)
+    params.require(:lesson).permit(:message, :starts_at_time, :ends_at_time,
+      :starts_at_date, :ends_at_date, :subject_id, :receiver_id, :sender_id)
+  end
+
+  def wrong_id
+    flash[:danger] = 'Wrong id provided'
+    redirect_to user_lessons_url(current_user)
   end
 end

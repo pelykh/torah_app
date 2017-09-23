@@ -1,16 +1,43 @@
-<li class="list-group-item clearfix">
+<li class="lesson media list-group-item">
     <% if lesson.receiver.id == current_user.id %>
-      <h4><%= lesson.sender.name %> invites you to learn <%= lesson.subject.name %> together</h4>
-      <p><%= lesson.message %></p>
-      <% unless lesson.confirmed_at %>
-       <%= button_to "Accept", accept_lesson_invite_path(lesson.id), class: "btn btn-success" %>
-       <%= button_to "Decline", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
-      <% end %>
+      <div class="media-left">
+        <%= link_to lesson.sender do %>
+          <%= image_tag(lesson.sender.avatar_url, class: "media-object avatar") %>
+          <div class="status"><div class="<%= lesson.sender.status %>"></div></div>
+        <% end %>
+      </div>
+
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to lesson.sender.name, lesson.sender %>
+          <small><%= link_to "@" + lesson.subject.name, lesson.subject %></small>
+        </h4>
+
+        <div class="lesson-message"><%= lesson.message %></div>
+
+        <div class="lesson-time">
+          Lesson will take place from <%= lesson_time(lesson.starts_at) %> to <%= lesson_time(lesson.ends_at) %>
+        </div>
+
+        <% unless lesson.confirmed_at %>
+          <%= button_to "Accept", accept_lesson_invite_path(lesson.id), class: "btn btn-success" %>
+          <%= button_to "Decline", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+        <% end %>
+      </div>
     <% else %>
-      <% unless lesson.confirmed_at %>
-      <h4>You invited <%= lesson.receiver.name %>to learn <%= lesson.subject.name %> together</h4>
+      <h4>
+        You invited <%= link_to lesson.sender.name, lesson.sender %>
+        to study <%= link_to lesson.subject.name, lesson.subject %> together
+      </h4>
+
       <p><%= lesson.message %></p>
-      <%= button_to "Cancel", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+
+      <div class="lesson-time">
+        Lesson will take place from <%= lesson_time(lesson.starts_at) %> to <%= lesson_time(lesson.ends_at) %>
+      </div>
+
+      <% unless lesson.confirmed_at %>
+        <%= button_to "Cancel", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
       <% end %>
     <% end %>
 </li>

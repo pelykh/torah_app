@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "jquery.timepicker.css";
+@import "jquery.timepicker.css";
+@import "bootstrap-datepicker.css";
 
 .video-call-link {
   color: blue;
@@ -179,6 +181,55 @@
 
 #invite-users-list {
   display: none;
+}
+
+.lesson {
+
+  .lesson-time {
+    color:#bfbfbf;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .lesson-message {
+    margin-left: 5px;
+  }
+
+  form {
+    display: inline-block;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .pull-left {
+    position: relative;
+
+    .status {
+      position: absolute;
+      right: 3px;
+      bottom: 0;
+      border-radius: 50%;
+	    width: 10px;
+	    height: 10px;
+
+      .online {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: chartreuse;
+      }
+
+      .offline {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        background: grey;
+      }
+    }
+  }
 }
 
 .chatroom-button {

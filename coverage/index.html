@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-09-23T14:58:37+03:00">2017-09-23T14:58:37+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-09-23T19:20:54+03:00">2017-09-23T19:20:54+03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">97.19%</span></span>
+    (<span class="covered_percent"><span class="green">96.76%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         40.12
+         39.5
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>61</b> files in total.
-    <b>819</b> relevant lines. 
-    <span class="green"><b>796</b> lines covered</span> and
-    <span class="red"><b>23</b> lines missed </span>
+    <b>834</b> relevant lines. 
+    <span class="green"><b>807</b> lines covered</span> and
+    <span class="red"><b>27</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#340da97c163cb6e08073bb8628153aa47924fdbb" class="src_link" title="app/controllers/lessons_controller.rb">app/controllers/lessons_controller.rb</a></td>
-        <td class="green strong">96.55 %</td>
-        <td>52</td>
-        <td>29</td>
-        <td>28</td>
-        <td>1</td>
-        <td>2.7</td>
+        <td class="green strong">90.91 %</td>
+        <td>59</td>
+        <td>33</td>
+        <td>30</td>
+        <td>3</td>
+        <td>2.4</td>
       </tr>
       
       <tr>
@@ -102,12 +102,12 @@
       
       <tr>
         <td class="strong"><a href="#b58e95e2ef396dbd0ee92f56db30f5a3cf983bf3" class="src_link" title="app/helpers/lessons_helper.rb">app/helpers/lessons_helper.rb</a></td>
-        <td class="green strong">100.0 %</td>
+        <td class="red strong">50.0 %</td>
+        <td>6</td>
+        <td>4</td>
         <td>2</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>1.0</td>
+        <td>2</td>
+        <td>0.5</td>
       </tr>
       
       <tr>
@@ -193,11 +193,11 @@
       <tr>
         <td class="strong"><a href="#eb57b544837b9ad4401532bed99b15efc2c5bc23" class="src_link" title="app/models/lesson.rb">app/models/lesson.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>5</td>
-        <td>4</td>
-        <td>4</td>
+        <td>16</td>
+        <td>10</td>
+        <td>10</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>8.2</td>
       </tr>
       
       <tr>
@@ -503,9 +503,9 @@
       <tr>
         <td class="strong"><a href="#c2731f4b281ede6fea8d72902142b8d01a42d1d8" class="src_link" title="spec/factories/lessons.rb">spec/factories/lessons.rb</a></td>
         <td class="green strong">100.0 %</td>
+        <td>13</td>
         <td>11</td>
-        <td>9</td>
-        <td>9</td>
+        <td>11</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -806,11 +806,11 @@
         <div class="source_table" id="340da97c163cb6e08073bb8628153aa47924fdbb">
   <div class="header">
     <h3>app/controllers/lessons_controller.rb</h3>
-    <h4><span class="green">96.55 %</span> covered</h4>
+    <h4><span class="green">90.91 %</span> covered</h4>
     <div>
-      <b>29</b> relevant lines. 
-      <span class="green"><b>28</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>33</b> relevant lines. 
+      <span class="green"><b>30</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
   
@@ -826,304 +826,346 @@
         <li class="covered" data-hits="1" data-linenumber="2">
           <span class="hits">1</span>
           
+          <code class="ruby">  rescue_from ActiveRecord::RecordNotFound, with: :wrong_id</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
           <code class="ruby">  before_action :authenticate_user!</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="3">
+        <li class="never" data-hits="" data-linenumber="4">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="4">
+        <li class="covered" data-hits="1" data-linenumber="5">
           <span class="hits">1</span>
           
           <code class="ruby">  def index</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="5">
+        <li class="never" data-hits="" data-linenumber="6">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="6">
+        <li class="never" data-hits="" data-linenumber="7">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="7">
+        <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
           <code class="ruby">  def fetch_lessons</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="8">
+        <li class="covered" data-hits="2" data-linenumber="9">
           <span class="hits">2</span>
           
           <code class="ruby">    render current_user.lessons</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="9">
+        <li class="never" data-hits="" data-linenumber="10">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="10">
+        <li class="never" data-hits="" data-linenumber="11">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="11">
+        <li class="covered" data-hits="1" data-linenumber="12">
           <span class="hits">1</span>
           
           <code class="ruby">  def accept_invite</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="12">
+        <li class="covered" data-hits="6" data-linenumber="13">
           <span class="hits">6</span>
           
           <code class="ruby">    lesson = Lesson.find(params[:id])</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="13">
+        <li class="covered" data-hits="6" data-linenumber="14">
           <span class="hits">6</span>
           
           <code class="ruby">    if lesson.receiver == current_user</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="14">
+        <li class="covered" data-hits="3" data-linenumber="15">
           <span class="hits">3</span>
           
           <code class="ruby">      lesson.update_attribute(:confirmed_at, Time.now)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="15">
+        <li class="covered" data-hits="3" data-linenumber="16">
           <span class="hits">3</span>
           
           <code class="ruby">      redirect_to user_lessons_path(current_user)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="never" data-hits="" data-linenumber="17">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="17">
+        <li class="covered" data-hits="3" data-linenumber="18">
           <span class="hits">3</span>
           
           <code class="ruby">      redirect_to user_lessons_path(current_user), notice: &quot;You cannot accept his invite&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="18">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="20">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="22">
           <span class="hits">1</span>
           
           <code class="ruby">  def decline_invite</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="22">
+        <li class="covered" data-hits="6" data-linenumber="23">
           <span class="hits">6</span>
           
           <code class="ruby">    lesson = Lesson.find(params[:id])</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="23">
+        <li class="covered" data-hits="6" data-linenumber="24">
           <span class="hits">6</span>
           
           <code class="ruby">    if lesson.receiver == current_user || lesson.sender == current_user</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="24">
+        <li class="covered" data-hits="3" data-linenumber="25">
           <span class="hits">3</span>
           
           <code class="ruby">      lesson.destroy</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="25">
+        <li class="covered" data-hits="3" data-linenumber="26">
           <span class="hits">3</span>
           
           <code class="ruby">      redirect_to user_lessons_path(current_user)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="27">
+        <li class="covered" data-hits="3" data-linenumber="28">
           <span class="hits">3</span>
           
           <code class="ruby">      redirect_to user_lessons_path(current_user), notice: &quot;You cannot decline this lesson&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="29">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="31">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="32">
+        <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
           <code class="ruby">  def create</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="33">
+        <li class="covered" data-hits="3" data-linenumber="34">
           <span class="hits">3</span>
           
           <code class="ruby">    user = User.find(params[:user_id])</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="34">
+        <li class="covered" data-hits="3" data-linenumber="35">
           <span class="hits">3</span>
           
           <code class="ruby">    lesson = Lesson.new(lesson_params)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="35">
+        <li class="covered" data-hits="3" data-linenumber="36">
           <span class="hits">3</span>
           
           <code class="ruby">    if lesson.save</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="36">
+        <li class="covered" data-hits="3" data-linenumber="37">
           <span class="hits">3</span>
           
           <code class="ruby">      redirect_to user, notice: &quot;You have invited this user to study with you&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="38">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="38">
+        <li class="missed" data-hits="0" data-linenumber="39">
           
           
           <code class="ruby">      redirect_to new_user_lesson_url(user)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="40">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="never" data-hits="" data-linenumber="42">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="42">
+        <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
           <code class="ruby">  def new</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="43">
+        <li class="covered" data-hits="4" data-linenumber="44">
           <span class="hits">4</span>
           
           <code class="ruby">    @user = User.find(params[:user_id])</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="44">
+        <li class="covered" data-hits="4" data-linenumber="45">
           <span class="hits">4</span>
           
           <code class="ruby">    @lesson = Lesson.new(sender_id: current_user.id, receiver_id: @user.id)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="47">
+        <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
           <code class="ruby">  private</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="49">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">  def lesson_params</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="50">
+        <li class="covered" data-hits="3" data-linenumber="51">
           <span class="hits">3</span>
           
-          <code class="ruby">    params.require(:lesson).permit(:message, :starts_at, :ends_at, :subject_id, :receiver_id, :sender_id)</code>
+          <code class="ruby">    params.require(:lesson).permit(:message, :starts_at_time, :ends_at_time,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="51">
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby">      :starts_at_date, :ends_at_date, :subject_id, :receiver_id, :sender_id)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="54">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="55">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def wrong_id</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="56">
+          
+          
+          <code class="ruby">    flash[:danger] = &#39;Wrong id provided&#39;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="57">
+          
+          
+          <code class="ruby">    redirect_to user_lessons_url(current_user)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">end</code>
@@ -1992,11 +2034,11 @@
         <div class="source_table" id="b58e95e2ef396dbd0ee92f56db30f5a3cf983bf3">
   <div class="header">
     <h3>app/helpers/lessons_helper.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="red">50.0 %</span> covered</h4>
     <div>
-      <b>1</b> relevant lines. 
-      <span class="green"><b>1</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>4</b> relevant lines. 
+      <span class="green"><b>2</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -2009,7 +2051,31 @@
           <code class="ruby">module LessonsHelper</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="2">
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def lesson_time(time)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="3">
+          
+          
+          <code class="ruby">    return nil unless time</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="4">
+          
+          
+          <code class="ruby">    time.strftime(&#39;%H:%M %d %B&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
           
           
           <code class="ruby">end</code>
@@ -2543,8 +2609,8 @@
     <h3>app/models/lesson.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>4</b> relevant lines. 
-      <span class="green"><b>4</b> lines covered</span> and
+      <b>10</b> relevant lines. 
+      <span class="green"><b>10</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -2561,22 +2627,88 @@
         <li class="covered" data-hits="1" data-linenumber="2">
           <span class="hits">1</span>
           
-          <code class="ruby">  belongs_to :sender, class_name: &quot;User&quot;,  foreign_key: &#39;sender_id&#39;</code>
+          <code class="ruby">  attr_accessor :starts_at_time, :starts_at_date, :ends_at_time, :ends_at_date</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="3">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="3">
           
-          <code class="ruby">  belongs_to :receiver, class_name: &quot;User&quot;, foreign_key: &#39;receiver_id&#39;</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="4">
           <span class="hits">1</span>
           
+          <code class="ruby">  belongs_to :sender, class_name: &quot;User&quot;,  foreign_key: &#39;sender_id&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  belongs_to :receiver, class_name: &quot;User&quot;, foreign_key: &#39;receiver_id&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
           <code class="ruby">  belongs_to :subject</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="5">
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  before_create :serialize_time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def serialize_time</code>
+        </li>
+      
+        <li class="covered" data-hits="37" data-linenumber="13">
+          <span class="hits">37</span>
+          
+          <code class="ruby">    self.starts_at = DateTime.parse(&quot;#{starts_at_date} #{starts_at_time}&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="37" data-linenumber="14">
+          <span class="hits">37</span>
+          
+          <code class="ruby">    self.ends_at = DateTime.parse(&quot;#{ends_at_date} #{ends_at_time}&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
           
           
           <code class="ruby">end</code>
@@ -10338,8 +10470,8 @@
     <h3>spec/factories/lessons.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>9</b> relevant lines. 
-      <span class="green"><b>9</b> lines covered</span> and
+      <b>11</b> relevant lines. 
+      <span class="green"><b>11</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -10386,28 +10518,40 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">    starts_at &quot;2017-09-21 13:06:06&quot;</code>
+          <code class="ruby">    confirmed_at nil</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
-          <code class="ruby">    ends_at &quot;2017-09-21 13:06:06&quot;</code>
+          <code class="ruby">    starts_at_time &quot;13:06&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="9">
           <span class="hits">1</span>
           
-          <code class="ruby">    confirmed_at &quot;2017-09-21 13:06:06&quot;</code>
+          <code class="ruby">    starts_at_date &quot;2017-09-21&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="10">
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    ends_at_time &quot;14:06&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    ends_at_date &quot;2017-09-21&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="13">
           
           
           <code class="ruby">end</code>
