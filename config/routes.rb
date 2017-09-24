@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     resources :lessons, only: [:create, :new, :index, :destroy]
   end
 
-  get :fetch_lessons, to: "lessons#fetch_lessons", as: "fetch_lessons"
+  get "fetch_lessons", to: "lessons#fetch_lessons", as: "fetch_lessons"
+  get "lessons/fetch_subjects", to: "lessons#fetch_subjects"
   post "lessons/:id/accept_invite", to: "lessons#accept_invite", as: "accept_lesson_invite"
   delete "lessons/:id/decline_invite", to: "lessons#decline_invite", as: "decline_lesson_invite"
 

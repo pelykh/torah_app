@@ -125,5 +125,5 @@ RSpec.describe SubjectsController, type: :controller do
     it { is_expected.to redirect_to subjects_url }
 
     it { is_expected.to set_flash }
-    end
+  end
 end

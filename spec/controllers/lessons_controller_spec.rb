@@ -211,4 +211,30 @@ RSpec.describe LessonsController, type: :controller do
       it { is_expected.to redirect_to new_user_session_url }
     end
   end
+
+  describe "GET fetch_subjects" do
+    before do
+      sign_in current_user
+    end
+
+    context "when requesting with valid subject name" do
+      before do
+        2.times  { FactoryGirl.create(:subject, name: "pattern") }
+        get :fetch_lessons, params: { search: "patt" }
+      end
+
+      it { is_expected.to respond_with :success }
+
+      it { is_expected.to render_template(partial: "lessons/_subject_option")}
+    end
+
+    context "when requesting with invalid subject name" do
+      before do
+        2.times  { FactoryGirl.create(:subject) }
+        get :fetch_lessons, params: { search: "pattern" }
+      end
+
+      it { is_expected.to respond_with :success }
+    end
+  end
 end

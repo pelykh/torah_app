@@ -9,6 +9,13 @@ class LessonsController < ApplicationController
     render current_user.lessons
   end
 
+  def fetch_subjects
+    subjects =  Subject.where("name LIKE ?", "%#{params[:search]}%")
+    p Subject.all, params[:search]
+    p Subject.where("name LIKE ?", "%#{params[:search]}%")
+    render partial: "lessons/subject_option", collection: subjects, as: :subject
+  end
+
   def accept_invite
     lesson = Lesson.find(params[:id])
     if lesson.receiver == current_user
@@ -31,12 +38,12 @@ class LessonsController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
-    lesson = Lesson.new(lesson_params)
-    if lesson.save
-      redirect_to user, notice: "You have invited this user to study with you"
+    @user = User.find(params[:user_id])
+    @lesson = Lesson.new(lesson_params)
+    if @lesson.save
+      redirect_to @user, notice: "You have invited this user to study with you"
     else
-      redirect_to new_user_lesson_url(user)
+      render :new
     end
   end
 

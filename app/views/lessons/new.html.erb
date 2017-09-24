@@ -13,20 +13,11 @@
 <hr/>
 
 <%= form_for [@user, @lesson], url: user_lessons_path do |f| %>
-  <% if @lesson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
-
-      <ul>
-      <% @lesson.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= errors_for(@lesson) %>
 
   <%= f.hidden_field :sender_id %>
   <%= f.hidden_field :receiver_id %>
+  <%= f.hidden_field :subject_id %>
 
   <div class="form-group">
     <%= f.label :message %>
@@ -34,8 +25,9 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :subject_id %>
-    <%= f.text_field :subject_id, class: "form-control" %>
+    <input id="subject_picker" autocomplete="off" list="subject_options" class="form-control" />
+    <datalist id="subject_options">
+	  </datalist>
   </div>
 
   <div class="lesson">

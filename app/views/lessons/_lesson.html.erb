@@ -26,7 +26,7 @@
       </div>
     <% else %>
       <h4>
-        You invited <%= link_to lesson.sender.name, lesson.sender %>
+        You invited <%= link_to lesson.receiver.name, lesson.receiver %>
         to study <%= link_to lesson.subject.name, lesson.subject %> together
       </h4>
 
