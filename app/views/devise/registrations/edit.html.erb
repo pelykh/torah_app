@@ -1,7 +1,7 @@
 <h1>Settings</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= errors_for(resource) %>
 
   <h3>Availability</h3>
   <%= f.fields_for :availability do |a_f| %>
