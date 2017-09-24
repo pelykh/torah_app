@@ -17,5 +17,5 @@
 /tmp
 
 .env
-coverage
+coverage/*
 /public/uploads
