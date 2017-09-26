@@ -4,10 +4,11 @@ FactoryGirl.define do
     association :sender, factory: :user
     association :receiver, factory: :user
     association :subject, factory: :subject
-    confirmed_at nil
-    starts_at_time "13:06"
-    starts_at_date "2017-09-21"
-    ends_at_time "14:06"
-    ends_at_date "2017-09-21"
+    confirmed_at DateTime.now
+    starts_at_time Time.now + 1.hours
+    starts_at_date  Date.today
+    ends_at_time Time.now + 2.hours
+    ends_at_date Date.tomorrow
+    recurring false
   end
 end

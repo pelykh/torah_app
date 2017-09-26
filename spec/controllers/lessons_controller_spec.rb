@@ -36,7 +36,7 @@ RSpec.describe LessonsController, type: :controller do
     context "when authorized" do
       before do
         sign_in current_user
-        5.times { FactoryGirl.create(:lesson, receiver: user, sender: current_user) }
+        5.times { FactoryGirl.create(:lesson, receiver: user, sender: current_user, confirmed_at: nil) }
         get :fetch_lessons
       end
 
@@ -212,7 +212,7 @@ RSpec.describe LessonsController, type: :controller do
     end
   end
 
-  describe "GET fetch_subjects" do
+  describe "GET #fetch_subjects" do
     before do
       sign_in current_user
     end
@@ -225,7 +225,7 @@ RSpec.describe LessonsController, type: :controller do
 
       it { is_expected.to respond_with :success }
 
-      it { is_expected.to render_template(partial: "lessons/_subject_option")}
+      it { is_expected.to render_template(partial: "subjects/_subject_option")}
     end
 
     context "when requesting with invalid subject name" do

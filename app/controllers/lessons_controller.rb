@@ -11,15 +11,13 @@ class LessonsController < ApplicationController
 
   def fetch_subjects
     subjects =  Subject.where("name LIKE ?", "%#{params[:search]}%")
-    p Subject.all, params[:search]
-    p Subject.where("name LIKE ?", "%#{params[:search]}%")
-    render partial: "lessons/subject_option", collection: subjects, as: :subject
+    render partial: "subjects/subject_option", collection: subjects, as: :subject
   end
 
   def accept_invite
     lesson = Lesson.find(params[:id])
     if lesson.receiver == current_user
-      lesson.update_attribute(:confirmed_at, Time.now)
+      lesson.update_attribute(:confirmed_at, DateTime.now)
       redirect_to user_lessons_path(current_user)
     else
       redirect_to user_lessons_path(current_user), notice: "You cannot accept his invite"
@@ -56,7 +54,7 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.require(:lesson).permit(:message, :starts_at_time, :ends_at_time,
-      :starts_at_date, :ends_at_date, :subject_id, :receiver_id, :sender_id)
+      :starts_at_date, :ends_at_date, :subject_id, :receiver_id, :sender_id, :recurring)
   end
 
   def wrong_id

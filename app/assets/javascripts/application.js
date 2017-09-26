@@ -34,7 +34,7 @@ jQuery(document).on('turbolinks:load', function() {
   if ($('form').length > 0) {
     $('input.time').timepicker({
       showDuration: true,
-      timeFormat: 'g:ia'
+      timeFormat: 'g:iA'
     });
     $('.lesson .time').timepicker('setTime', new Date());
 
