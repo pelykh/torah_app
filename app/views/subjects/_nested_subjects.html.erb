@@ -2,6 +2,6 @@
 
 <div id="<%= "colapse-#{parent_id}" %>" class="panel-collapse collapse">
   <ul class="list-group">
-    <%= render subjects%>
+    <%= render subjects, current_user: current_user %>
   </ul>
 </div>

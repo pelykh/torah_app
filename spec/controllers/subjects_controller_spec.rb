@@ -22,57 +22,32 @@ RSpec.describe SubjectsController, type: :controller do
   end
 
   describe "GET #show" do
-    context "when authorized" do
-      before do
-        sign_in user
-        get :show, params: { id: subj.id }
-      end
-
-      it { is_expected.to respond_with :success }
-
-      it { is_expected.to render_template :show }
-
-      it "assigns subject" do
-        expect(assigns(:subject)).to eq(subj)
-      end
+    before do
+      sign_in user
+      get :show, params: { id: subj.id }
     end
 
-    context "when unathorized" do
-      before do
-        get :show, params: { id: subj.id }
-      end
+    it { is_expected.to respond_with :success }
 
-      it { is_expected.to respond_with :found }
+    it { is_expected.to render_template :show }
 
-      it { is_expected.to redirect_to new_user_session_url }
+    it "assigns subject" do
+      expect(assigns(:subject)).to eq(subj)
     end
   end
 
   describe "GET #index" do
-    context "when authorized" do
-      before do
-        sign_in user
-        10.times { FactoryGirl.create(:subject) }
-        get :index
-      end
-
-      it { is_expected.to respond_with :success }
-
-      it { is_expected.to render_template :index }
-
-      it "assings subjects" do
-        expect(assigns(:subjects)).to eq(Subject.includes(:children))
-      end
+    before do
+      10.times { FactoryGirl.create(:subject) }
+      get :index
     end
 
-    context "when unathorized" do
-      before do
-        get :index
-      end
+    it { is_expected.to respond_with :success }
 
-      it { is_expected.to respond_with :found }
+    it { is_expected.to render_template :index }
 
-      it { is_expected.to redirect_to new_user_session_url }
+    it "assings subjects" do
+      expect(assigns(:subjects)).to eq(Subject.includes(:children))
     end
   end
 
