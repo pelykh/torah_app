@@ -1,6 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_admin!, except: [:index, :show]
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_subject_id
 
   def index
@@ -41,6 +42,10 @@ class SubjectsController < ApplicationController
   end
 
   private
+
+  def authenticate_admin!
+    redirect_to subjects_url, notice: "Only for admins" unless current_user.admin?
+  end
 
     def set_subject
       @subject = Subject.find(params[:id])

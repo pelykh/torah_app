@@ -23,6 +23,7 @@ module ApplicationHelper
   end
 
   def flash_for flash
+    p "flash", flash
     flash.map do |key, value|
       case key
         when "danger"
@@ -35,6 +36,8 @@ module ApplicationHelper
           "<div class='alert alert-warning'>#{value}</div>"
         when "info"
           "<div class='alert alert-info'>#{value}</div>"
+        else
+          "<div class='alert alert-warning'>#{value}</div>"
         end
     end.join(" ").html_safe
   end

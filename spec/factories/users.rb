@@ -17,6 +17,10 @@ FactoryGirl.define do
       }
     end
 
+    factory :admin do
+      admin true
+    end
+
     factory :inviter_user do
       transient do
         user FactoryGirl.create(:user)

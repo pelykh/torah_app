@@ -5,7 +5,7 @@ jQuery(document).on('turbolinks:load', () => {
   function likeSubject(e) {
     e.preventDefault();
     const id = e.target.dataset.id;
-    $.ajax({ url: `${window.location.origin}/add_subject/${id}`, method: 'POST'})
+    $.post(`${window.location.origin}/add_subject/${id}`)
       .done((response) => {
         $(e.target).html('Unlike');
         $(e.target).toggleClass('like-button unlike-button');

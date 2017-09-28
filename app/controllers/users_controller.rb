@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:add_subject, :remove_subject, :update_availability, :add_friend, :remove_friend]
+  before_action :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
   def fetch_users

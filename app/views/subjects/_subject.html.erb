@@ -4,12 +4,14 @@
   <% end %>
   <strong><%= link_to subject.name, subject %></strong>
   <% if current_user %>
-    <%= link_to 'Edit', edit_subject_path(subject) %>
-    <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% if current_user.interests.find_by(subject_id: subject.id)%>
+    <% if current_user.admin? %>
+      <%= link_to 'Edit', edit_subject_path(subject) %>
+      <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <% if current_user.interests.find_by(subject_id: subject.id) %>
       <%= link_to 'Unlike',"#", class: "unlike-button", data: { id: subject.id } %>
     <% else %>
       <%= link_to 'Like',"#", class: "like-button", data: { id: subject.id }  %>
-    <%end%>
-  <%end%>
+    <% end %>
+  <% end %>
 </li>
