@@ -31,7 +31,6 @@ jQuery(document).on('turbolinks:load', () => {
 
     $('#subject_picker').on('change', (e)=> {
       const id = $(`#subject_options option[value='${e.target.value}']`).data('id');
-      console.log(id);
       $('#lesson_subject_id').val(id);
     });
   }

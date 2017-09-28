@@ -33,7 +33,7 @@ class Lesson < ApplicationRecord
    end
 
     receiver_lessons = receiver.lessons.where("((starts_at >= ? AND starts_at < ?) OR
-      (ends_at > ? AND ends_at <= ?)) AND confirmed_at IS NOT NULL", starts_at, ends_at, starts_at, ends_at)
+      (ends_at > ? AND ends_at <= ?) OR (starts_at >= ? AND ends_at <= ?)) AND confirmed_at IS NOT NULL", starts_at, ends_at, starts_at, ends_at, starts_at, ends_at)
     errors.add(:starts_at, "#{receiver.name} is busy at that time") if receiver_lessons.any? || receiver_recurring_lessons.select do |l|
      (starts_at >= l["starts_at"] && starts_at < l["ends_at"]) || (ends_at > l["starts_at"] && ends_at <= l["ends_at"])
    end.any?
@@ -72,5 +72,10 @@ class Lesson < ApplicationRecord
   def serialize_time
     self.starts_at = DateTime.parse("#{starts_at_date} #{starts_at_time}")
     self.ends_at = DateTime.parse("#{ends_at_date} #{ends_at_time}")
+  end
+
+  def self.time_for user_a, user_b
+    self.select("starts_at, ends_at, recurring").where("(sender_id = ? OR receiver_id = ? OR sender_id = ? OR receiver_id = ?) AND confirmed_at IS NOT NULL",
+      user_a.id ,user_a.id, user_b.id, user_b.id).to_json
   end
 end

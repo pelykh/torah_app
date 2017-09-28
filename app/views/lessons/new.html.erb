@@ -3,9 +3,10 @@
   <% @user.availability.each do |day, v| %>
     <div class="col-lg-3">
       <h4><%= day %></h4>
-      <p><%= "#{v[:from]}-#{v[:to]}" %></p>
+      <p id="<%= day %>"><%= "#{v[:from]}-#{v[:to]}" %></p>
     </div>
   <% end %>
+  <div id="lessons-time" data-lessons="<%= Lesson.time_for(@user, current_user) %>"></div>
 </div>
 
 <%= link_to "Back to #{@user.name} profile", user_path(@lesson.receiver_id) %>
@@ -33,13 +34,13 @@
   <div class="lesson">
     <div class="form-group">
       <%= f.label :starts_at %>
-      <%= f.text_field :starts_at_time, class: "time start" %>
       <%= f.text_field :starts_at_date, class: "date start" %>
+      <%= f.text_field :starts_at_time, class: "time start" %>
     </div>
     <div class="form-group">
       <%= f.label :ends_at %>
-      <%= f.text_field :ends_at_time, class: "time end" %>
       <%= f.text_field :ends_at_date, class: "date end" %>
+      <%= f.text_field :ends_at_time, class: "time end" %>
     </div>
   </div>
 
