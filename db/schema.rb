@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930095124) do
+ActiveRecord::Schema.define(version: 20170930123517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,9 +90,12 @@ ActiveRecord::Schema.define(version: 20170930095124) do
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "parent_id"
+    t.text     "description"
+    t.text     "headline"
+    t.boolean  "featured"
     t.index ["parent_id"], name: "index_subjects_on_parent_id", using: :btree
   end
 

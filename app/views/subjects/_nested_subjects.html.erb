@@ -1,6 +1,6 @@
-<%= link_to "", "#colapse-#{parent_id}", class: "glyphicon glyphicon-chevron-down","data-toggle" => "collapse" %>
+<%= link_to "", "#colapse-#{id}", class: "glyphicon glyphicon-chevron-down","data-toggle" => "collapse" %>
 
-<div id="<%= "colapse-#{parent_id}" %>" class="panel-collapse collapse">
+<div id="<%= "colapse-#{id}" %>" class="panel-collapse collapse">
   <ul class="list-group">
     <%= render subjects, current_user: current_user %>
   </ul>

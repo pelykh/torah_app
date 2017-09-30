@@ -55,7 +55,7 @@ RSpec.describe AdminController, type: :controller do
       end
 
       it "updates_user" do
-        expect(User.last.moderator).to be_thuthy
+        expect(User.last.moderator).to eq(true)
       end
     end
 

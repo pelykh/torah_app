@@ -42,11 +42,11 @@ User.create!(
 
 
 3.times do |n|
-  subject = Subject.create!(name: "Subject#{n}")
+  subject = Subject.create!(name: "Subject#{n}", headline: "headline", description: "description")
   3.times do |k|
-    children  = subject.children.create!(name: "Subject#{n} #{k}")
+    children  = subject.children.create!(name: "Subject#{n} #{k}", headline: "headline", description: "description")
     3.times do |m|
-      children.children.create!(name: "Subject#{n} #{k} #{m}")
+      children.children.create!(name: "Subject#{n} #{k} #{m}", headline: "headline", description: "description")
     end
   end
 

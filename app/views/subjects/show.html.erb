@@ -1,10 +1,15 @@
 <h1><%= @subject.name %></h1>
+<h3><%= @subject.headline %></h3>
+<strong><%= "featured" if @subject.featured %></strong>
+<p><%= @subject.description %></p>
+
 <% if current_user && current_user.admin? %>
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
+
 <%= link_to 'Back', subjects_path %>
 
-<h2> Interested users </h2>
+<h3> Interested users </h3>
 
 <% if current_user %>
   <ul id="interested-users-list" class="list-group">

@@ -1,14 +1,13 @@
 <li class="list-group-item">
   <% if local_assigns[:without_nested].nil? && subject.children.exists? %>
-    <%= render partial: "nested_subjects", locals: { subjects: subject.children, parent_id: subject.id } %>
+    <%= render partial: "nested_subjects", locals: { subjects: subject.children, id: rand(1..27101997) } %>
   <% end %>
   <strong><%= link_to subject.name, subject %></strong>
   <% if current_user %>
     <% if current_user.admin? %>
       <%= link_to 'Edit', edit_subject_path(subject) %>
-      <%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-    <% if current_user.interests.find_by(subject_id: subject.id) %>
+    <% if subject.interests.find_by(user: current_user) %>
       <%= link_to 'Unlike',"#", class: "unlike-button", data: { id: subject.id } %>
     <% else %>
       <%= link_to 'Like',"#", class: "like-button", data: { id: subject.id }  %>

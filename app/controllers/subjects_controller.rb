@@ -5,7 +5,7 @@ class SubjectsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_subject_id
 
   def index
-    @subjects = Subject.includes(:children)
+    @subjects = Subject.includes(:children, :interests)
   end
 
   def show
@@ -48,7 +48,7 @@ class SubjectsController < ApplicationController
   end
 
   def subject_params
-    params.require(:subject).permit(:name)
+    params.require(:subject).permit(:name, :headline, :description, :featured, :parent_id)
   end
 
   def wrong_subject_id

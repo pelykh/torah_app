@@ -1,9 +1,34 @@
 <%= form_for(subject) do |f| %>
   <%= errors_for(subject) %>
 
+  <%= f.hidden_field :parent_id %>
+
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :headline %>
+    <%= f.text_field :headline, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 3, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :featured %>
+    <%= f.check_box :featured %>
+  </div>
+
+  <div class="form-group">
+    <label>parent subject</label>
+    <input id="subject_picker" autocomplete="off" list="subject_options"
+      class="form-control" value="<%= subject.parent.name if subject.parent %>" />
+    <datalist id="subject_options">
+    </datalist>
   </div>
 
   <div class="actions">
