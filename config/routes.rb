@@ -29,4 +29,9 @@ Rails.application.routes.draw do
   get "chatrooms/video_token/:chatroom_id", to: "chatrooms#generate_video_token"
 
   mount ActionCable.server => '/cable'
+
+  scope :admin do
+    get "edit_user/:id", to: "admin#edit_user", as: "admin_edit_user"
+    patch "update_user/:id", to: "admin#update_user", as: "admin_update_user"
+  end
 end

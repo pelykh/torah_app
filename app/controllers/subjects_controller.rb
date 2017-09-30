@@ -43,20 +43,16 @@ class SubjectsController < ApplicationController
 
   private
 
-  def authenticate_admin!
-    redirect_to subjects_url, notice: "Only for admins" unless current_user.admin?
+  def set_subject
+    @subject = Subject.find(params[:id])
   end
 
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
+  def subject_params
+    params.require(:subject).permit(:name)
+  end
 
-    def subject_params
-      params.require(:subject).permit(:name)
-    end
-
-    def wrong_subject_id
-      flash[:danger] = 'Wrong id provided'
-      redirect_to subjects_path
-    end
+  def wrong_subject_id
+    flash[:danger] = 'Wrong id provided'
+    redirect_to subjects_path
+  end
 end

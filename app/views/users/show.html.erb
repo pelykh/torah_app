@@ -3,15 +3,19 @@
 </div>
 <div class="col-lg-7">
   <h2><%= @user.name %></h2>
-  <span><%= "admin" if @user.admin? %></span>
+  <span><%= "admin " if @user.admin? %></span>
+  <span><%= "moderator " if @user.moderator? %></span>
+  <span><%= "verified " if @user.verified? %></span>
 
   <div class="status">
     <div class="<%= @user.status %>"><%= @user.status %>, <%= @user.is_available? ? "available": "not available" %></div>
   </div>
 
-  <% if @current_user && @current_user != @user %>
+  <% if current_user && current_user != @user %>
+    <%= link_to "edit", admin_edit_user_path(@user.id) if current_user.admin? %>
+
     <div id="relation-with-user" >
-      <% case @current_user.relation_with @user %>
+      <% case current_user.relation_with @user %>
         <% when "friends" %>
           <p> Already your friend </p>
           <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn btn-danger", method: :delete %>

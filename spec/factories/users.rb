@@ -8,6 +8,9 @@ FactoryGirl.define do
     country "Ukraine"
     state "Oblastb"
     city "Kiev"
+    moderator false
+    verified false
+    
     availability do
       {
         :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},

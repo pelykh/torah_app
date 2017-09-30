@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     thursday: [:from, :to], friday: [:from, :to],
     saturday: [:from, :to]]
   end
+
+  def authenticate_admin!
+    redirect_to subjects_url, notice: "Only for admins" unless current_user.admin?
+  end
 end

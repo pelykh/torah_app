@@ -119,8 +119,8 @@ RSpec.describe UsersController, type: :controller do
       10.times { FactoryGirl.create(:user) }
       sign_in current_user
       get :fetch_users, params: {
-        sort: "newest",
-        filters: { online: false }
+        search: { name: ""},
+        filters: { online: "false", order_by: "newest" }
       }
     end
 
