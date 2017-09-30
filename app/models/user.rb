@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-  scope :online, -> { where(status: "online") }
-  scope :sort, -> (param) { sort_by(param) }
+  include Filterable
+  include Searchable
 
   attribute :availability, :availability_type
+
+  scope :order_by, -> (param) { sort_by(param) }
 
   enum status: {
     offline: 0,
@@ -61,17 +63,11 @@ class User < ApplicationRecord
     return "not_friends" if !has_invited_user && !invited_by_user
   end
 
-
-  private
-
   def self.sort_by param
-    case param
-     when "newest"
-       order(created_at: :desc)
-     when "oldest"
-       order(created_at: :asc)
-     else
-       order(created_at: :asc)
-    end
+    order_params = {
+      "oldest" => "created_at ASC",
+      "newest" => "created_at DESC"
+    }
+    self.order(order_params[param])
   end
 end

@@ -5,6 +5,9 @@ FactoryGirl.define do
     password "111111"
     confirmed_at DateTime.now
     status "offline"
+    country "Ukraine"
+    state "Oblastb"
+    city "Kiev"
     availability do
       {
         :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},

@@ -40,21 +40,14 @@ RSpec.describe UsersController, type: :controller do
         get :show, params: { id: user.id }
       end
 
-      it { is_expected.to respond_with :success }
+      it { is_expected.to respond_with :found }
 
-      it { is_expected.to render_template :show }
-
-      it "assigns user" do
-        expect(assigns(:user)).to eq(user)
-      end
-
-      it "assigns chatroom to nil" do
-        expect(assigns(:chatroom)).to eq(nil)
-      end
+      it { is_expected.to redirect_to new_user_session_url }
     end
 
     context "when requesting with invalid id" do
       before do
+        sign_in current_user
         get :show, params: { id: "wrong id" }
       end
 
@@ -124,6 +117,7 @@ RSpec.describe UsersController, type: :controller do
   describe "GET #fetch_users" do
     before do
       10.times { FactoryGirl.create(:user) }
+      sign_in current_user
       get :fetch_users, params: {
         sort: "newest",
         filters: { online: false }

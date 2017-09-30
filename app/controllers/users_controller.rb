@@ -3,12 +3,11 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
   def fetch_users
-    if filters[:online] == "true"
-      @users = User.sort(params[:sort]).online
-    else
-      @users = User.sort(params[:sort])
-    end
+    @users = User.filter(filters_params).search(search_params)
     render @users
+  end
+
+  def index
   end
 
   def show
@@ -56,8 +55,12 @@ class UsersController < ApplicationController
 
   private
 
-  def filters
-    params[:filters]? params.require(:filters).permit(:online) : {}
+  def filters_params
+    params[:filters]? params.require(:filters).permit(:sort, :online, :order_by) : {}
+  end
+
+  def search_params
+    params[:search]? params.require(:search).permit(:name, :country, :city, :state) : {}
   end
 
   def user_params

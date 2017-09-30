@@ -3,6 +3,8 @@
 </div>
 <div class="col-lg-7">
   <h2><%= @user.name %></h2>
+  <span><%= "admin" if @user.admin? %></span>
+
   <div class="status">
     <div class="<%= @user.status %>"><%= @user.status %>, <%= @user.is_available? ? "available": "not available" %></div>
   </div>
@@ -35,6 +37,10 @@
       <%= button_to "Invite to study", new_user_lesson_path(@user.id), class: "btn btn-info", method: :get %>
     </div>
   <% end %>
+
+  <p> Country <%= @user.country %> </p>
+  <p>State/province <%= @user.state %></p>
+  <p>City <%= @user.city %></p>
 
   <div class="row">
   <h3>Availability</h3>

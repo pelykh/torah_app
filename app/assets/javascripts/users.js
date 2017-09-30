@@ -1,27 +1,29 @@
 jQuery(document).on('turbolinks:load', () => {
   if($('#users-list').length > 0) {
-    fetchUsers(1, {});
+    fetchUsers(1);
 
-    function fetchUsers(page, options) {
-      $.get(`${window.location.origin}/users/fetch_users/`, {
+    function fetchUsers(page) {
+      const data = {
         page: page,
-        filters: options.filters,
-        sort: options.sort
-      }).done((users) => {
-          $('#users-list').append(users);
-      });
-    }
-
-    function fetchFilteredUsers() {
-      $('#users-list').empty();
-      fetchUsers(1, {
-        filters: {
-          online: $('#online-checkbox').prop('checked')
+        search: {
+          name: $('#name').val(),
+          country: $('#country').val(),
+          city: $('#city').val(),
+          state: $('#state').val()
         },
-        sort: $('#sort').val()
+        filters: {
+          online: $('#online').prop('checked'),
+          order_by: $('#order_by').val()
+        }
+      }
+
+      $.get(`${window.location.origin}/users/fetch_users/`, data).done((users) => {
+        $('#users-list').empty();
+        $('#users-list').append(users);
       });
     }
 
-    $('#filters #online-checkbox, #sort').change(fetchFilteredUsers);
+    $('#search-form').change(() => fetchUsers(1));
+    $('#order_by').change(() => fetchUsers(1));
   }
 });
