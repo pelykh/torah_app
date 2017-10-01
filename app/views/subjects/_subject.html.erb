@@ -1,9 +1,9 @@
-<li class="list-group-item clearfix">
+<li class="subject list-group-item clearfix">
   <%= link_to subject, class: "pull-left" do %>
-    <%= image_tag(subject.thumbnail_url, class: "avatar", size: "64x64") %>
+    <%= image_tag(subject.thumbnail_url, class: "thumbnail img-rounded", size: "64x64") %>
   <% end %>
 
-  <strong><%= link_to subject.name, subject %></strong>
+  <strong> <%= link_to subject.name, subject %></strong>
 
   <% if current_user %>
     <% if subject.interests.find_by(user: current_user) %>
