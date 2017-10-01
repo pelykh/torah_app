@@ -6,7 +6,7 @@
       <p id="<%= day %>"><%= "#{v[:from]}-#{v[:to]}" %></p>
     </div>
   <% end %>
-  <div id="lessons-time" data-lessons="<%= Lesson.time_for(@user, current_user) %>"></div>
+  <div id="lessons-time" data-lessons="<%= Lesson.time_for(current_user, @user) %>"></div>
 </div>
 
 <%= link_to "Back to #{@user.name} profile", user_path(@lesson.receiver_id) %>

@@ -22,6 +22,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to :state }
   it { is_expected.to respond_to :moderator }
   it { is_expected.to respond_to :verified }
+  it { is_expected.to respond_to :time_zone }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(6).is_at_most(20) }

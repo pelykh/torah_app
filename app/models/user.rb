@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def is_available?
-    t = Time.now
+    t = Time.current
     availability.each do |day, v|
       return true if t.method("#{day}?").call &&
                       (v[:from].to_time..v[:to].to_time).cover?(t)

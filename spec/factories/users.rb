@@ -10,7 +10,8 @@ FactoryGirl.define do
     city "Kiev"
     moderator false
     verified false
-    
+    time_zone "UTC"
+
     availability do
       {
         :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},
