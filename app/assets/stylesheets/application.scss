@@ -158,6 +158,8 @@
 }
 
 #relation-with-user {
+  display: inline-block;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -238,6 +240,10 @@
 
 .remember_me {
   margin-top: 10px;
+}
+
+#action-buttons {
+  display: inline-block;
 }
 
 /*!

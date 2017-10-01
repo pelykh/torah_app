@@ -23,13 +23,21 @@
             <li><%= link_to "Lessons", user_lessons_path(current_user.id) %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to current_user do %>
-               <div id="current_user" data-id="<%= current_user.id %>">
-                 Profile
-               </div>
-            <% end %></li>
-            <li><%= link_to "Settings", edit_user_registration_path %></li>
-            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="glyphicon glyphicon-user"></div>
+                <%= current_user.name %>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to current_user do %>
+                   <div id="current_user" data-id="<%= current_user.id %>">
+                     Profile
+                   </div>
+                <% end %></li>
+                <li><%= link_to "Settings", edit_user_registration_path %></li>
+                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
           </ul>
         <% else %>
           <ul class="nav navbar-nav navbar-right">
