@@ -1,14 +1,21 @@
 jQuery(document).on('turbolinks:load', () => {
-  $('#subjects-list').on('click', '.like-button', likeSubject);
-  $('#subjects-list').on('click', '.unlike-button', unlikeSubject);
+  if($('#subjects-list').length > 0) {
+    $('#subjects-list').on('click', '.like-button', likeSubject);
+    $('#subjects-list').on('click', '.unlike-button', unlikeSubject);
+  }
+
+  if($('#subject').length > 0) {
+    $('#subject').on('click', '.like-button', likeSubject);
+    $('#subject').on('click', '.unlike-button', unlikeSubject);
+  }
 
   function likeSubject(e) {
     e.preventDefault();
     const id = e.target.dataset.id;
     $.post(`${window.location.origin}/add_subject/${id}`)
       .done((response) => {
-        $(e.target).html('Unlike');
         $(e.target).toggleClass('like-button unlike-button');
+        $(e.target).toggleClass('glyphicon-star-empty glyphicon-star');
       });
   }
 
@@ -17,8 +24,8 @@ jQuery(document).on('turbolinks:load', () => {
     const id = e.target.dataset.id;
     $.ajax({ url: `${window.location.origin}/remove_subject/${id}`, method: 'DELETE'})
       .done((response) => {
-        $(e.target).html('Like');
         $(e.target).toggleClass('unlike-button like-button');
+        $(e.target).toggleClass('glyphicon-star glyphicon-star-empty');
       });
   }
 

@@ -48,7 +48,9 @@ class SubjectsController < ApplicationController
   end
 
   def subject_params
-    params.require(:subject).permit(:name, :headline, :description, :featured, :parent_id)
+    params.require(:subject).permit(:name, :headline, :description,
+      :featured, :parent_id, :thumbnail, :thumbnail_cache, :remove_thumbnail,
+      :banner, :banner_cache, :remove_banner)
   end
 
   def wrong_subject_id

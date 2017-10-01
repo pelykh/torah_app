@@ -1,9 +1,21 @@
+<div id="subject">
 <h1><%= @subject.name %></h1>
+<% if current_user %>
+  <% if @subject.interests.find_by(user: current_user) %>
+    <%= link_to '',"#", class: "unlike-button glyphicon glyphicon-star", data: { id: @subject.id } %>
+  <% else %>
+    <%= link_to '',"#", class: "like-button glyphicon glyphicon-star-empty", data: { id: @subject.id }  %>
+  <% end %>
+<% end %>
 <h3><%= @subject.headline %></h3>
 <strong><%= "featured" if @subject.featured %></strong>
 <p><%= @subject.description %></p>
 
+<%= image_tag(@subject.thumbnail_url) if @subject.thumbnail? %>
+<%= image_tag(@subject.banner_url) if @subject.banner? %>
+
 <% if current_user && current_user.admin? %>
+
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
 
@@ -18,3 +30,4 @@
 <% else %>
   <strong> <%= @subject.users.count %> users are interested in this subject </strong>
 <% end %>
+<end>

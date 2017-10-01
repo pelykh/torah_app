@@ -9,6 +9,8 @@ RSpec.describe Subject, type: :model do
   it { is_expected.to respond_to :headline }
   it { is_expected.to respond_to :description }
   it { is_expected.to respond_to :featured }
+  it { is_expected.to respond_to :banner }
+  it { is_expected.to respond_to :thumbnail }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :description }

@@ -11,6 +11,9 @@ class Subject < ApplicationRecord
 
   validate :check_if_parent_id_wont_loop, on: :update
 
+  mount_uploader :thumbnail, ThumbnailUploader
+  mount_uploader :banner, BannerUploader
+
   def is_inherit_from_child?(id)
     self.children.each do |c|
       return true if c.id == id || c.is_inherit_from_child?(id)
