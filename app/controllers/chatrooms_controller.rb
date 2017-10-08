@@ -43,6 +43,13 @@ class ChatroomsController < ApplicationController
     grant.room = "chatroom_#{params["chatroom_id"]}"
     token.add_grant(grant)
 
+    client = Twilio::REST::Client.new(ENV["API_KEY_SID"], ENV["API_KEY_SECRET"])
+    rooms = client.video.rooms.list(unique_name: "chatroom_#{params["chatroom_id"]}")
+
+    unless rooms.any?
+      client.video.v1.rooms.create(unique_name: "chatroom_#{params["chatroom_id"]}", video_codecs: "H264")
+    end
+
     render json: {token: token.to_jwt}
   end
 

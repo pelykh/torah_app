@@ -79,7 +79,7 @@ jQuery(document).on('turbolinks:load', () => {
   function participantDiv(participant) {
     const div = document.createElement('div');
     div.dataset.identity = participant.identity;
-    div.className = 'webcam col-lg-6';
+    div.className = 'webcam col-lg-12';
     return div;
   }
 
@@ -94,7 +94,8 @@ jQuery(document).on('turbolinks:load', () => {
 
   function connectToVideoChat() {
     getToken(chatroom_id).then((data) => {
-      Twilio.Video.connect(data.token, {name:'chatroom_' + chatroom_id})
+      Twilio.Video.connect(data.token, {
+        name:'chatroom_' + chatroom_id})
         .then(createRoom, roomErrors);
     });
 
