@@ -1,45 +1,18 @@
 require 'database_cleaner'
+require 'factory_girl_rails'
+
 
 DatabaseCleaner.clean_with(:truncation)
-25.times do |n|
-  User.create!(
-    email: "email#{n}@gmail.com",
-    name: "namee#{n}",
-    password: "111111",
-    confirmed_at: DateTime.now,
-    status: 0,
-    availability:{
-      :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :monday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :tuesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :wednesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :thursday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :friday=>{:from=>"01:00AM", :to=>"11:00PM"},
-      :saturday=>{:from=>"01:00AM", :to=>"11:00PM"}
-    }
-  )
+
+5.times do |n|
+  FactoryGirl.create(:user)
 end
 
-User.create!(
-  email: "admin@gmail.com",
-  name: "Adminnnn",
-  password: "111111",
-  confirmed_at: DateTime.now,
-  status: 0,
-  availability:{
-    :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :monday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :tuesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :wednesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :thursday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :friday=>{:from=>"01:00AM", :to=>"11:00PM"},
-    :saturday=>{:from=>"01:00AM", :to=>"11:00PM"}
-  },
-  admin: true
-)
+5.times do |n|
+  FactoryGirl.create(:busy_user)
+end
 
-
-
+FactoryGirl.create(:admin)
 
 3.times do |n|
   subject = Subject.create!(name: "Subject#{n}", headline: "headline", description: "description")

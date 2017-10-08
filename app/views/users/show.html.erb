@@ -18,7 +18,7 @@
   <% end %>
 
   <div class="status">
-    <div class="<%= @user.status %>"><%= @user.status %>, <%= @user.is_available? ? "available": "not available" %></div>
+    <div class="<%= @user.status %>"><%= @user.status %></div>
   </div>
 
   <% if current_user && current_user != @user %>
@@ -60,10 +60,10 @@
 <div class="row">
 <div class="col-lg-12">
   <h3>Availability</h3>
-  <% @user.availability.each do |day, v| %>
+  <% @user.availability.each_with_index do |v, i| %>
     <div class="col-lg-3 col-sm-4 col-xs-6">
-      <h4><%= day %></h4>
-      <p><%= "#{v[:from]}-#{v[:to]}" %></p>
+      <h5><%= Date::DAYNAMES[i] %></h5>
+      <p><%= v.begin.strftime("%I:%M%p") %>-<%= v.end.strftime("%I:%M%p") %></p>
     </div>
   <% end %>
 </div>

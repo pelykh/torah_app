@@ -49,7 +49,7 @@ jQuery(document).on('turbolinks:load', function() {
 
   function playNewMessageSound() {
     const audio = new Audio(`${window.location.origin}/sounds/new_message.mp3`);
-    audio.play();
+    audio.play().catch( () => console.log("Your browser cannot play sound on background"));
   }
 
   function openMessageEditForm(e) {

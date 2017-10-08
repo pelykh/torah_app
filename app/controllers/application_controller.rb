@@ -1,19 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_filter :configure_permitted_parameters, if: :devise_controller?
   around_action :set_time_zone, if: :current_user
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email,
-      :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
-      :time_zone, availability: availability_params)}
-  end
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      availability = u[:availability].map.with_index do |r, i|
+        ends = r.split('..')
+        s = Time.zone.parse("2017 2 october #{ends[0]}") + i.days
+        e = Time.zone.parse("2017 2 october #{ends[1]}") + i.days
+        s..e
+      end
 
-  def availability_params
-    [sunday: [:from, :to], monday: [:from, :to],
-    tuesday: [:from, :to], wednesday: [:from, :to],
-    thursday: [:from, :to], friday: [:from, :to],
-    saturday: [:from, :to]]
+      u.permit(:name, :email,
+        :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
+        :time_zone).merge({ availability: availability })
+    end
   end
 
   def authenticate_admin!

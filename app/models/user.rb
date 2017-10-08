@@ -2,8 +2,6 @@ class User < ApplicationRecord
   include Filterable
   include Searchable
 
-  attribute :availability, :availability_type
-
   scope :order_by, -> (param) { sort_by(param) }
 
   enum status: {
@@ -22,12 +20,14 @@ class User < ApplicationRecord
   has_many :lessons, foreign_key: :receiver_id, dependent: :destroy
   has_many :lessons, foreign_key: :sender_id, dependent: :destroy
 
-  validates :name, presence: true, length: { in: 6..20 }
+  validates :name, presence: true, length: { in: 5..40 }
+  validate :check_availability_ranges
 
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :timeoutable, :lockable, :omniauthable
+
 
   def disappear
     update_attribute(:status, 0)
@@ -69,5 +69,11 @@ class User < ApplicationRecord
       "newest" => "created_at DESC"
     }
     self.order(order_params[param])
+  end
+
+  private
+
+  def check_availability_ranges
+    p self.availability
   end
 end

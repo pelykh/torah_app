@@ -1,31 +1,31 @@
 FactoryGirl.define do
   factory :user do
-    name     { Faker::Name.name[0,19] }
-    email    { Faker::Internet.email }
-    password "111111"
-    confirmed_at DateTime.now
-    status "offline"
-    country "Ukraine"
-    state "Oblastb"
-    city "Kiev"
-    moderator false
-    verified false
-    time_zone "UTC"
+    name                { Faker::Name.name }
+    sequence(:email) { |n| "email#{n}@gmail.com" }
+    password            "111111"
+    confirmed_at        DateTime.now
+    status              "offline"
+    country             "Ukraine"
+    state               "Oblastb"
+    city                "Kiev"
+    moderator           false
+    verified            false
+    admin               false
+    time_zone           "UTC"
 
     availability do
-      {
-        :sunday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :monday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :tuesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :wednesday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :thursday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :friday=>{:from=>"01:00AM", :to=>"11:00PM"},
-        :saturday=>{:from=>"01:00AM", :to=>"11:00PM"}
-      }
+        a = []
+        7.times do |i|
+          range = Time.zone.parse("2017 2 october 12:00AM") + i.days..Time.zone.parse("2017 2 october 11:30PM") + i.days
+          a << range
+        end
+        a
     end
 
     factory :admin do
       admin true
+      name { "Admin " + Faker::Name.name }
+      sequence(:email) { |n| "admin@gmail.com" }
     end
 
     factory :inviter_user do
@@ -53,16 +53,16 @@ FactoryGirl.define do
     end
 
     factory :busy_user do
+      name { "Busy " + Faker::Name.name }
+      sequence(:email) { |n| "busy#{n}@gmail.com" }
+
       availability do
-        {
-          :sunday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :monday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :tuesday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :wednesday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :thursday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :friday=>{:from=>"12:00AM", :to=>"12:00AM"},
-          :saturday=>{:from=>"12:00AM", :to=>"12:00AM"}
-        }
+        a = []
+        7.times do |i|
+          range = Time.zone.parse("2017 2 october 12:00AM") + i.days..Time.zone.parse("2017 2 october 12:00AM") + i.days
+          a << range
+        end
+        a
       end
     end
   end

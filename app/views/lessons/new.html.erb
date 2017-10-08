@@ -1,13 +1,6 @@
-<div class="row">
-<h3><%= @user.name %> availability</h3>
-  <% @user.availability.each do |day, v| %>
-    <div class="col-lg-3">
-      <h4><%= day %></h4>
-      <p id="<%= day %>"><%= "#{v[:from]}-#{v[:to]}" %></p>
-    </div>
-  <% end %>
-  <div id="lessons-time" data-lessons="<%= Lesson.time_for(current_user, @user) %>"></div>
-</div>
+<div id="lessons-time" data-lessons="<%= Lesson.time_for(current_user, @user) %>"></div>
+<div id="current-user-availability" data-availability="<%= current_user.availability.to_json %>"></div>
+<div id="user-availability" data-availability="<%= @user.availability.to_json %>"></div>
 
 <%= link_to "Back to #{@user.name} profile", user_path(@lesson.receiver_id) %>
 
@@ -18,7 +11,6 @@
 
   <%= f.hidden_field :sender_id %>
   <%= f.hidden_field :receiver_id %>
-  <%= f.hidden_field :subject_id %>
 
   <div class="form-group">
     <%= f.label :message %>
@@ -26,6 +18,8 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :subject %>
+    <%= f.hidden_field :subject_id %>
     <input id="subject_picker" autocomplete="off" list="subject_options" class="form-control" />
     <datalist id="subject_options">
 	  </datalist>

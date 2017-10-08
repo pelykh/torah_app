@@ -10,18 +10,10 @@ class Types::AvailabilityType < ActiveRecord::Type::String
   end
 
   def deserialize value
-    return value if value == ""
-     a = {}
-     ranges =  value.split(",")
-     days.each do |day|
-       ranges
-       range = ranges.shift.split("-")
-       a[day] = {
-         from: range[0],
-         to: range[1]
-       }
-     end
-    a
+    p value
+    value.map {|r|
+      p r
+    }
   end
 
   def cast value

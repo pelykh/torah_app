@@ -26,4 +26,21 @@ jQuery(document).on('turbolinks:load', () => {
     $('#search-form').change(() => fetchUsers(1));
     $('#order_by').change(() => fetchUsers(1));
   }
+
+  if ($('#edit_user').length > 0) {
+    $('input.time').timepicker({
+      showDuration: true,
+      timeFormat: 'g:iA',
+      disableTextInput: true
+    });
+
+    $('.day').datepair();
+
+    $('#edit_user').on('submit', (e) => {
+      $('.day').each((i, e) => {
+        const range = `${$(e).find('.start').val()}..${$(e).find('.end').val()}`;
+        $(e).find('#user_availability').val(range);
+      });
+    });
+  }
 });
