@@ -5,77 +5,79 @@ class Lesson < ApplicationRecord
   belongs_to :receiver, class_name: "User", foreign_key: 'receiver_id'
   belongs_to :subject
 
-  validate :check_if_users_have_lessons_at_time_range
-  validate :check_if_time_range_is_valid
-  validate :check_if_users_are_available
+  validate :sender_cannot_be_busy_on_lesson_time
+  validate :receiver_cannot_be_busy_on_lesson_time
+  validate :time_cannot_be_in_the_past
+  validate :sender_should_be_available_on_lesson_time
+  validate :receiver_should_be_available_on_lesson_time
 
   before_validation :serialize_time, on: :create
 
   private
 
-  def check_if_users_have_lessons_at_time_range
-    sender_recurring_lessons = sender.lessons.where(recurring: true).map do |l|
-      l.starts_at = Time.zone.parse("#{weekday(l.starts_at)} #{l.starts_at.to_s(:time)}")
-      l.ends_at = Time.zone.parse("#{weekday(l.ends_at)}, #{l.ends_at.to_s(:time)}")
-      l
+  def sender_should_be_available_on_lesson_time
+    t = to_availability_week(time)
+    sender.availability.each do |r|
+      return true if r.include?(t)
     end
-
-    sender_lessons = sender.lessons.where("((starts_at >= ? AND starts_at < ?) OR
-      (ends_at > ? AND ends_at <= ?)) AND confirmed_at IS NOT NULL", starts_at, ends_at, starts_at, ends_at)
-    errors.add(:starts_at, "#{sender.name} is busy at that time") if sender_lessons.any? || sender_recurring_lessons.select do |l|
-     (starts_at >= l["starts_at"] && starts_at < l["ends_at"]) || (ends_at > l["starts_at"] && ends_at <= l["ends_at"])
-   end.any?
-
-   receiver_recurring_lessons = receiver.lessons.where(recurring: true).map do |l|
-     l.starts_at = Time.zone.parse("#{weekday(l.starts_at)} #{l.starts_at.to_s(:time)}")
-     l.ends_at = Time.zone.parse("#{weekday(l.ends_at)}, #{l.ends_at.to_s(:time)}")
-     l
-   end
-
-    receiver_lessons = receiver.lessons.where("((starts_at >= ? AND starts_at < ?) OR
-      (ends_at > ? AND ends_at <= ?) OR (starts_at >= ? AND ends_at <= ?)) AND confirmed_at IS NOT NULL", starts_at, ends_at, starts_at, ends_at, starts_at, ends_at)
-    errors.add(:starts_at, "#{receiver.name} is busy at that time") if receiver_lessons.any? || receiver_recurring_lessons.select do |l|
-     (starts_at >= l["starts_at"] && starts_at < l["ends_at"]) || (ends_at > l["starts_at"] && ends_at <= l["ends_at"])
-   end.any?
+    errors.add(:time, "#{sender.name} is not available at that time")
   end
 
-  def weekday date
-    Date::DAYNAMES[date.wday].downcase
-  end
-
-  def check_if_users_are_available
-    lesson_day = weekday(starts_at).to_sym
-    starts_at_time = starts_at.to_s(:time).to_time
-
-    receiver_available_from = Time.zone.parse(receiver.availability[lesson_day][:from]).to_time
-    receiver_available_to = Time.zone.parse(receiver.availability[lesson_day][:to]).to_time
-    errors.add(:starts_at,
-      "#{receiver.name} is unavailable at that time") unless starts_at_time.between?(receiver_available_from, receiver_available_to)
-
-    sender_available_from = Time.zone.parse(sender.availability[lesson_day][:from]).to_time
-    sender_available_to = Time.zone.parse(sender.availability[lesson_day][:to]).to_time
-    errors.add(:starts_at,
-      "#{sender.name} is unavailable at that time") unless starts_at_time.between?(sender_available_from, sender_available_to)
-  end
-
-  def check_if_time_range_is_valid
-    if starts_at >= ends_at
-      errors.add(:starts_at, :invalid)
-      errors.add(:ends_at, :invalid)
+  def receiver_should_be_available_on_lesson_time
+    t = to_availability_week(time)
+    receiver.availability.each do |r|
+      return true if r.include?(t)
     end
+    errors.add(:time, "#{receiver.name} is not available at that time")
+  end
 
-    unless starts_at > Time.current || recurring
-      errors.add(:starts_at, "You can`t set up lesson on  past days")
+  def to_availability_week range
+    b = range.begin
+    e = range.end
+    Time.zone.parse("1996-01-01 #{b.to_s(:time)}") + (b.wday - 1).days ..
+    Time.zone.parse("1996-01-01 #{e.to_s(:time)}") + (e.wday - 1).days
+  end
+
+  def sender_cannot_be_busy_on_lesson_time
+    t = to_availability_week(time)
+    errors.add(:time, "#{sender.name} is busy at that time") if
+     sender.lessons.exists?([
+       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL",
+       begin: time.begin, end: time.end
+     ]) ||
+     sender.lessons.exists?([
+       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL AND recurring IS NOT NULL",
+       begin: t.begin, end: t.end
+     ])
+  end
+
+  def receiver_cannot_be_busy_on_lesson_time
+    t = to_availability_week(time)
+
+    errors.add(:time, "#{receiver.name} is busy at that time") if
+      receiver.lessons.exists?([
+        "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL",
+        begin: time.begin, end: time.end
+      ]) ||
+      receiver.lessons.exists?([
+        "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL AND recurring IS NOT NULL",
+        begin: t.begin, end: t.end
+      ])
+  end
+
+  def time_cannot_be_in_the_past
+    unless time.begin > Time.current || recurring
+      errors.add(:time, "You can`t set up lesson on past days")
     end
   end
 
   def serialize_time
-    self.starts_at = Time.zone.parse("#{starts_at_date} #{starts_at_time}")
-    self.ends_at = Time.zone.parse("#{ends_at_date} #{ends_at_time}")
+    self.time = Time.zone.parse("#{starts_at_date} #{starts_at_time}")..Time.zone.parse("#{ends_at_date} #{ends_at_time}")
+    self.time = to_availability_week(time) if recurring
   end
 
   def self.time_for current_user, user
-    self.select("starts_at, ends_at, recurring").where("(sender_id = ? OR receiver_id = ? OR sender_id = ? OR receiver_id = ?) AND confirmed_at IS NOT NULL",
+    self.select("time, recurring").where("(sender_id = ? OR receiver_id = ? OR sender_id = ? OR receiver_id = ?) AND confirmed_at IS NOT NULL",
       current_user.id ,current_user.id, user.id, user.id).to_json
   end
 end

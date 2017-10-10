@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to :time_zone }
 
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_length_of(:name).is_at_least(6).is_at_most(20) }
+  it { is_expected.to validate_length_of(:name).is_at_least(5).is_at_most(40) }
 
   it { is_expected.to have_many(:interests).dependent(:destroy) }
   it { is_expected.to have_many(:participatings) }
@@ -68,23 +68,6 @@ RSpec.describe User, type: :model do
 
   it "changes status to away on away" do
      expect{subject.away}.to change{subject.status}.from("offline").to("away")
-  end
-
-  describe "#is_available?" do
-    context "when user is available now" do
-      it "returns true" do
-        subject.availability = {
-          sunday:    { from: "12:00am", to: "11:30pm" },
-          monday:    { from: "12:00am", to: "11:30pm" },
-          tuesday:   { from: "12:00am", to: "11:30pm" },
-          wednesday: { from: "12:00am", to: "11:30pm" },
-          thursday:  { from: "12:00am", to: "11:30pm" },
-          friday:    { from: "12:00am", to: "11:30pm" },
-          saturday:  { from: "12:00am", to: "11:30pm" }
-        }
-        expect(subject.is_available?).to be_truthy
-      end
-    end
   end
 
   context "returns relation with other user on relation_with" do

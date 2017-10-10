@@ -1,22 +1,22 @@
 FactoryGirl.define do
   factory :user do
     name                { Faker::Name.name }
-    sequence(:email) { |n| "email#{n}@gmail.com" }
+    sequence(:email) { |n| "email#{n-3}@gmail.com" }
     password            "111111"
-    confirmed_at        DateTime.now
+    confirmed_at        Time.current
     status              "offline"
-    country             "Ukraine"
-    state               "Oblastb"
-    city                "Kiev"
+    country             { Faker::Address.country }
+    state               { Faker::Address.state }
+    city                { Faker::Address.city }
     moderator           false
     verified            false
     admin               false
-    time_zone           "UTC"
+    time_zone           { Faker::Address.time_zone }
 
     availability do
         a = []
         7.times do |i|
-          range = Time.zone.parse("2017 2 october 12:00AM") + i.days..Time.zone.parse("2017 2 october 11:30PM") + i.days
+          range = Time.zone.parse("1996-01-01 00:00") + i.days..Time.zone.parse("1996-01-01 24:00") + i.days
           a << range
         end
         a
@@ -25,7 +25,7 @@ FactoryGirl.define do
     factory :admin do
       admin true
       name { "Admin " + Faker::Name.name }
-      sequence(:email) { |n| "admin@gmail.com" }
+      sequence(:email) { |n| "admin#{n}@gmail.com" }
     end
 
     factory :inviter_user do
@@ -59,7 +59,18 @@ FactoryGirl.define do
       availability do
         a = []
         7.times do |i|
-          range = Time.zone.parse("2017 2 october 12:00AM") + i.days..Time.zone.parse("2017 2 october 12:00AM") + i.days
+          range = Time.zone.parse("1996-01-01 12:00AM") + i.days..Time.zone.parse("1996-01-01 12:00AM") + i.days
+          a << range
+        end
+        a
+      end
+    end
+
+    factory :half_busy_user do
+      availability do
+        a = []
+        7.times do |i|
+          range = Time.zone.parse("1996-01-01 00:00") + i.days..Time.zone.parse("1996-01-01 11:00") + i.days
           a << range
         end
         a

@@ -9,8 +9,8 @@
     <div class="form-group day">
       <%= f.label Date::DAYNAMES[n]  %><br />
       <%= f.hidden_field :availability, value: resource.availability[n], multiple: true, class: "form-control"  %>
-      <%= text_field_tag "", resource.availability[n].begin.strftime("%I:%M%p"), class: "time start" %>
-      <%= text_field_tag "",resource.availability[n].end.strftime("%I:%M%p"), class: "time end" %>
+      <%= text_field_tag "", resource.availability[n].begin.localtime.strftime("%I:%M%p"), class: "time start" %>
+      <%= text_field_tag "",resource.availability[n].end.localtime.strftime("%I:%M%p"), class: "time end" %>
     </div>
   <% end %>
 

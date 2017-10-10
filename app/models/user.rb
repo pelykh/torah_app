@@ -74,6 +74,5 @@ class User < ApplicationRecord
   private
 
   def check_availability_ranges
-    p self.availability
   end
 end

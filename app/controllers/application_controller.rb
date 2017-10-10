@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) do |u|
       availability = u[:availability].map.with_index do |r, i|
         ends = r.split('..')
-        s = Time.zone.parse("2017 2 october #{ends[0]}") + i.days
-        e = Time.zone.parse("2017 2 october #{ends[1]}") + i.days
+        s = Time.zone.parse("1996-01-01 #{ends[0]}") + i.days
+        e = Time.zone.parse("1996-01-01 #{ends[1]}") + i.days
         s..e
       end
 
