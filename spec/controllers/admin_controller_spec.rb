@@ -5,7 +5,7 @@ RSpec.describe AdminController, type: :controller do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
-  let(:user_params) { FactoryGirl.attributes_for(:user, moderator: true) }
+  let(:user_params) { FactoryGirl.attributes_for(:moderator) }
 
   describe "GET #edit_user" do
     context "when admin" do

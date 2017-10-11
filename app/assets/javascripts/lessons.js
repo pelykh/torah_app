@@ -73,9 +73,12 @@ jQuery(document).on('turbolinks:load', () => {
     }
 
     function lessonsTime(date) {
-      return ($('#lessons-time').data('lessons')).map((l) => {
-        return [new Date(l['starts_at']), new Date(l['ends_at']), l["recurring"]]
-      })
+      const lessons = ($('#lessons-time').data('lessons')).map((l) => {
+        let time = l['time'].split('..');
+        return [new Date(time[0]), new Date(time[1]), l["recurring"]]
+      });
+      console.log("lessons ", lessons);
+      return lessons;
     }
 
     function compareDates(d1,d2) {

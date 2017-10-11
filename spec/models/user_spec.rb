@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { FactoryGirl.create(:user) }
+  subject { FactoryGirl.build(:user) }
 
   let(:invited_user) { FactoryGirl.create(:invited_user, user: subject) }
 
@@ -56,7 +56,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   it "changes status to online on appear" do
      expect{subject.appear}.to change{subject.status}.from("offline").to("online")
   end
@@ -92,6 +91,40 @@ RSpec.describe User, type: :model do
     context "when you aren't friends" do
       it "returns not_friend" do
         expect(subject.relation_with(not_friend)).to eql("not_friends")
+      end
+    end
+  end
+
+  describe ".availability_should_be_inside_availability_range" do
+    context "when availability is valid" do
+      it { is_expected.to be_valid }
+    end
+
+    context "when availability is invalid" do
+      context "when availability is more right than availability range" do
+        before do
+          subject.availability = [Time.zone.parse("1996-01-08 00:00")..Time.zone.parse("1996-01-09 10:00")]
+          subject.save
+        end
+
+        it { is_expected.to be_invalid }
+
+        it "adds error to subject" do
+          expect(subject.errors[:availability]).to include("Invalid availability ranges are provided")
+        end
+      end
+
+      context "when availability is more left than availability range" do
+        before do
+          subject.availability = [Time.zone.parse("1995-12-31 10:00")..Time.zone.parse("1996-01-01 10:00")]
+          subject.save
+        end
+
+        it { is_expected.to be_invalid }
+
+        it "adds error to subject" do
+          expect(subject.errors[:availability]).to include("Invalid availability ranges are provided")
+        end
       end
     end
   end

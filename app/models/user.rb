@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :lessons, foreign_key: :sender_id, dependent: :destroy
 
   validates :name, presence: true, length: { in: 5..40 }
-  validate :check_availability_ranges
+  validate :availability_should_be_inside_availability_range
 
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,
@@ -73,6 +73,13 @@ class User < ApplicationRecord
 
   private
 
-  def check_availability_ranges
+  def availability_should_be_inside_availability_range
+    availability_range = Time.parse("1996-01-01 00:00")..
+                         Time.parse("1996-01-08 24:00")
+    availability.each do |r|
+      errors.add(:availability, "Invalid availability ranges are provided") unless
+        r.begin.between?(availability_range.begin, availability_range.end) &&
+        r.end.between?(availability_range.begin, availability_range.end)
+    end
   end
 end

@@ -28,6 +28,10 @@ FactoryGirl.define do
       sequence(:email) { |n| "admin#{n}@gmail.com" }
     end
 
+    factory :moderator do
+      moderator true
+    end
+
     factory :inviter_user do
       transient do
         user FactoryGirl.create(:user)
