@@ -1,0 +1,10 @@
+<div class="organization">
+  <h3>Name <%= organization.name %></h3>
+  <p>Founder: <%= link_to organization.founder.name, organization.founder %></p>
+  <span><%= link_to "show", admin_organization_path(organization) %></span>
+  <% unless organization.confirmed_at %>
+    <span><%= link_to 'Confirm', admin_organization_confirm_path(organization.id), method: :patch, data: { confirm: 'Confirm' } %></span>
+  <% else %>
+    <span><small>confirmed</small></span>
+  <% end %>
+</div>

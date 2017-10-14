@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_user!
+  before_action :authorizate_admin
 
   def edit_user
     @user = User.find(params[:id])
@@ -18,5 +19,9 @@ class AdminController < ApplicationController
 
   def user_params
     params.require(:user).permit(:moderator, :verified)
+  end
+
+  def authorizate_admin
+    redirect_to subjects_url, notice: "Only for admins" unless current_user.admin?
   end
 end

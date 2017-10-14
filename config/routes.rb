@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :organizations
   root "subjects#index"
   devise_for :users
   resources :subjects
@@ -33,5 +34,11 @@ Rails.application.routes.draw do
   scope :admin do
     get "edit_user/:id", to: "admin#edit_user", as: "admin_edit_user"
     patch "update_user/:id", to: "admin#update_user", as: "admin_update_user"
+  end
+
+  namespace :admin do
+    resources :organizations, only: [:show, :index] do
+      patch "confirm", to: "organizations#confirm", as: "confirm"
+    end
   end
 end

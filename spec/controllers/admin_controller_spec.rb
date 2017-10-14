@@ -48,7 +48,7 @@ RSpec.describe AdminController, type: :controller do
         expect(assigns(:user)).to eq(user)
       end
 
-      it do
+      it "permits params" do
         is_expected.to permit(:moderator, :verified)
           .for(:update_user, verb: :post, params: { id: user.id, user: user_params })
           .on(:user)

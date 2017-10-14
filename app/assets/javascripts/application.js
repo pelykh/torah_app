@@ -18,6 +18,7 @@
 //= require Datepair
 //= require jquery.datepair.js
 //= require bootstrap-datepicker
+//= require bootstrap
 //= require_tree .
 
 jQuery(document).on('turbolinks:load', function() {
