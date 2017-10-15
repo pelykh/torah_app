@@ -1,22 +1,15 @@
-<h1><%= @organization.name %>'s members</h1>
+<br />
+<%= link_to 'Back', organization_path(@organization), class: "btn btn-primary" %>
+<br />
+<% if @organization.memberships.find_by(user_id: current_user.id, role: :admin) %>
+  <h2>Candidates</h2>
+  <ul id="candidates-list" class="list-group">
+    <%= render partial: "candidate", collection: @candidates %>
+  </ul>
+<% end %>
 
-<div id="members-list">
-  <% @members.each do |member| %>
-    <strong><%= member.name %> <%= member.memberships.find_by(organization_id: @organization.id).role %></strong>
-    <%= link_to "admin", organization_change_role_path(@organization, member, "admin"), method: :patch %>
-    <%= link_to "moderator", organization_change_role_path(@organization, member, "moderator"), method: :patch %>
-    <%= link_to "member", organization_change_role_path(@organization, member, "member"), method: :patch %>
-  <% end %>
-</div>
+<h1>Members</h1>
 
-<h2>Invites</h2>
-
-
-<div id="members-list">
-  <% @candidates.each do |candidate| %>
-    <strong><%= candidate.name %></strong>
-    <%= link_to "accept", organization_accept_invite_path(@organization, candidate), method: :patch %>
-  <% end %>
-</div>
-
-<%= link_to 'Back', organization_path(@organization) %>
+<ul id="members-list" class="list-group">
+  <%= render partial: "member", collection: @members %>
+</ul>

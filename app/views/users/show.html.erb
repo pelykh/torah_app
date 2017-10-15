@@ -58,6 +58,15 @@
 </div>
 
 <div class="row">
+  <div class="col-lg-12">
+    <h3>Organizations</h3>
+    <% @memberships.each do |membership| %>
+      <div><%= link_to membership.organization.name, membership.organization %></div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
 <div class="col-lg-12">
   <h3>Availability</h3>
   <% @user.availability.each_with_index do |v, i| %>

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @memberships = @user.memberships.where.not(confirmed_at: nil).includes(:organization)
     @chatroom = Chatroom.find_by_participants(current_user, @user)
   end
 

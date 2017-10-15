@@ -3,8 +3,7 @@ class MembershipsController <ApplicationController
   before_action :authenticate_user!
   before_action :authorizate_founder, only: [:change_role]
   before_action :authorizate_admin, only: [:accept_invite]
-
-
+  before_action :authorizate_member, only: [:members]
 
   def send_invite
     unless current_user.memberships.find_by(organization_id: @organization.id)
@@ -66,6 +65,12 @@ class MembershipsController <ApplicationController
 
   def authorizate_founder
     unless @organization.founder_id == current_user.id
+      redirect_to organizations_path, notice: "You have no permissions"
+    end
+  end
+
+  def authorizate_member
+    unless @organization.founder_id == current_user.id || @organization.memberships.exists?(["user_id = :id AND confirmed_at IS NOT NULL", id: current_user.id])
       redirect_to organizations_path, notice: "You have no permissions"
     end
   end

@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_organization, only: [:show]
-  before_action :authorizate_founder, only: [:show], unless: -> { @organization.confirmed_at }
+  before_action :authorizate_founder, only: [:show], unless: :organization_is_confirmed_or_current_user_is_admin
 
   def index
     @organizations = Organization.confirmed
@@ -34,6 +34,10 @@ class OrganizationsController < ApplicationController
 
   def set_organization
     @organization = Organization.find(params[:id])
+  end
+
+  def organization_is_confirmed_or_current_user_is_admin
+    @organization.confirmed_at || current_user.admin?
   end
 
   def authorizate_founder

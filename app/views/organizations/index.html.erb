@@ -1,21 +1,5 @@
 <h1>Organizations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @organizations.each do |organization| %>
-      <tr>
-        <td>Name:<%= organization.name %></td>
-      </tr>
-      <tr>
-        <td>Founder:<%= organization.founder.name %> </td>
-        <td> <%= link_to 'Show', organization %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul id= "organizations-list" class="list-group">
+  <%= render @organizations, current_user: current_user %>
+</ul>

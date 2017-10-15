@@ -4,6 +4,14 @@
 @import "jquery.timepicker.css";
 @import "bootstrap-datepicker.css";
 
+#organizations-list {
+  .organization {
+    .thumbnail {
+      margin-right: 10px;
+    }
+  }
+}
+
 #subjects-list {
   .subject {
     .thumbnail {
@@ -32,6 +40,28 @@
     }
   }
 }
+
+#organization {
+  #banner {
+    position: relative;
+    min-height: 150px;
+    max-height: 300px;
+    background-color: #F0F8FF;
+    overflow-y: hidden;
+
+    #organization-name {
+      border-radius: 25px;
+      padding: 10px;
+      background: #F0F8FF;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
 .video-call-link {
   color: blue;
 }
@@ -83,7 +113,7 @@
   }
 }
 
-#users-list, #interested-users-list, #invite-users-list  {
+#users-list, #interested-users-list, #invite-users-list, #members-list, #candidates-list  {
   .avatar {
     width: 32px;
     height: 32px;
