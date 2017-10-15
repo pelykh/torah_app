@@ -1,6 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_organization, only: [:show]
+  before_action :authorizate_founder, only: [:show], unless: -> { @organization.confirmed_at }
 
   def index
     @organizations = Organization.confirmed
@@ -16,6 +17,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = current_user.foundations.build(organization_params)
     if @organization.save
+      current_user.memberships.create(organization_id: @organization)
       redirect_to organizations_url
     else
       render :new, status: :unprocessable_entity
@@ -32,5 +34,11 @@ class OrganizationsController < ApplicationController
 
   def set_organization
     @organization = Organization.find(params[:id])
+  end
+
+  def authorizate_founder
+    unless current_user && @organization.founder.id == current_user.id
+      redirect_to organizations_path, notice: "You have no permissions"
+    end
   end
 end

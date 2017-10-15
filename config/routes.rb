@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :organizations
+  resources :organizations do
+    post "send_invite", to: "memberships#send_invite", as: "send_invite"
+    patch "accept_invite/:user_id", to: "memberships#accept_invite", as: "accept_invite"
+    delete "cancel_invite", to: "memberships#cancel_invite", as: "cancel_invite"
+    get "members", to: "memberships#members", as: "members"
+    patch "change_role/:user_id/:role", to: "memberships#change_role", as: "change_role"
+  end
+
   root "subjects#index"
   devise_for :users
   resources :subjects

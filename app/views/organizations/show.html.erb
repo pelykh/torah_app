@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<h1><%= @organization.name %></h1>
+<% unless current_user && current_user.memberships.find_by(organization_id: @organization.id) %>
+  <%= link_to 'Send invite', organization_send_invite_path(@organization), method: :post %> |
+<% else %>
+  <%= link_to 'Cancel invite', organization_cancel_invite_path(@organization), method: :delete, data: { confirm: "Are you sure?"}  %> |
+<% end %>
+<%= link_to "members", organization_members_path(@organization)%> |
 <%= link_to 'Back', organizations_path %>

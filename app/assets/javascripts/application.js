@@ -22,6 +22,8 @@
 //= require_tree .
 
 jQuery(document).on('turbolinks:load', function() {
+  $(".dropdown-toggle").dropdown();
+
   if ($('#subjects-list').length > 0) {
     $('#subjects-list').on('click', '.glyphicon-chevron-down', (e) => {
       $(e.target).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
