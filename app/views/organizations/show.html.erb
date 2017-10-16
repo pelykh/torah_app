@@ -9,7 +9,7 @@
   <h4>Founded by <%= link_to @organization.founder.name, @organization.founder %> in <%= @organization.created_at.strftime('%d %B %Y') %></h4>
   <h5>
     <%= @organization.name %> has <%= @organization.members.count %> members
-    <%= link_to "Go to members list", organization_members_path(@organization) if @organization.has_member?(current_user) %>
+    <%= link_to "Go to members list", organization_members_path(@organization) if current_user && @organization.has_member?(current_user) %>
   </h5>
 
 <h3><%= @organization.headline %></h3>
@@ -28,7 +28,7 @@
 
 <%= link_to 'Back', organizations_path, class: "btn btn-primary" %>
 <hr />
-<% if @organization.has_admin?(current_user) %>
+<% if current_user && @organization.has_admin?(current_user) %>
   <%= link_to "New post", new_organization_post_path(@organization), class: "btn btn-info" %>
 <% end %>
 <h2>Last news</h2>
