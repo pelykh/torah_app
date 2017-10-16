@@ -1,7 +1,7 @@
 <br />
 <%= link_to 'Back', organization_path(@organization), class: "btn btn-primary" %>
 <br />
-<% if @organization.memberships.find_by(user_id: current_user.id, role: :admin) %>
+<% if @organization.has_admin?(current_user) %>
   <h2>Candidates</h2>
   <ul id="candidates-list" class="list-group">
     <%= render partial: "candidate", collection: @candidates %>

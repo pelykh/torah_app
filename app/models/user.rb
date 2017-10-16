@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :foundations, class_name: "Organization", foreign_key: :founder_id
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
+  has_many :posts
 
   validates :name, presence: true, length: { in: 5..40 }
   validate :availability_should_be_inside_availability_range

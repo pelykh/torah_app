@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :organizations do
+    resources :posts
     post "send_invite", to: "memberships#send_invite", as: "send_invite"
     patch "accept_invite/:user_id", to: "memberships#accept_invite", as: "accept_invite"
     delete "cancel_invite", to: "memberships#cancel_invite", as: "cancel_invite"

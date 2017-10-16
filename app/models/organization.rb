@@ -4,6 +4,7 @@ class Organization < ApplicationRecord
   belongs_to :founder, class_name: "User"
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
+  has_many :posts, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :headline, presence: true
@@ -11,6 +12,8 @@ class Organization < ApplicationRecord
 
   mount_uploader :thumbnail, ThumbnailUploader
   mount_uploader :banner, BannerUploader
+
+  after_create :create_founder_membership
 
   def members
     users.includes(:memberships)
@@ -21,5 +24,32 @@ class Organization < ApplicationRecord
   def candidates
     users.includes(:memberships)
       .where(memberships: { confirmed_at: nil, organization_id: id })
+  end
+
+  def role_of user
+    membership = memberships.where.not(confirmed_at: nil).find_by(user_id: user.id)
+    return membership.role if membership
+  end
+
+  def has_admin? user
+    role_of(user) == "admin"
+  end
+
+  def has_member? user
+    return true if role_of(user)
+  end
+
+  def has_candidate? user
+    memberships.find_by(user_id: user.id, confirmed_at: nil)
+  end
+
+  def has_founder? user
+    founder_id == user.id
+  end
+
+  private
+
+  def create_founder_membership
+    founder.memberships.create(organization_id: id, confirmed_at: Time.current, role: "admin")
   end
 end

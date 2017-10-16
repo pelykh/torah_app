@@ -8,6 +8,7 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+    @posts = @organization.posts
   end
 
   def new
@@ -17,7 +18,6 @@ class OrganizationsController < ApplicationController
   def create
     @organization = current_user.foundations.build(organization_params)
     if @organization.save
-      current_user.memberships.create(organization_id: @organization)
       redirect_to organizations_url
     else
       render :new, status: :unprocessable_entity
