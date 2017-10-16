@@ -23,13 +23,13 @@ gem 'carrierwave', '~> 1.0'
 gem 'pg'
 gem 'jquery-timepicker-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'factory_girl_rails', '~> 4.5', require: false
+gem 'faker', '~> 1.6.1'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'factory_girl_rails', '~> 4.5', require: false
   gem 'capybara', '~> 2.5'
-  gem 'faker', '~> 1.6.1'
 end
 
 group :test do
