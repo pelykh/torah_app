@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "subjects#home"
+
   resources :organizations do
     resources :posts
     post "send_invite", to: "memberships#send_invite", as: "send_invite"
@@ -8,9 +10,11 @@ Rails.application.routes.draw do
     patch "change_role/:user_id/:role", to: "memberships#change_role", as: "change_role"
   end
 
-  root "subjects#index"
+
   devise_for :users
+  get "subjects/fetch", to: "subjects#fetch"
   resources :subjects
+
   scope "users" do
     get "fetch_users", to: "users#fetch_users"
     post "add_friend/:id", to: "users#add_friend", as: "add_friend"

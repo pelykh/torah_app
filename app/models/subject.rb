@@ -1,4 +1,10 @@
 class Subject < ApplicationRecord
+  include Filterable
+  include Searchable
+
+  scope :featured, -> { where(featured: true) }
+  scope :order_by, -> (param) { sort_by(param) }
+
   has_many :interests, dependent: :destroy
   has_many :users, through: :interests
   belongs_to :parent, class_name: "Subject", optional: true
@@ -22,6 +28,14 @@ class Subject < ApplicationRecord
   end
 
   private
+
+  def self.sort_by param
+    order_params = {
+      "oldest" => "created_at ASC",
+      "newest" => "created_at DESC"
+    }
+    self.order(order_params[param])
+  end
 
   def check_if_parent_id_wont_loop
     errors.add(:parent_id, "You cannot inherit subject from himself") if parent_id == id

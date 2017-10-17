@@ -4,6 +4,43 @@
 @import "jquery.timepicker.css";
 @import "bootstrap-datepicker.css";
 
+#list-loader {
+  font-size:64px;
+  display: none;
+  margin-top: 32px;
+  text-align: center;
+}
+
+#home-page {
+  h1 {
+    text-align: center;
+  }
+
+  #featured-subjects {
+    .subject {
+      height: 200px;
+      background-color: #F0F8FF;
+      overflow-y: hidden;
+
+      .subject-name {
+        border-radius: 25px;
+        padding: 10px;
+        background: #F0F8FF;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
 #organizations-list {
   .organization {
     .thumbnail {

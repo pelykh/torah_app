@@ -1,5 +1,37 @@
 jQuery(document).on('turbolinks:load', () => {
+  if($('#home-page').length > 0) {
+  }
+
   if($('#subjects-list').length > 0) {
+    fetchSubjects();
+
+    function fetchSubjects() {
+      const data = {
+        search: {
+          name: $('#name').val()
+        },
+        filters: {
+          featured: $('#featured').prop('checked'),
+          order_by: $('#order_by').val()
+        }
+      }
+
+      $('#subjects-list').empty();
+      $('#list-loader').show();
+
+      $.get(`${window.location.origin}/subjects/fetch`, data).done((subjects) => {
+        $('#list-loader').hide();
+        if(subjects ==' ') {
+          $('#subjects-list').append("Your search returned no matches.");
+        } else {
+          $('#subjects-list').append(subjects);
+        }
+      });
+    }
+
+    $('#search-form').change(fetchSubjects);
+    $('#order_by').change(fetchSubjects);
+
     $('#subjects-list').on('click', '.like-button', likeSubject);
     $('#subjects-list').on('click', '.unlike-button', unlikeSubject);
   }
@@ -31,9 +63,9 @@ jQuery(document).on('turbolinks:load', () => {
 
   if($('#subject_picker').length > 0) {
     let searchTimeout;
-    fetchSubjects();
+    fetchSubjectsOptions();
 
-    function fetchSubjects(search) {
+    function fetchSubjectsOptions(search) {
       $.get(`${window.location.origin}/lessons/fetch_subjects`, { search: search})
         .then((lessons) => {
           $('#subject_options').html(lessons);
@@ -43,7 +75,7 @@ jQuery(document).on('turbolinks:load', () => {
     $('#subject_picker').on('keyup', (e) => {
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
-        fetchSubjects(e.target.value);
+        fetchSubjectsOptions(e.target.value);
       }, 1000);
 
     })

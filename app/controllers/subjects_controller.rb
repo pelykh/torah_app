@@ -5,7 +5,16 @@ class SubjectsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_subject_id
 
   def index
-    @subjects = Subject.includes(:children, :interests)
+    @name = params[:name]
+  end
+
+  def fetch
+    @subjects = Subject.includes(:children, :interests).filter(filters_params).search(search_params)
+    render @subjects
+  end
+
+  def home
+    @featured = Subject.where(featured: true)
   end
 
   def show
@@ -45,6 +54,14 @@ class SubjectsController < ApplicationController
 
   def set_subject
     @subject = Subject.find(params[:id])
+  end
+
+  def filters_params
+    params[:filters]? params.require(:filters).permit(:order_by, :featured) : {}
+  end
+
+  def search_params
+    params[:search]? params.require(:search).permit(:name) : {}
   end
 
   def subject_params
