@@ -1,7 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :authenticate_admin!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :home, :fetch]
+  before_action :authenticate_admin!, except: [:index, :show, :home, :fetch]
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_subject_id
 
   def index
