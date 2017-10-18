@@ -11,30 +11,28 @@ jQuery(document).on('turbolinks:load', () => {
   }
 
   if($('#new_lesson').length > 0) {
-    const timeFormat = { hour: 'numeric', minute:'numeric', hour12: true }
+    const timeZone = moment.tz.names().find((zone) => zone.includes($('#timezone').data('timezone')));
 
     function getDisabledTimeRangesForStart(date) {
-      console.log(unavailabilityTimeOnStart(date).concat(lessonsTimeOnStart(date)))
       return unavailabilityTimeOnStart(date).concat(lessonsTimeOnStart(date))
     }
 
     function getDisabledTimeRangesForEnd(date) {
-      console.log(unavailabilityTimeOnEnd(date).concat(lessonsTimeOnEnd(date)))
       return unavailabilityTimeOnEnd(date).concat(lessonsTimeOnEnd(date))
     }
 
     function unavailabilityTimeOnEnd(date) {
       const availability = userAvailability().concat(currentUserAvailability()).filter((e) => {
-        return e[1].getDay() == date.getDay()
+        return e[1].day == date.day
       })
 
       let result = []
 
       availability.forEach((e) => {
-        if (compareDates(e[0], e[1])) {
-          result.push(["12:00AM", e[0].toLocaleString('en-US', timeFormat)])
+        if (e[0] == e[1]) {
+          result.push(["00:00", e[0].format('kk:mm')])
         }
-        result.push([e[1].toLocaleString('en-US', timeFormat), "12:00AM"])
+        result.push([e[1].format('kk:mm'), "24:00"])
       });
 
       return result;
@@ -42,16 +40,16 @@ jQuery(document).on('turbolinks:load', () => {
 
     function unavailabilityTimeOnStart(date) {
       const availability = userAvailability().concat(currentUserAvailability()).filter((e) => {
-        return e[0].getDay() == date.getDay()
+        return e[0].day == date.day
       })
 
       let result = []
 
       availability.forEach((e) => {
-        if (compareDates(e[0], e[1])) {
-          result.push([e[1].toLocaleString('en-US', timeFormat), "12:00AM"])
+        if (e[0] == e[1]) {
+          result.push([e[1].format('kk:mm'), "24:00"])
         }
-        result.push(["12:00AM", e[0].toLocaleString('en-US', timeFormat)])
+        result.push(["00:00", e[0].format('kk:mm')])
       })
 
       return result;
@@ -61,88 +59,76 @@ jQuery(document).on('turbolinks:load', () => {
     function userAvailability() {
       return $('#user-availability').data('availability').map((e) => {
         const a = e.split('..');
-        return [new Date(a[0]), new Date(a[1])];
+        return [moment(new Date(a[0])).tz(timeZone), moment(new Date(a[1])).tz(timeZone)];
       })
     }
 
     function currentUserAvailability() {
       return $('#current-user-availability').data('availability').map((e) => {
         const a = e.split('..');
-        return [new Date(a[0]), new Date(a[1])];
+        return [moment(new Date(a[0])).tz(timeZone), moment(new Date(a[1])).tz(timeZone)];
       })
     }
 
     function lessonsTime(date) {
       const lessons = ($('#lessons-time').data('lessons')).map((l) => {
         let time = l['time'].split('..');
-        return [new Date(time[0]), new Date(time[1]), l["recurring"]]
+        return [moment(new Date(time[0])).tz(timeZone), moment(new Date(time[1])).tz(timeZone), l["recurring"]]
       });
-      console.log("lessons ", lessons);
       return lessons;
-    }
-
-    function compareDates(d1,d2) {
-      return d1.getDate() == d2.getDate() &&
-             d1.getMonth() == d2.getMonth() &&
-             d1.getFullYear() == d2.getFullYear()
     }
 
     function lessonsTimeOnStart(date) {
       const lessons = lessonsTime(date).filter((l) => {
-        return compareDates(l[0], date) ||
-               (l[0].getDay() == date.getDay() && l[2])
+        return l[0] == date ||
+               (l[0].day == date.day && l[2])
       })
 
       return lessons? lessons.map((l) => {
-        if (compareDates(l[0], l[1])) {
-          return [l[0].toLocaleString('en-US', timeFormat),
-                 l[1].toLocaleString('en-US', timeFormat)]
+        if (l[0] == l[1]) {
+          return [l[0].format('kk:mm'),
+                 l[1].format('kk:mm')]
         }
         return [
-        l[0].toLocaleString('en-US', timeFormat),
-        "11:59PM"
+        l[0].format('kk:mm'),
+        "24:00"
       ]}) : []
     }
 
     function lessonsTimeOnEnd(date) {
       const lessons = lessonsTime(date).filter((l) => {
-        return compareDates(l[1], date) ||
-               (l[1].getDay() == date.getDay() && l[2])
+        return l[1] == date ||
+               (l[1].day == date.day && l[2])
       })
 
       return lessons? lessons.map((l) => {
-        if (compareDates(l[0], l[1])) {
-          return [l[0].toLocaleString('en-US', timeFormat),
-                 l[1].toLocaleString('en-US', timeFormat)]
+        if (l[0] == l[1]) {
+          return [l[0].format('kk:mm'),
+                 l[1].format('kk:mm')]
         }
         return [
-        "12:00AM",
-        l[1].toLocaleString('en-US', timeFormat)
+        "00:00",
+        l[1].format('kk:mm')
       ]}) : []
     }
 
-    function weekDay(d) {
-      return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'sunday'][d.getDay()]
-    }
-
     function changeTimeRanges() {
-      console.log($('.lesson .date.end').val())
-      const endDate = new Date($('.lesson .date.end').val())
-      const startDate = new Date($('.lesson .date.start').val())
+      const endDate = moment(new Date($('.lesson .date.end').val())).tz(timeZone)
+      const startDate = moment(new Date($('.lesson .date.start').val())).tz(timeZone)
       $('.lesson .time.start').timepicker('option', 'disableTimeRanges', getDisabledTimeRangesForStart(startDate));
-      $('.lesson .time.end').timepicker('option', 'disableTimeRanges', getDisabledTimeRangesForEnd(endDate));
+      $('.lesson .time.end').timepicker('option', 'disabTZTimeRanges', getDisabledTimeRangesForEnd(endDate));
     }
 
     $('.lesson .time.start').timepicker({
       showDuration: true,
-      timeFormat: 'g:iA',
-      disableTimeRanges: getDisabledTimeRangesForStart(new Date)
+      timeFormat: 'H:i',
+      disableTimeRanges: getDisabledTimeRangesForStart(moment(new Date).tz(timeZone))
     });
 
     $('.lesson .time.end').timepicker({
       showDuration: true,
-      timeFormat: 'g:iA',
-      disableTimeRanges: getDisabledTimeRangesForEnd(new Date)
+      timeFormat: 'H:i',
+      disableTimeRanges: getDisabledTimeRangesForEnd(moment(new Date).tz(timeZone))
     });
 
     $('.lesson .time').timepicker('setTime', new Date);

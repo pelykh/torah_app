@@ -13,6 +13,7 @@
   <body>
     <%= render "shared/navbar", current_user: current_user %>
     <div id="page" class="container">
+      <div id="timezone" data-timezone="<%= current_user.time_zone %>"></div>
       <div class="row">
         <div class="col-md-offset-2 col-md-8 col-md-offset-2">
           <%= flash_for flash %>

@@ -19,6 +19,8 @@
 //= require jquery.datepair.js
 //= require bootstrap-datepicker
 //= require bootstrap
+//= require moment
+//= require moment-timezone-with-data
 //= require_tree .
 
 jQuery(document).on('turbolinks:load', function() {

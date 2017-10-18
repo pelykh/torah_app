@@ -30,7 +30,7 @@ jQuery(document).on('turbolinks:load', () => {
   if ($('#edit_user').length > 0) {
     $('input.time').timepicker({
       showDuration: true,
-      timeFormat: 'g:iA',
+      timeFormat: 'H:i',
       disableTextInput: true
     });
 
