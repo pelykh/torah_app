@@ -54,4 +54,6 @@ Rails.application.routes.draw do
       patch "confirm", to: "organizations#confirm", as: "confirm"
     end
   end
+
+  get "/:organization_name", to: "organizations#show_by_name", as: "organization_page"
 end

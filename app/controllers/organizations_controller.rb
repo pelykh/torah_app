@@ -1,7 +1,8 @@
 class OrganizationsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :home]
+  before_action :authenticate_user!, only: [:new, :create]
   before_action :set_organization, only: [:show]
-  before_action :authorizate_founder, only: [:show], unless: :organization_is_confirmed_or_current_user_is_admin
+  before_action :set_organization_by_name, only: [:show_by_name]
+  before_action :authorizate_founder, only: [:show, :show_by_name], unless: :organization_is_confirmed_or_current_user_is_admin
 
   def index
   end
@@ -13,6 +14,11 @@ class OrganizationsController < ApplicationController
 
   def show
     @posts = @organization.posts
+  end
+
+  def show_by_name
+    @posts = @organization.posts
+    render :show
   end
 
   def new
@@ -34,6 +40,11 @@ class OrganizationsController < ApplicationController
     params.require(:organization).permit(
       :name, :headline, :description, :banner, :thumbnail, :thumbnail_cache,
       :remove_thumbnail, :banner_cache, :remove_banner)
+  end
+
+  def set_organization_by_name
+    p name = params[:organization_name].gsub(/-/, " ")
+    @organization = Organization.where('lower(name) = ?', name.downcase).first
   end
 
   def filters_params

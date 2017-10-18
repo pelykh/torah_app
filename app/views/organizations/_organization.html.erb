@@ -3,6 +3,6 @@
     <%= image_tag(organization.thumbnail_url, class: "thumbnail img-rounded", size: "64x64") %>
   <% end %>
 
-  <strong> <%= link_to organization.name, organization %></strong>
+  <strong> <%= link_to organization.name, organization_page_path(organization.params_url) %></strong>
   <h4><%= organization.headline %></h4>
 </li>

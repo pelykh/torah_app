@@ -53,6 +53,10 @@ class Organization < ApplicationRecord
     founder_id == user.id
   end
 
+  def params_url
+    name.downcase.gsub(/ /, "-")
+  end
+
   private
 
   def create_organization_chatroom
