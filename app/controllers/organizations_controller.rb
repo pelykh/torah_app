@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :home]
   before_action :set_organization, only: [:show]
   before_action :authorizate_founder, only: [:show], unless: :organization_is_confirmed_or_current_user_is_admin
 

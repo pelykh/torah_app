@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "subjects#home"
 
   get "organizations/fetch", to: "organizations#fetch"
+  get "organizations/home", to: "organizations#home"
   resources :organizations do
     resources :posts
     post "send_invite", to: "memberships#send_invite", as: "send_invite"

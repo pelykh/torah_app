@@ -13,7 +13,9 @@
     <%= f.submit "Send", class: 'btn btn-primary pull-right', data: { disable_with: false } %>
   <% end %>
   <button id="call-button" class="btn btn-info">Call</button>
-  <button class="invite-list-button btn btn-success">Add user</button>
+  <% unless @chatroom.organization_id %>
+    <button class="invite-list-button btn btn-success">Add user</button>
+  <% end %>
 </div>
 
 <div class="col-offset-lg-2 col-lg-8">

@@ -2,9 +2,10 @@ class Chatroom < ApplicationRecord
   has_many :participatings, dependent: :destroy
   has_many :users, through: :participatings
   has_many :messages, dependent: :destroy
+  belongs_to :organization, optional: true
 
   def add_participant user
-    return nil if participatings.find_by(user_id: user.id)
+    return nil if participatings.find_by(user_id: user.id) || organization_id
     participatings.create(user_id: user.id)
   end
 

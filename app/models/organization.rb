@@ -9,6 +9,7 @@ class Organization < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
   has_many :posts, dependent: :destroy
+  has_one :chatroom, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :headline, presence: true
@@ -17,6 +18,7 @@ class Organization < ApplicationRecord
   mount_uploader :thumbnail, ThumbnailUploader
   mount_uploader :banner, BannerUploader
 
+  after_create :create_organization_chatroom
   after_create :create_founder_membership
 
   def members
@@ -52,6 +54,10 @@ class Organization < ApplicationRecord
   end
 
   private
+
+  def create_organization_chatroom
+    create_chatroom
+  end
 
   def create_founder_membership
     founder.memberships.create(organization_id: id, confirmed_at: Time.current, role: "admin")
