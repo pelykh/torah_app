@@ -1,4 +1,8 @@
 class Organization < ApplicationRecord
+  include Filterable
+  include Searchable
+
+  scope :order_by, -> (param) { sort_by(param) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   belongs_to :founder, class_name: "User"
@@ -51,5 +55,13 @@ class Organization < ApplicationRecord
 
   def create_founder_membership
     founder.memberships.create(organization_id: id, confirmed_at: Time.current, role: "admin")
+  end
+
+  def self.sort_by param
+    order_params = {
+      "oldest" => "created_at ASC",
+      "newest" => "created_at DESC"
+    }
+    self.order(order_params[param])
   end
 end

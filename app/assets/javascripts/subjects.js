@@ -1,7 +1,4 @@
 jQuery(document).on('turbolinks:load', () => {
-  if($('#home-page').length > 0) {
-  }
-
   if($('#subjects-list').length > 0) {
     fetchSubjects();
 

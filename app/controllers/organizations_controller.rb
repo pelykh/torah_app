@@ -4,7 +4,11 @@ class OrganizationsController < ApplicationController
   before_action :authorizate_founder, only: [:show], unless: :organization_is_confirmed_or_current_user_is_admin
 
   def index
-    @organizations = Organization.confirmed
+  end
+
+  def fetch
+    render Organization.confirmed.filter(filters_params).search(search_params),
+      current_user: current_user
   end
 
   def show
@@ -30,6 +34,14 @@ class OrganizationsController < ApplicationController
     params.require(:organization).permit(
       :name, :headline, :description, :banner, :thumbnail, :thumbnail_cache,
       :remove_thumbnail, :banner_cache, :remove_banner)
+  end
+
+  def filters_params
+    params[:filters]? params.require(:filters).permit(:order_by) : {}
+  end
+
+  def search_params
+    params[:search]? params.require(:search).permit(:name) : {}
   end
 
   def set_organization
