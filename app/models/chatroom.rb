@@ -11,9 +11,11 @@ class Chatroom < ApplicationRecord
 
   def self.find_by_participants(user_a, user_b)
     return nil unless user_a and user_b
-    self.joins(:users).where("(users.id = ?)", user_a.id).select do |chat|
-      chat.users.select{ |user| user.id == user_b.id }.any?
-    end.first
+    user_a.chatrooms.includes(:users)
+      .where(users: {id: user_b.id})
+      .where(
+        '(SELECT Count(*) FROM participatings WHERE participatings.chatroom_id = chatrooms.id) = 2'
+      ).first
   end
 
   def participants_name_without(user)
@@ -24,5 +26,9 @@ class Chatroom < ApplicationRecord
       end
     end
     return name
+  end
+
+  def has_participant?(user)
+    participatings.find_by(user_id: user.id)
   end
 end
