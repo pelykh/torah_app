@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-  subject { FactoryGirl.build(:organization) }
+  subject { build(:organization) }
 
   it { is_expected.to be_valid }
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Lesson, type: :model do
-  subject { FactoryGirl.build(:lesson) }
+  subject { build(:lesson) }
 
 
   it { is_expected.to be_valid }
@@ -22,7 +22,7 @@ RSpec.describe Lesson, type: :model do
     context "when sender is unavailable on lesson time" do
       context "when lesson time range overlaps with one of availability ranges" do
         before do
-           subject.sender = FactoryGirl.create(:half_busy_user)
+           subject.sender = create(:half_busy_user)
            subject.save
          end
 
@@ -36,7 +36,7 @@ RSpec.describe Lesson, type: :model do
 
       context "when lesson time range doesn't overlaps with one of availability ranges" do
         before do
-           subject.sender = FactoryGirl.create(:busy_user)
+           subject.sender = create(:busy_user)
            subject.save
          end
 
@@ -58,7 +58,7 @@ RSpec.describe Lesson, type: :model do
     context "when receiver is unavailable on lesson time" do
       context "when lesson time range overlaps with one of availability ranges" do
         before do
-           subject.receiver = FactoryGirl.create(:half_busy_user)
+           subject.receiver = create(:half_busy_user)
            subject.save
          end
 
@@ -72,7 +72,7 @@ RSpec.describe Lesson, type: :model do
 
       context "when lesson time range doesn't overlaps with one of availability ranges" do
         before do
-           subject.receiver = FactoryGirl.create(:busy_user)
+           subject.receiver = create(:busy_user)
            subject.save
          end
 
@@ -95,7 +95,7 @@ RSpec.describe Lesson, type: :model do
       context "when other lesson is not reccuring" do
         context "when subjects time is inside other lesson's time range" do
           before do
-             FactoryGirl.create(:lesson, receiver: subject.receiver)
+             create(:lesson, receiver: subject.receiver)
              subject.save
            end
 
@@ -109,7 +109,7 @@ RSpec.describe Lesson, type: :model do
 
         context "when subjects time overlaps with other lesson's time range" do
           before do
-             FactoryGirl.create(:lesson, receiver: subject.receiver, starts_at_time: "9:00", ends_at_time: "13:00")
+             create(:lesson, receiver: subject.receiver, starts_at_time: "9:00", ends_at_time: "13:00")
              subject.save
            end
 
@@ -125,7 +125,7 @@ RSpec.describe Lesson, type: :model do
       context "when other lesson is reccuring" do
         context "when subjects time is inside other lesson's time range" do
           before do
-             FactoryGirl.create(:reccuring_lesson, receiver: subject.receiver)
+             create(:reccuring_lesson, receiver: subject.receiver)
              subject.save
            end
 
@@ -139,7 +139,7 @@ RSpec.describe Lesson, type: :model do
 
         context "when subjects time overlaps with other lesson's time range" do
           before do
-             FactoryGirl.create(:reccuring_lesson, receiver: subject.receiver, starts_at_time: "9:00", ends_at_time: "13:00")
+             create(:reccuring_lesson, receiver: subject.receiver, starts_at_time: "9:00", ends_at_time: "13:00")
              subject.save
            end
 
@@ -163,7 +163,7 @@ RSpec.describe Lesson, type: :model do
       context "when other lesson is not reccuring" do
         context "when subjects time is inside other lesson's time range" do
           before do
-             FactoryGirl.create(:lesson, sender: subject.sender)
+             create(:lesson, sender: subject.sender)
              subject.save
            end
 
@@ -177,7 +177,7 @@ RSpec.describe Lesson, type: :model do
 
         context "when subjects time overlaps with other lesson's time range" do
           before do
-             FactoryGirl.create(:lesson, sender: subject.sender, starts_at_time: "9:00", ends_at_time: "13:00")
+             create(:lesson, sender: subject.sender, starts_at_time: "9:00", ends_at_time: "13:00")
              subject.save
            end
 
@@ -193,7 +193,7 @@ RSpec.describe Lesson, type: :model do
       context "when other lesson is reccuring" do
         context "when subjects time is inside other lesson's time range" do
           before do
-             FactoryGirl.create(:reccuring_lesson, sender: subject.sender)
+             create(:reccuring_lesson, sender: subject.sender)
              subject.save
            end
 
@@ -207,7 +207,7 @@ RSpec.describe Lesson, type: :model do
 
         context "when subjects time overlaps with other lesson's time range" do
           before do
-             FactoryGirl.create(:reccuring_lesson, sender: subject.sender, starts_at_time: "9:00", ends_at_time: "13:00")
+             create(:reccuring_lesson, sender: subject.sender, starts_at_time: "9:00", ends_at_time: "13:00")
              subject.save
            end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Interest, type: :model do
-  subject { FactoryGirl.create(:interest) }
+  subject { create(:interest) }
 
   it { is_expected.to be_valid }
 

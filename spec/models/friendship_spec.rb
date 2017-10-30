@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
-  subject { FactoryGirl.create(:friendship) }
+  subject { create(:friendship) }
 
   it { is_expected.to be_valid }
 

@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe SubjectsController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:subj) { FactoryGirl.create(:subject) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
+  let(:subj) { create(:subject) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
+
+  it { is_expected.to use_before_filter(:authenticate_user!).except_on([:index, :show, :home, :fetch]) }
 
   context "when ActiveRecord::RecordNotFound is raised" do
     context "when authorized" do
@@ -39,17 +41,24 @@ RSpec.describe SubjectsController, type: :controller do
 
   describe "GET #index" do
     before do
-      10.times { FactoryGirl.create(:subject) }
+      10.times { create(:subject) }
       get :index
     end
 
     it { is_expected.to respond_with :success }
 
     it { is_expected.to render_template :index }
+  end
 
-    it "assings subjects" do
-      expect(assigns(:subjects)).to eq(Subject.includes(:children))
+  describe "GET #fetch" do
+    before do
+      10.times { create(:subject) }
+      get :fetch
     end
+
+    it { is_expected.to respond_with :success }
+
+    it { is_expected.to render_template "subjects/_subject" }
   end
 
   describe "GET #edit" do
@@ -142,7 +151,7 @@ RSpec.describe SubjectsController, type: :controller do
         context "when requesting with valid data" do
           before do
             sign_in admin
-            post :create, params: { subject: FactoryGirl.attributes_for(:subject) }
+            post :create, params: { subject: attributes_for(:subject) }
           end
 
           it "creates subject" do
@@ -156,11 +165,11 @@ RSpec.describe SubjectsController, type: :controller do
           it { is_expected.to set_flash }
         end
       end
-      
+
       context "when not admin" do
         before do
           sign_in user
-          post :create, params: { subject: FactoryGirl.attributes_for(:subject) }
+          post :create, params: { subject: attributes_for(:subject) }
         end
 
         it { is_expected.to respond_with :found }
@@ -173,7 +182,7 @@ RSpec.describe SubjectsController, type: :controller do
 
     context "when unathorized" do
       before do
-        post :create, params: { subject: FactoryGirl.attributes_for(:subject) }
+        post :create, params: { subject: attributes_for(:subject) }
       end
 
       it { is_expected.to respond_with :found }
@@ -189,7 +198,7 @@ RSpec.describe SubjectsController, type: :controller do
           before do
             sign_in admin
             patch :update, params: { id: subj.id,
-              subject: FactoryGirl.attributes_for(:subject, name: "new_name") }
+              subject: attributes_for(:subject, name: "new_name") }
           end
 
           it "updates subject" do
@@ -208,7 +217,7 @@ RSpec.describe SubjectsController, type: :controller do
         before do
           sign_in user
           patch :update, params: { id: subj.id,
-            subject: FactoryGirl.attributes_for(:subject, name: "new_name") }
+            subject: attributes_for(:subject, name: "new_name") }
         end
 
         it { is_expected.to set_flash }
@@ -222,7 +231,7 @@ RSpec.describe SubjectsController, type: :controller do
     context "when unathorized" do
       before do
         patch :update, params: { id: subj.id,
-          subject: FactoryGirl.attributes_for(:subject, name: "new_name") }
+          subject: attributes_for(:subject, name: "new_name") }
       end
 
       it { is_expected.to respond_with :found }

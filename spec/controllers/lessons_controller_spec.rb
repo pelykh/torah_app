@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe LessonsController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:current_user) { FactoryGirl.create(:user) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:lesson) { FactoryGirl.create(:lesson, receiver: current_user, sender: user) }
-  let(:subj) { FactoryGirl.create(:subject) }
+  let(:current_user) { create(:user) }
+  let(:user) { create(:user) }
+  let(:busy_user) { create(:busy_user) }
+  let(:lesson) { create(:lesson, receiver: current_user, sender: user) }
+  let(:subj) { create(:subject) }
 
 
   describe "GET #index" do
@@ -36,7 +37,7 @@ RSpec.describe LessonsController, type: :controller do
     context "when authorized" do
       before do
         sign_in current_user
-        5.times { FactoryGirl.create(:lesson, receiver: user, sender: current_user, confirmed_at: nil) }
+        5.times { create(:lesson, receiver: user, sender: current_user, confirmed_at: nil) }
         get :fetch_lessons
       end
 
@@ -65,14 +66,12 @@ RSpec.describe LessonsController, type: :controller do
      context "when requesting with valid data" do
        before do
          post :create, params: { user_id: user.id,
-           lesson: FactoryGirl.attributes_for(:lesson,
+           lesson: attributes_for(:lesson,
              sender_id: current_user.id,
              receiver_id: user.id,
              subject_id: subj.id)
          }
        end
-
-       it { is_expected.to respond_with :found }
 
        it { is_expected.to redirect_to user_url(user) }
 
@@ -82,7 +81,20 @@ RSpec.describe LessonsController, type: :controller do
      end
 
      context "when requesting with invalid data" do
-      it "will be implemented when validations will be added"
+       before do
+         post :create, params: { user_id: user.id,
+           lesson: attributes_for(:lesson,
+             sender_id: current_user.id,
+             receiver_id: user.id,
+             subject_id: subj.id)
+         }
+       end
+
+       it { is_expected.to redirect_to user_url(user) }
+
+       it "creates lesson" do
+         expect(current_user.lessons.count).to eql(1)
+       end
      end
    end
 
@@ -189,7 +201,7 @@ RSpec.describe LessonsController, type: :controller do
 
       context "when declines not your lessons" do
         before do
-          sign_in FactoryGirl.create(:user)
+          sign_in create(:user)
           delete :decline_invite, params: { id: lesson.id }
         end
 
@@ -219,18 +231,16 @@ RSpec.describe LessonsController, type: :controller do
 
     context "when requesting with valid subject name" do
       before do
-        2.times  { FactoryGirl.create(:subject, name: "pattern") }
+        2.times  { create(:subject, name: "pattern") }
         get :fetch_lessons, params: { search: "patt" }
       end
 
       it { is_expected.to respond_with :success }
-
-      it { is_expected.to render_template(partial: "subjects/_subject_option")}
     end
 
     context "when requesting with invalid subject name" do
       before do
-        2.times  { FactoryGirl.create(:subject) }
+        2.times  { create(:subject) }
         get :fetch_lessons, params: { search: "pattern" }
       end
 

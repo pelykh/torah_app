@@ -11,14 +11,14 @@ class User < ApplicationRecord
   }
 
   has_many :interests, dependent: :destroy
-  has_many :participatings
+  has_many :participatings, dependent: :destroy
   has_many :subjects, through: :interests
   has_many :chatrooms, through: :participatings
   has_many :messages
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
-  has_many :lessons, foreign_key: :receiver_id, dependent: :destroy
   has_many :lessons, foreign_key: :sender_id, dependent: :destroy
+  has_many :lessons, foreign_key: :receiver_id, dependent: :destroy
   has_many :foundations, class_name: "Organization", foreign_key: :founder_id
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
@@ -43,19 +43,6 @@ class User < ApplicationRecord
 
   def away
     update_attribute(:status, 2)
-  end
-
-  def lessons
-    Lesson.where(sender: self).or(Lesson.where(receiver: self))
-  end
-
-  def is_available?
-    t = Time.current
-    availability.each do |day, v|
-      return true if t.method("#{day}?").call &&
-                      (v[:from].to_time..v[:to].to_time).cover?(t)
-    end
-    false
   end
 
   def relation_with user

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:current_user) { FactoryGirl.create(:user) }
-  let(:subj) { FactoryGirl.create(:subject) }
+  let(:user) { create(:user) }
+  let(:current_user) { create(:user) }
+  let(:subj) { create(:subject) }
 
   let(:chatroom) do
     chatroom = Chatroom.create
@@ -13,6 +13,8 @@ RSpec.describe UsersController, type: :controller do
     chatroom.add_participant(current_user)
     chatroom
   end
+
+  it { is_expected.to use_before_filter(:authenticate_user!) }
 
   describe "GET #show" do
     context "when authorized" do
@@ -116,7 +118,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #fetch_users" do
     before do
-      10.times { FactoryGirl.create(:user) }
+      10.times { create(:user) }
       sign_in current_user
       get :fetch_users, params: {
         search: { name: ""},

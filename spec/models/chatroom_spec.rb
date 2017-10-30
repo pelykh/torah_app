@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Chatroom, type: :model do
-  subject { FactoryGirl.create(:chatroom) }
+  subject { create(:chatroom) }
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
   let(:participants) { subject.users }
 
   it { is_expected.to be_valid }

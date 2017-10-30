@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Participating, type: :model do
-  subject { FactoryGirl.create(:participating) }
+  subject { create(:participating) }
 
   it { is_expected.to be_valid }
 

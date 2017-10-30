@@ -15,17 +15,10 @@ class Subject < ApplicationRecord
   validates :headline, presence: true
   validates :description, presence: true
 
-  validate :check_if_parent_id_wont_loop, on: :update
+  validate :check_if_parent_id_wont_loop
 
   mount_uploader :thumbnail, ThumbnailUploader
   mount_uploader :banner, BannerUploader
-
-  def is_inherit_from_child?(id)
-    self.children.each do |c|
-      return true if c.id == id || c.is_inherit_from_child?(id)
-    end
-    return false
-  end
 
   private
 
@@ -35,6 +28,13 @@ class Subject < ApplicationRecord
       "newest" => "created_at DESC"
     }
     self.order(order_params[param])
+  end
+
+  def is_inherit_from_child?(id)
+    self.children.each do |c|
+      return true if c.id == id || c.is_inherit_from_child?(id)
+    end
+    return false
   end
 
   def check_if_parent_id_wont_loop

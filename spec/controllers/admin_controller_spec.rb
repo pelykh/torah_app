@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe AdminController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:user_params) { FactoryGirl.attributes_for(:moderator) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
+  let(:user_params) { attributes_for(:moderator) }
 
   describe "GET #edit_user" do
     context "when admin" do

@@ -5,7 +5,7 @@ require 'factory_girl_rails'
 DatabaseCleaner.clean_with(:truncation, { except: %[subjects] })
 
 5.times do |n|
-  FactoryGirl.create(:user)
+  FactoryGirl.create(:seed_user)
 end
 
 5.times do |n|

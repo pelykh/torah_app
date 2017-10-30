@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe OrganizationsController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:organization_params) { FactoryGirl.attributes_for(:organization) }
+  let(:user) { create(:user) }
+  let(:organization_params) { attributes_for(:organization) }
   let(:wrong_organization_params) do
-    FactoryGirl.attributes_for(:organization, name: nil, headline: nil)
+    attributes_for(:organization, name: "", headline: "", founder: user)
   end
 
   describe "GET #new" do
@@ -52,7 +52,7 @@ RSpec.describe OrganizationsController, type: :controller do
         it "creates new organization" do
           expect(Organization.last.founder).to eq(user)
           expect(Organization.last.confirmed_at).to be_falsy
-          expect(user.organization).to eq(Organization.last)
+          expect(user.organizations.last).to eq(Organization.last)
         end
 
         it "permits params" do
@@ -74,7 +74,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
         it "assigns organization" do
           expect(assigns[:organization].attributes).to eq(
-            user.organizations.build(wrong_organization_params).attributes
+            user.foundations.build(wrong_organization_params).attributes
           )
         end
 
