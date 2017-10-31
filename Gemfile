@@ -27,6 +27,7 @@ gem 'momentjs-rails'
 gem 'moment_timezone-rails'
 gem 'factory_girl_rails', '~> 4.5', require: false
 gem 'faker', '~> 1.6.1'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'

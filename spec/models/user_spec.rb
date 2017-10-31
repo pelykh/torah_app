@@ -35,6 +35,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:organizations).through(:memberships) }
   it { is_expected.to have_many(:foundations).class_name('Organization') }
   it { is_expected.to have_many(:posts) }
+  it { is_expected.to have_many(:notifications).dependent(:destroy) }
 
   it { is_expected.to define_enum_for(:status).with(offline: 0, online: 1, away: 2) }
 

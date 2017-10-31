@@ -1,0 +1,10 @@
+<li>
+  <%= link_to notification.link do %>
+    <%= notification.message %>
+  <% end %>
+  |
+  <%= link_to notification, method: :delete do %>
+    Delete
+  <% end %>
+  <hr />
+</li>

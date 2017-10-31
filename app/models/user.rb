@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
   has_many :posts
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true, length: { in: 5..40 }
   validate :availability_should_be_inside_availability_range

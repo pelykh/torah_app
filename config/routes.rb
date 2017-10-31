@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :notifications, only: [:create, :index, :destroy] do
+    collection do
+      post :mark_as_read
+    end
+  end
+
   root "subjects#home"
 
   get "organizations/fetch", to: "organizations#fetch"

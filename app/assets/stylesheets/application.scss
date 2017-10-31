@@ -4,6 +4,17 @@
 @import "jquery.timepicker.css";
 @import "bootstrap-datepicker.css";
 
+#notifications-list {
+ list-style: none;
+ a {
+   color: black;
+ }
+}
+
+#notifications-small-list {
+  list-style: none;
+}
+
 #list-loader {
   font-size:64px;
   display: none;
@@ -342,7 +353,7 @@
 }
 
 #page {
-  margin-top: 50px;
+  margin-top: 64px;
 }
 
 /*!
