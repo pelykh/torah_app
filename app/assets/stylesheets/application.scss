@@ -5,14 +5,17 @@
 @import "bootstrap-datepicker.css";
 
 #notifications-list {
- list-style: none;
- a {
-   color: black;
- }
+  .notification-time {
+    display: inline-block;
+    color:#bfbfbf;
+  }
 }
 
 #notifications-small-list {
   list-style: none;
+  li {
+    margin-right: 10px;
+  }
 }
 
 #list-loader {

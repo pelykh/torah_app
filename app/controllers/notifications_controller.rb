@@ -3,9 +3,9 @@ class NotificationsController < ApplicationController
 
   def index
     if params[:limit]
-      @notifications = current_user.notifications.limit(params[:limit])
+      @notifications = current_user.notifications.order("created_at DESC").page(0).limit(params[:limit])
     else
-      @notifications = current_user.notifications.page(params[:page])
+      @notifications = current_user.notifications.order("created_at DESC").page(params[:page])
     end
     respond_to do |format|
       format.html
