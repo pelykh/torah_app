@@ -19,11 +19,10 @@
         <div class="col-md-offset-2 col-md-8 col-md-offset-2">
           <%= flash_for flash %>
 
-          <button class="webpush-button">Send a message</button>
-
           <%= yield %>
           <script>
             window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
+            window.subscribedToPushNotifications = false;
           </script>
         </div>
       </div>
