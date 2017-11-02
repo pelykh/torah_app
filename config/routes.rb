@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  post "/push" => "notifications#create"
+
   resources :notifications, only: [:create, :index, :destroy] do
     collection do
       post :mark_as_read
+      post :subscribe
     end
   end
 

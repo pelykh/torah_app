@@ -24,4 +24,34 @@ class NotificationsController < ApplicationController
     @notifications.update_all(read_at: Time.current)
     render json: { success: true }
   end
+
+  def subscribe
+    head :ok
+  end
+
+  def create
+    Webpush.payload_send(
+    message: notification_message,
+    endpoint: params[:subscription][:endpoint],
+    p256dh: params[:subscription][:keys][:p256dh],
+    auth: params[:subscription][:keys][:auth],
+    click_action: "/chatrooms",
+    vapid: {
+      subject: "/",
+      public_key: ENV['VAPID_PUBLIC_KEY'],
+      private_key: ENV['VAPID_PRIVATE_KEY']
+      }
+    )
+
+    head :ok
+  end
+
+  private
+
+  def notification_message
+    {
+      body: params[:message],
+      url: chatrooms_url
+    }.to_json
+  end
 end

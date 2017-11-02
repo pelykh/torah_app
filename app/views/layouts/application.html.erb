@@ -6,8 +6,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="manifest" href="/manifest.json">
   </head>
 
   <body>
@@ -17,7 +18,13 @@
       <div class="row">
         <div class="col-md-offset-2 col-md-8 col-md-offset-2">
           <%= flash_for flash %>
+
+          <button class="webpush-button">Send a message</button>
+
           <%= yield %>
+          <script>
+            window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
+          </script>
         </div>
       </div>
     </div>
