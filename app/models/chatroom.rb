@@ -7,6 +7,10 @@ class Chatroom < ApplicationRecord
   def add_participant user
     return nil if participatings.find_by(user_id: user.id) || organization_id
     participatings.create(user_id: user.id)
+    user.notifications.create(
+      message: "You have been invited to chatroom",
+      link: Rails.application.routes.url_helpers.chatroom_path(id)
+    )
   end
 
   def self.find_by_participants(user_a, user_b)
