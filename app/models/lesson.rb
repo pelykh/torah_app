@@ -13,7 +13,25 @@ class Lesson < ApplicationRecord
 
   before_validation :serialize_time, on: :create
 
+  after_create :notify_receiver
+  after_update :notify_sender
+
   private
+
+  def notify_receiver
+    receiver.notifications.create(
+      message: "You have been invited to study together",
+      link: Rails.application.routes.url_helpers.user_lessons_path(receiver.id)
+    )
+  end
+
+  def notify_sender
+    sender.notifications.create(
+      message: "#{receiver.name} has accepted your invation to study",
+      link: Rails.application.routes.url_helpers.user_lessons_path(sender.id)
+    )
+  end
+
 
   def sender_should_be_available_on_lesson_time
     t = to_availability_week(time)
