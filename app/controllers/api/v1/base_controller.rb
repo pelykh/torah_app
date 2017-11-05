@@ -1,7 +1,9 @@
 class Api::V1::BaseController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
+
   around_action :set_time_zone, if: :current_user
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   respond_to :json
 
   def configure_permitted_parameters
@@ -14,8 +16,8 @@ class Api::V1::BaseController < ActionController::API
       end
 
       u.permit(:name, :email,
-        :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
-        :time_zone).merge({ availability: availability })
+               :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
+               :time_zone).merge(availability: availability)
     end
   end
 

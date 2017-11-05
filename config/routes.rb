@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'users'
+
       resources :users, only: [:index, :show] do
         post :add_to_friends, to: "users#add_to_friends"
         post :remove_from_friends, to: "users#remove_from_friends"
+      end
+
+      resources :subjects, only: [:index, :show] do
+        post :like, to: "subjects#like"
+        delete :unlike, to: "subjects#unlike"
       end
     end
   end

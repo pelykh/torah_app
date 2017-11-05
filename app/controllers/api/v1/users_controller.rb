@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  before_action :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
+  before_action :authenticate_user!
 
   def index
     @users = User.filter(filters_params).search(search_params).page(params[:page])

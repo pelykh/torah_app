@@ -14,13 +14,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context 'when authenticated' do
       before do
         api_sign_in current_user
-        get :index, params: { page: 0 }
+        get :index, params: { page: 1 }
       end
 
       it { is_expected.to respond_with :success }
 
       it 'returns array of users' do
-        expect(json_response).to eq(json_for(User.all))
+        expect(json_response).to eq(json_for(User.page(1)))
       end
     end
 
