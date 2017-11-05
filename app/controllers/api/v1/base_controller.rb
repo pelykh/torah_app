@@ -1,7 +1,8 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+class Api::V1::BaseController < ActionController::API
+  include DeviseTokenAuth::Concerns::SetUserByToken
   around_action :set_time_zone, if: :current_user
   before_action :configure_permitted_parameters, if: :devise_controller?
+  respond_to :json
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update) do |u|
@@ -16,10 +17,6 @@ class ApplicationController < ActionController::Base
         :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
         :time_zone).merge({ availability: availability })
     end
-  end
-
-  def authenticate_admin!
-    redirect_to subjects_url, notice: "Only for admins" unless current_user.admin?
   end
 
   private

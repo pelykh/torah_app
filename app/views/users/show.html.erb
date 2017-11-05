@@ -82,6 +82,6 @@
 
   <ul id= "subjects-list" class="list-group">
     <%= render @user.subjects, without_nested: true %>
-    <%= "Not interested in something yet" unless @user.subjects.any?%>
+    <%= "Not interested in something yet" unless @user.subjects.any? %>
   </ul>
 </div>

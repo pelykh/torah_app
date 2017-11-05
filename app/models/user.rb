@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Filterable
   include Searchable
 
+
   scope :order_by, -> (param) { sort_by(param) }
 
   enum status: {
@@ -22,6 +23,10 @@ class User < ApplicationRecord
   has_many :foundations, class_name: "Organization", foreign_key: :founder_id
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
+  has_many :memberships, dependent: :destroy
+  has_many :organizations, through: :memberships
+  has_many :confirmed_memberships, -> { confirmed }, class_name: "Membership"
+  has_many :confirmed_organizations, source: :organization, through: :confirmed_memberships
   has_many :posts
   has_many :notifications, dependent: :destroy
   has_many :devices, dependent: :destroy
@@ -32,7 +37,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :timeoutable, :lockable, :omniauthable
+         :timeoutable, :lockable#, :omniauthable
+  include DeviseTokenAuth::Concerns::User
 
 
   def disappear

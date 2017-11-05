@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  namespace :api do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'users'
+      resources :users, only: [:index, :show] do
+        post :add_to_friends, to: "users#add_to_friends"
+        post :remove_from_friends, to: "users#remove_from_friends"
+      end
+    end
+  end
+
   post "/push" => "notifications#create"
 
   resources :notifications, only: [:create, :index, :destroy] do
@@ -21,7 +33,7 @@ Rails.application.routes.draw do
     patch "change_role/:user_id/:role", to: "memberships#change_role", as: "change_role"
   end
 
-  devise_for :users
+  #devise_for :users
   get "subjects/fetch", to: "subjects#fetch"
   resources :subjects
 
