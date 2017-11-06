@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         post :like, to: "subjects#like"
         delete :unlike, to: "subjects#unlike"
       end
+
+      resources :organizations do
+        resources :posts, only: [:index, :show, :create, :update]
+      end
     end
   end
 
