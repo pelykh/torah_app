@@ -20,10 +20,14 @@ Rails.application.routes.draw do
       end
 
       resources :organization, only: [:index, :show, :create]
+
+      resources :notifications, only: [:create, :index, :destroy] do
+        collection do
+          patch :mark_as_read
+        end
+      end
     end
   end
-
-  post "/push" => "notifications#create"
 
   resources :notifications, only: [:create, :index, :destroy] do
     collection do
