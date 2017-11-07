@@ -9,7 +9,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def show
     @user = User.find(params[:id])
-    render json: @user, serializer: UserProfileSerializer
+    render json: @user, serializer: FullUserSerializer
   end
 
   def add_to_friends

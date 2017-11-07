@@ -1,6 +1,6 @@
 class Membership < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
-  
+
   enum role: {
     member: 0,
     moderator: 1,

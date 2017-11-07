@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       resources :organizations do
         resources :posts, only: [:index, :show, :create, :update]
       end
+
+      resources :organization, only: [:index, :show, :create]
     end
   end
 
