@@ -19,7 +19,14 @@ Rails.application.routes.draw do
         resources :posts, only: [:index, :show, :create, :update]
       end
 
-      resources :organization, only: [:index, :show, :create]
+      resources :organization, only: [:index, :show, :create] do
+        post "send_invite", to: "memberships#send_invite"
+        patch "accept_invite/:user_id", to: "memberships#accept_invite"
+        delete "cancel_invite", to: "memberships#cancel_invite"
+        get "members", to: "memberships#members"
+        get "candidates", to: "memberships#candidates"
+        patch "change_role/:user_id/:role", to: "memberships#change_role"
+      end
 
       resources :notifications, only: [:create, :index, :destroy] do
         collection do
