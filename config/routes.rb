@@ -33,6 +33,12 @@ Rails.application.routes.draw do
           patch :mark_as_read
         end
       end
+
+      resources :lessons, except: [:new, :edit] do
+        collection do
+          get "subjects/:name", to: "lessons#subjects"
+        end
+      end
     end
   end
 
