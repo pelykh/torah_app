@@ -46,8 +46,4 @@ class Api::V1::LessonsController < Api::V1::BaseController
     params.require(:lesson).permit(:message, :starts_at_time, :ends_at_time,
       :starts_at_date, :ends_at_date, :subject_id, :receiver_id, :recurring).merge({sender_id: current_user.id})
   end
-
-  def wrong_id
-    render json: { errors: { id: "Wrong id provided" }}, status: :bad_request
-  end
 end

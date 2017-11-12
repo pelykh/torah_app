@@ -99,7 +99,6 @@ RSpec.describe Api::V1::LessonsController, type: :controller do
       end
     end
 
-
     context 'when unauthenticated' do
       before do
         post :create, params: { lesson: lesson_params }

@@ -39,6 +39,12 @@ Rails.application.routes.draw do
           get "subjects/:name", to: "lessons#subjects"
         end
       end
+
+      resources :chatrooms, only: [:index, :show, :create] do
+        post "add_participant/:user_id", to: "chatrooms#add_participant"
+        get :video_token, to: "chatrooms#video_token"
+        get :messages, to: "chatrooms#messages"
+      end
     end
   end
 

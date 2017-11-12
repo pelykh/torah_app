@@ -11,5 +11,6 @@ module Helper
     chatroom = Chatroom.create
     chatroom.add_participant(user_a)
     chatroom.add_participant(user_b)
+    chatroom
   end
 end

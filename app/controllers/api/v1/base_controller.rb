@@ -21,6 +21,10 @@ class Api::V1::BaseController < ActionController::API
     end
   end
 
+  def wrong_id
+    render json: { errors: { id: "Wrong id provided" }}, status: :bad_request
+  end
+
   private
 
   def set_time_zone(&block)
