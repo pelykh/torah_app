@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :devices, dependent: :destroy
 
   validates :name, presence: true, length: { in: 5..40 }
-  validate :availability_should_be_inside_availability_range
+  validate :availability_should_be_inside_availability_range, on: :update
 
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,

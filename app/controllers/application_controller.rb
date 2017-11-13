@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
         :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
         :time_zone).merge({ availability: availability })
     end
+
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:name, :email, :password, :password_confirmation)
+    end
   end
 
   def authenticate_admin!
