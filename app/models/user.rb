@@ -2,7 +2,6 @@ class User < ApplicationRecord
   include Filterable
   include Searchable
 
-
   scope :order_by, -> (param) { sort_by(param) }
 
   enum status: {
@@ -37,9 +36,11 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :timeoutable, :lockable#, :omniauthable
+         :timeoutable, :lockable #, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  # Devise is not sending confrirmation email on create
+  after_commit :send_confirmation_instructions, on: :create
 
   def disappear
     update_attribute(:status, 0)
@@ -71,6 +72,15 @@ class User < ApplicationRecord
   end
 
   private
+
+  def send_confirmation_instructions
+      unless @raw_confirmation_token
+        generate_confirmation_token!
+      end
+
+      opts = pending_reconfirmation? ? { to: unconfirmed_email } : { }
+      send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
+    end
 
   def availability_should_be_inside_availability_range
     availability_range = Time.parse("1996-01-01 00:00")..
