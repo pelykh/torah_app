@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
   def fetch_users
-    @users = User.filter(filters_params).search(search_params)
+    @users = User.filter(filters_params).search(search_params).page(params[:page])
     render @users
   end
 
