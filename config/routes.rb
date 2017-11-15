@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     collection do
       post :mark_as_read
       post :subscribe
+      get :fetch
     end
   end
 
