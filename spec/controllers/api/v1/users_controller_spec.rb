@@ -6,6 +6,30 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   let(:user) { create(:user) }
   let(:current_user) { create(:user) }
 
+  describe "GET #favorites" do
+    context 'when authenticated' do
+      before do
+        10.times { create(:interest, user: user) }
+        api_sign_in current_user
+        get :favorites, params: { user_id: user.id, page: 1 }
+      end
+
+      it { is_expected.to respond_with :success }
+
+      it "returns array of favorited subjects" do
+        expect(json_response).to eq(json_for(Subject.page(1)))
+      end
+    end
+
+    context 'when unauthenticated' do
+      before do
+        get :favorites, params: { user_id: user, page: 0 }
+      end
+
+      it { is_expected.to respond_with_unauthenticated }
+    end
+  end
+
   describe 'GET #index' do
     before do
       10.times { create(:user) }

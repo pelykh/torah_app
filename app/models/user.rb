@@ -22,8 +22,6 @@ class User < ApplicationRecord
   has_many :foundations, class_name: "Organization", foreign_key: :founder_id
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
-  has_many :memberships, dependent: :destroy
-  has_many :organizations, through: :memberships
   has_many :confirmed_memberships, -> { confirmed }, class_name: "Membership"
   has_many :confirmed_organizations, source: :organization, through: :confirmed_memberships
   has_many :posts

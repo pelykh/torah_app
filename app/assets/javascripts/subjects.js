@@ -27,6 +27,25 @@ jQuery(document).on('turbolinks:load', () => {
     $('#subject').on('click', '.unlike-button', unlikeSubject);
   }
 
+  if ($('#favorites-list').length > 0) {
+    const getData = (page) => ({
+      page: page
+    });
+
+    const userId = $('#favorites-list').data("id");
+
+    new InfinityList({
+      selector: "#favorites-list",
+      url: `/users/${userId}/favorites`,
+      getData: getData,
+      per_page: 25
+    });
+
+
+    $('#favorites-list').on('click', '.like-button', likeSubject);
+    $('#favorites-list').on('click', '.unlike-button', unlikeSubject);
+  }
+
   function likeSubject(e) {
     e.preventDefault();
     const id = e.target.dataset.id;

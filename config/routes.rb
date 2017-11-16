@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'users'
+      devise_for :users, only: []
 
       resources :users, only: [:index, :show] do
-        post :add_to_friends, to: "users#add_to_friends"
-        post :remove_from_friends, to: "users#remove_from_friends"
+        post :add_to_friends
+        post :remove_from_friends
+        get :favorites
       end
 
       resources :subjects, only: [:index, :show] do
@@ -80,6 +82,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show, :index] do
+    get :favorites
     resources :lessons, only: [:create, :new, :index, :destroy]
   end
 

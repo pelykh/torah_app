@@ -10,9 +10,13 @@ class UsersController < ApplicationController
   def index
   end
 
+  def favorites
+    subjects = User.find(params[:user_id]).subjects.page(params[:page])
+    render partial: "subjects/subject", collection: subjects, as: :subject, locals: { without_nested: true }
+  end
+
   def show
-    @user = User.find(params[:id])
-    @memberships = @user.memberships.where.not(confirmed_at: nil).includes(:organization)
+    @user = User.includes(:confirmed_organizations).find(params[:id])
     @chatroom = Chatroom.find_by_participants(current_user, @user)
   end
 

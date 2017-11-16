@@ -13,7 +13,7 @@ jQuery(document).on('turbolinks:load', () => {
         order_by: $('#order_by').val()
       }
     });
-    
+
     new InfinityList({
       selector: "#users-list",
       url: "/users/fetch_users",

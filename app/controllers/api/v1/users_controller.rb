@@ -7,6 +7,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     render json: @users
   end
 
+  def favorites
+    def favorites
+      subjetcs = User.find(params[:user_id]).subjects.page(params[:page])
+      render json: subjects
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     render json: @user, serializer: FullUserSerializer
