@@ -45,7 +45,7 @@ class OrganizationsController < ApplicationController
   end
 
   def set_organization_by_name
-    p name = params[:organization_name].gsub(/-/, " ")
+    name = params[:organization_name].gsub(/-/, " ")
     @organization = Organization.where('lower(name) = ?', name.downcase).first
   end
 

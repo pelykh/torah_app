@@ -112,7 +112,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :organizations, only: [:show, :index] do
-      patch "confirm", to: "organizations#confirm", as: "confirm"
+      collection do
+        get :fetch
+      end
+      patch :confirm
     end
   end
 
