@@ -15,8 +15,7 @@ class Api::V1::BaseController < ActionController::API
         s..e
       end
 
-      u.permit(:name, :email,
-               :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
+      u.permit(:name, :email, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
                :time_zone).merge(availability: availability)
     end
   end

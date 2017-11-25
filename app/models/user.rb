@@ -82,7 +82,7 @@ class User < ApplicationRecord
   end
 
   def availability_is_present?
-    availability
+    @availability
   end
 
   def send_confirmation_instructions

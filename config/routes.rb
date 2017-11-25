@@ -81,7 +81,8 @@ Rails.application.routes.draw do
     delete "remove_friend/:id", to: "users#remove_friend", as: "remove_friend"
   end
 
-  resources :users, only: [:show, :index] do
+  resources :users, only: [:show, :index, :edit, :update] do
+    patch :change_password
     get :favorites
     resources :lessons, only: [:create, :new, :index, :destroy]
   end

@@ -4,19 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update) do |u|
-      availability = u[:availability].map.with_index do |r, i|
-        ends = r.split('..')
-        s = Time.zone.parse("1996-01-01 #{ends[0]}") + i.days
-        e = Time.zone.parse("1996-01-01 #{ends[1]}") + i.days
-        s..e
-      end
-
-      u.permit(:name, :email,
-        :current_password, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
-        :time_zone).merge({ availability: availability })
-    end
-
     devise_parameter_sanitizer.permit(:sign_up) do |u|
       u.permit(:name, :email, :password, :password_confirmation)
     end
