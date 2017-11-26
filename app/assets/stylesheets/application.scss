@@ -59,15 +59,7 @@
   }
 }
 
-#organizations-list {
-  .organization {
-    .thumbnail {
-      margin-right: 10px;
-    }
-  }
-}
-
-#admin-organizations-list {
+#organizations-list, #admin-organizations-list, #current-user-organizations-list {
   .organization {
     .thumbnail {
       margin-right: 10px;

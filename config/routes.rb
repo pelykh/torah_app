@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "subjects#home"
   devise_for :users
 
   namespace :api do
@@ -58,11 +59,13 @@ Rails.application.routes.draw do
     end
   end
 
-  root "subjects#home"
-
-  get "organizations/fetch", to: "organizations#fetch"
-  get "organizations/home", to: "organizations#home"
   resources :organizations do
+    collection do
+      get :fetch
+      get :home
+      get :home_fetch
+    end
+
     resources :posts
     post "send_invite", to: "memberships#send_invite", as: "send_invite"
     patch "accept_invite/:user_id", to: "memberships#accept_invite", as: "accept_invite"
