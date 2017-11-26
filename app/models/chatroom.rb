@@ -4,13 +4,13 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :organization, optional: true
 
-  def add_participant user
+  def add_participant user, options={notify: true}
     return nil if participatings.find_by(user_id: user.id) || organization_id
     participatings.create(user_id: user.id)
     user.notifications.create(
       message: "You have been invited to chatroom",
       link: Rails.application.routes.url_helpers.chatroom_path(id)
-    )
+    ) if options[:notify]
   end
 
   def self.find_by_participants(user_a, user_b)

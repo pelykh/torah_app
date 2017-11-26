@@ -69,7 +69,7 @@ class ChatroomsController < ApplicationController
   def create_room(user)
     chatroom = Chatroom.create
     chatroom.add_participant(user)
-    chatroom.add_participant(current_user)
+    chatroom.add_participant(current_user, notify: false)
     chatroom
   end
 end
