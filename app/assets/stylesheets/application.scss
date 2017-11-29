@@ -1,9 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "jquery.timepicker.css";
-@import "jquery.timepicker.css";
-@import "bootstrap-datepicker.css";
-@import "choices_js/assets/styles/css/choices.min.css";
+@import "jquery.timepicker";
+@import "jquery.timepicker";
+@import "bootstrap-datepicker";
+@import "choices_js/assets/styles/css/choices.min";
 
 .confirmed {
   color: green;
