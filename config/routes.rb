@@ -91,7 +91,7 @@ Rails.application.routes.draw do
   end
 
   get "fetch_lessons", to: "lessons#fetch_lessons", as: "fetch_lessons"
-  get "lessons/fetch_subjects", to: "lessons#fetch_subjects"
+  get "lessons/subjects", to: "lessons#subjects"
   post "lessons/:id/accept_invite", to: "lessons#accept_invite", as: "accept_lesson_invite"
   delete "lessons/:id/decline_invite", to: "lessons#decline_invite", as: "decline_lesson_invite"
 

@@ -9,9 +9,9 @@ class LessonsController < ApplicationController
     render current_user.lessons
   end
 
-  def fetch_subjects
-    subjects =  Subject.where("name LIKE ?", "%#{params[:search]}%")
-    render partial: "subjects/subject_option", collection: subjects, as: :subject
+  def subjects
+    subjects = Subject.where("name LIKE ?", "%#{params[:search]}%").map { |subject| {label: subject.name, value: subject.id } }
+    render json: subjects
   end
 
   def accept_invite
@@ -37,6 +37,7 @@ class LessonsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    @subject = Subject.find(params[:lesson][:subject_id])
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
       redirect_to @user, notice: "You have invited this user to study with you"

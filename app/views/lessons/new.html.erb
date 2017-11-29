@@ -19,10 +19,7 @@
 
   <div class="form-group">
     <%= f.label :subject %>
-    <%= f.hidden_field :subject_id %>
-    <input id="subject_picker" autocomplete="off" list="subject_options" class="form-control" />
-    <datalist id="subject_options">
-	  </datalist>
+    <%= f.select :subject_id, @subject? [[@subject.name, @subject.id]] : [] %>
   </div>
 
   <div class="lesson">

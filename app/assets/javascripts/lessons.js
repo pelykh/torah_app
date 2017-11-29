@@ -11,6 +11,9 @@ jQuery(document).on('turbolinks:load', () => {
   }
 
   if($('#new_lesson').length > 0) {
+
+    const subjectPicker = createSubjectPicker('#lesson_subject_id');
+
     const timeZone = moment.tz.names().find((zone) => zone.includes($('#timezone').data('timezone')));
 
     function getDisabledTimeRangesForStart(date) {
