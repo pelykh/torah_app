@@ -72,7 +72,7 @@
   <% @user.availability.each_with_index do |v, i| %>
     <div class="col-lg-3 col-sm-4 col-xs-6">
       <h5><%= Date::DAYNAMES[i] %></h5>
-      <p><%= v.begin.localtime.strftime("%H:%M") %>-<%= v.end.localtime.strftime("%H:%M") %></p>
+      <p><%= v.begin.in_time_zone.strftime("%H:%M") %>-<%= v.end.in_time_zone.strftime("%H:%M") %></p>
     </div>
   <% end %>
 </div>

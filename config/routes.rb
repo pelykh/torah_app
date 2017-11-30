@@ -87,10 +87,13 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update] do
     patch :change_password
     get :favorites
-    resources :lessons, only: [:create, :new, :index, :destroy]
+    resources :lessons, only: [:create, :new, :index, :destroy] do
+      collection do
+        get :subjects
+        get :fetch
+      end
+    end
   end
-
-  get "fetch_lessons", to: "lessons#fetch_lessons", as: "fetch_lessons"
   get "lessons/subjects", to: "lessons#subjects"
   post "lessons/:id/accept_invite", to: "lessons#accept_invite", as: "accept_lesson_invite"
   delete "lessons/:id/decline_invite", to: "lessons#decline_invite", as: "decline_lesson_invite"

@@ -1,13 +1,19 @@
 jQuery(document).on('turbolinks:load', () => {
   if($('#lessons-list').length > 0) {
-    function fetchLessons() {
-      $.get(`${window.location.origin}/fetch_lessons`)
-        .then((lessons) => {
-          $('#lessons-list').append(lessons);
-        })
-    }
+    const getData = (page) => ({
+      page: page,
+      search: {
+      },
+      filters: {
+      }
+    });
 
-    fetchLessons();
+    new InfinityList({
+      selector: "#lessons-list",
+      url: `/users/id/lessons/fetch`,
+      getData: getData,
+      per_page: 10
+    });
   }
 
   if($('#new_lesson').length > 0) {
