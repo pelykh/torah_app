@@ -99,8 +99,9 @@ Rails.application.routes.draw do
   delete "remove_subject/:id", to: "users#remove_subject", as: "remove_subject"
 
   resources :chatrooms, only: [:index, :show] do
+    post :end_video_chat
     post "add_participant/:user_id", to: "chatrooms#add_participant", as: "add_participant"
-    get "fetch_users", to: "chatrooms#fetch_users", as: "fetch_users"
+    get :fetch_users
   end
   post "chatrooms/:user_id", to: "chatrooms#create", as: "new_chatroom"
 

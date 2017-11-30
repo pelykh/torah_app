@@ -5,6 +5,17 @@
 @import "bootstrap-datepicker";
 @import "choices_js/assets/styles/css/choices.min";
 
+.event-message {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.time {
+    color:#bfbfbf;
+    font-size: 10px;
+}
+
 .confirmed {
   color: green;
 }

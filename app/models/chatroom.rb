@@ -7,6 +7,9 @@ class Chatroom < ApplicationRecord
   def add_participant user, options={notify: true}
     return nil if participatings.find_by(user_id: user.id) || organization_id
     participatings.create(user_id: user.id)
+
+    create_add_participant_event_message(user, options[:current_user]) if options[:current_user]
+
     user.notifications.create(
       message: "You have been invited to chatroom",
       link: Rails.application.routes.url_helpers.chatroom_path(id)
@@ -34,5 +37,19 @@ class Chatroom < ApplicationRecord
 
   def has_participant?(user)
     participatings.find_by(user_id: user.id)
+  end
+
+  def create_end_video_chat_message time, current_user
+    create_event_message("Call has ended in #{time}", current_user)
+  end
+
+  private
+
+  def create_add_participant_event_message user, current_user
+    create_event_message("#{current_user.name} has invited #{user.name}", current_user)
+  end
+
+  def create_event_message body, user
+    messages.create(type_of: "event", user_id: user.id, body: body)
   end
 end
