@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
   end
 
   def subjects
-    subjects = Subject.where("name LIKE ?", "%#{params[:search]}%").map { |subject| {label: subject.name, value: subject.id } }
+    subjects = Subject.where("lower(name) LIKE ?", "%#{params[:search].downcase}%").map { |subject| {label: subject.name, value: subject.id } }
     render json: subjects
   end
 
