@@ -5,6 +5,14 @@ class LessonsController < ApplicationController
   def index
   end
 
+  def check_if_current_user_is_available
+    if current_user.available?(lesson_time)
+      render json: { message: "You are available on that time" }
+    else
+      render json: { message: "You are not available on that time" }, status: :bad_request
+    end
+  end
+
   def fetch
     render Lesson.where(sender_id: current_user.id)
   end
@@ -37,7 +45,7 @@ class LessonsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @subject = Subject.find(params[:lesson][:subject_id])
+    @subject = Subject.find(params[:lesson][:subject_id]) if params[:lesson][:subject_id]
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
       redirect_to @user, notice: "You have invited this user to study with you"
@@ -52,6 +60,11 @@ class LessonsController < ApplicationController
   end
 
   private
+
+  def lesson_time
+    Time.zone.parse("#{params[:starts_at_date]} #{params[:starts_at_time]}")..
+    Time.zone.parse("#{params[:ends_at_date]} #{params[:ends_at_time]}")
+  end
 
   def lesson_params
     params.require(:lesson).permit(:message, :starts_at_time, :ends_at_time, :private,

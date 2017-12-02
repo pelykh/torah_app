@@ -128,6 +128,30 @@ jQuery(document).on('turbolinks:load', () => {
       $('.lesson .time.end').timepicker('option', 'disabTZTimeRanges', getDisabledTimeRangesForEnd(endDate));
     }
 
+    function checkCurrentUserAvailability() {
+      $('#user-available').hide();
+      $('#user-unavailable').hide();
+      $('#check-user-availability-loader').show();
+      $('input[type="submit"]').prop('disabled', true);
+
+      $.get('/lessons/check_if_current_user_is_available', {
+        starts_at_date: $('#lesson_starts_at_date').val(),
+        ends_at_date:   $('#lesson_ends_at_date').val(),
+        starts_at_time: $('#lesson_starts_at_time').val(),
+        ends_at_time:   $('#lesson_ends_at_time').val()
+      })
+        .then((response) => {
+          $('#check-user-availability-loader').hide();
+          $('#user-available').show();
+          $('input[type="submit"]').prop('disabled', false);
+        })
+        .fail((errors) => {
+          $('input[type="submit"]').prop('disabled', false);
+          $('#check-user-availability-loader').hide();
+          $('#user-unavailable').show();
+        })
+    }
+
     $('.lesson .time.start').timepicker({
       showDuration: true,
       timeFormat: 'H:i',
@@ -154,5 +178,8 @@ jQuery(document).on('turbolinks:load', () => {
     $('.day').datepair();
     $('.lesson').datepair();
     $('.lesson .date').on('change', changeTimeRanges);
+
+    $('.lesson .date').on('change', checkCurrentUserAvailability);
+    $('.lesson .time').on('change', checkCurrentUserAvailability);
   }
 });

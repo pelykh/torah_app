@@ -70,7 +70,40 @@ class User < ApplicationRecord
     self.order(order_params[param])
   end
 
+  def available? time_range
+    t = to_availability_week(time_range)
+    self.availability.each do |r|
+      return true if r.include?(t)
+    end
+    false
+  end
+
+  def unavailable? time_range
+    !self.available?(time_range)
+  end
+
+  def busy? time_range
+    t = to_availability_week(time_range)
+    return true if
+     self.lessons.exists?([
+       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL",
+       begin: time_range.begin, end: time_range.end
+     ]) ||
+     self.lessons.exists?([
+       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL AND recurring IS NOT NULL",
+       begin: t.begin, end: t.end
+     ])
+     false
+  end
+
   private
+
+  def to_availability_week range
+    b = range.begin
+    e = range.end
+    Time.zone.parse("1996-01-01 #{b.to_s(:time)}") + (b.wday - 1).days ..
+    Time.zone.parse("1996-01-01 #{e.to_s(:time)}") + (e.wday - 1).days
+  end
 
   def set_default_availability
     a = []

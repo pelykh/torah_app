@@ -33,19 +33,11 @@ class Lesson < ApplicationRecord
   end
 
   def sender_should_be_available_on_lesson_time
-    t = to_availability_week(time)
-    sender.availability.each do |r|
-      return true if r.include?(t)
-    end
-    errors.add(:time, "#{sender.name} is not available at that time")
+    errors.add(:time, "#{sender.name} is not available at that time") unless sender.available?(time)
   end
 
   def receiver_should_be_available_on_lesson_time
-    t = to_availability_week(time)
-    receiver.availability.each do |r|
-      return true if r.include?(t)
-    end
-    errors.add(:time, "#{receiver.name} is not available at that time")
+    errors.add(:time, "#{receiver.name} is not available at that time") unless receiver.available?(time)
   end
 
   def to_availability_week range
@@ -56,30 +48,11 @@ class Lesson < ApplicationRecord
   end
 
   def sender_cannot_be_busy_on_lesson_time
-    t = to_availability_week(time)
-    errors.add(:time, "#{sender.name} is busy at that time") if
-     sender.lessons.exists?([
-       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL",
-       begin: time.begin, end: time.end
-     ]) ||
-     sender.lessons.exists?([
-       "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL AND recurring IS NOT NULL",
-       begin: t.begin, end: t.end
-     ])
+    errors.add(:time, "#{sender.name} is busy at that time") if sender.busy?(time)
   end
 
   def receiver_cannot_be_busy_on_lesson_time
-    t = to_availability_week(time)
-
-    errors.add(:time, "#{receiver.name} is busy at that time") if
-      receiver.lessons.exists?([
-        "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL",
-        begin: time.begin, end: time.end
-      ]) ||
-      receiver.lessons.exists?([
-        "(time && tstzrange(:begin, :end)) AND confirmed_at IS NOT NULL AND recurring IS NOT NULL",
-        begin: t.begin, end: t.end
-      ])
+  errors.add(:time, "#{receiver.name} is busy at that time") if receiver.busy?(time)
   end
 
   def time_cannot_be_in_the_past

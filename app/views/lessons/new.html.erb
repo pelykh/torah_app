@@ -33,6 +33,9 @@
       <%= f.text_field :ends_at_date, class: "date end" %>
       <%= f.text_field :ends_at_time, class: "time end" %>
     </div>
+    <div id="check-user-availability-loader"><i class="fa fa-circle-o-notch fa-spin" ></i></div>
+    <div class="alert alert-success" id="user-available">You are available on that time</div>
+    <div class="alert alert-warning" id="user-unavailable">You are not available on that time</div>
   </div>
 
   <div class="form-group">

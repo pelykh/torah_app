@@ -5,6 +5,10 @@
 @import "bootstrap-datepicker";
 @import "choices_js/assets/styles/css/choices.min";
 
+#check-user-availability-loader, #user-available, #user-unavailable {
+  display: none;
+}
+
 .event-message {
     text-align: center;
     margin-top: 5px;
@@ -79,7 +83,7 @@
   }
 }
 
-#subjects-list {
+#subjects-list, #favorites-list {
   .subject {
     .thumbnail {
       margin-right: 10px;

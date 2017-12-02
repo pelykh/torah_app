@@ -94,9 +94,16 @@ Rails.application.routes.draw do
       end
     end
   end
-  get "lessons/subjects", to: "lessons#subjects"
-  post "lessons/:id/accept_invite", to: "lessons#accept_invite", as: "accept_lesson_invite"
-  delete "lessons/:id/decline_invite", to: "lessons#decline_invite", as: "decline_lesson_invite"
+
+  resources :lessons, only: [] do
+    collection do
+      get :check_if_current_user_is_available
+      get :subjects
+    end
+
+    post :accept_invite
+    delete :decline_invite
+  end
 
   post "add_subject/:id", to: "users#add_subject", as: "add_subject"
   delete "remove_subject/:id", to: "users#remove_subject", as: "remove_subject"
