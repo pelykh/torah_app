@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
+  def home
+    @activities = PublicActivity::Activity.all
+  end
+
   def update
     if current_user.update_attributes(user_params)
       redirect_to current_user, notice: "Successfully updated your account"
@@ -38,7 +42,8 @@ class UsersController < ApplicationController
     subject = Subject.find(params[:id])
     interest = current_user.interests.find_by(subject_id: subject.id)
     unless interest
-      Interest.create(user_id: current_user.id, subject_id: subject.id)
+      interest = Interest.create(user_id: current_user.id, subject_id: subject.id)
+      interest.create_activity(key: 'subject.like', owner: current_user)
       head :created and return
     else
       head :bad_request and return

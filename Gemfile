@@ -31,6 +31,7 @@ gem 'faker', '~> 1.6.1'
 gem 'kaminari'
 gem "webpush"
 gem 'active_model_serializers'
+gem 'public_activity'
 
 group :development, :test do
   gem 'byebug'

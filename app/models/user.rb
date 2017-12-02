@@ -15,8 +15,6 @@ class User < ApplicationRecord
   has_many :subjects, through: :interests
   has_many :chatrooms, through: :participatings
   has_many :messages
-  has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships
   has_many :lessons, foreign_key: :sender_id, dependent: :destroy
   has_many :lessons, foreign_key: :receiver_id, dependent: :destroy
   has_many :foundations, class_name: "Organization", foreign_key: :founder_id

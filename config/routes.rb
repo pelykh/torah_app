@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "subjects#home"
+  get :home, to: "users#home"
+  
   devise_for :users
 
   namespace :api do
