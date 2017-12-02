@@ -16,7 +16,7 @@ jQuery(document).on('turbolinks:load', () => {
 
     new InfinityList({
       selector: "#users-list",
-      url: "/users/fetch_users",
+      url: "/users/fetch",
       getData: getData,
       per_page: 25
     });

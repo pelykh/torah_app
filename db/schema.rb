@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202111127) do
+ActiveRecord::Schema.define(version: 20171202125947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,13 @@ ActiveRecord::Schema.define(version: 20171202111127) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer  "user_id"
+    t.string   "friendable_type"
+    t.integer  "friendable_id"
     t.integer  "friend_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
-    t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "blocker_id"
+    t.integer  "status"
   end
 
   create_table "interests", force: :cascade do |t|
@@ -200,7 +201,6 @@ ActiveRecord::Schema.define(version: 20171202111127) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
 
-  add_foreign_key "friendships", "users"
   add_foreign_key "interests", "subjects"
   add_foreign_key "interests", "users"
   add_foreign_key "lessons", "subjects"

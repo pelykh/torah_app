@@ -32,6 +32,7 @@ gem 'kaminari'
 gem "webpush"
 gem 'active_model_serializers'
 gem 'public_activity'
+gem 'has_friendship'
 
 group :development, :test do
   gem 'byebug'

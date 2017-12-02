@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :wrong_user_id
 
   def home
-    @activities = PublicActivity::Activity.all
+    @activities = PublicActivity::Activity.order("created_at desc")
+      .where(owner_id: current_user.friend_ids.push(current_user.id), owner_type: "User")
   end
 
   def update
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def fetch_users
+  def fetch
     @users = User.filter(filters_params).search(search_params).page(params[:page])
     render @users
   end
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
     interest = current_user.interests.find_by(subject_id: subject.id)
     unless interest
       interest = Interest.create(user_id: current_user.id, subject_id: subject.id)
-      interest.create_activity(key: 'subject.like', owner: current_user)
+      subject.create_activity(key: 'subject.like', owner: current_user)
       head :created and return
     else
       head :bad_request and return
@@ -61,18 +62,28 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_friend
-    user = User.find(params[:id])
+  def friend_request
+    user = User.find(params[:user_id])
     if user
-      current_user.friendships.create(friend_id: user.id)
+      current_user.friend_request(user)
       redirect_to user
     end
   end
 
-  def remove_friend
-    user = User.find(params[:id])
+  def accept_request
+    user = User.find(params[:user_id])
     if user
-      current_user.friendships.find_by(friend_id: user.id).destroy
+      current_user.accept_request(user)
+      current_user.create_activity(key: 'user.accept_request', owner: user)
+      user.create_activity(key: 'user.accept_request', owner: current_user)
+      redirect_to user, notice: "You are friends now"
+    end
+  end
+
+  def remove_friend
+    user = User.find(params[:user_id])
+    if user
+      current_user.remove_friend(user)
       redirect_to user
     end
   end
@@ -107,5 +118,4 @@ class UsersController < ApplicationController
     flash[:danger] = 'Wrong id provided'
     redirect_to users_path
   end
-
 end

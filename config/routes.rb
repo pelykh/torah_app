@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "subjects#home"
   get :home, to: "users#home"
-  
+
   devise_for :users
 
   namespace :api do
@@ -79,14 +79,14 @@ Rails.application.routes.draw do
   #devise_for :users
   get "subjects/fetch", to: "subjects#fetch"
   resources :subjects
-
-  scope "users" do
-    get "fetch_users", to: "users#fetch_users"
-    post "add_friend/:id", to: "users#add_friend", as: "add_friend"
-    delete "remove_friend/:id", to: "users#remove_friend", as: "remove_friend"
-  end
-
   resources :users, only: [:show, :index, :edit, :update] do
+    collection do
+      get :fetch
+    end
+    post :friend_request
+    post :accept_request
+    delete :remove_friend
+
     patch :change_password
     get :favorites
     resources :lessons, only: [:create, :new, :index, :destroy] do

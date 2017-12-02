@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Filterable
   include Searchable
+  include PublicActivity::Common
 
   scope :order_by, -> (param) { sort_by(param) }
 
@@ -29,6 +30,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 5..40 }
   validate :availability_should_be_inside_availability_range, on: :update, if: :availability_is_present?
 
+  has_friendship
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -52,12 +54,8 @@ class User < ApplicationRecord
   end
 
   def relation_with user
-    has_invited_user = Friendship.find_by(user_id: id, friend_id: user.id)
-    invited_by_user = Friendship.find_by(user_id: user.id, friend_id: id)
-    return "friends" if has_invited_user && invited_by_user
-    return "invited_user" if has_invited_user && !invited_by_user
-    return "invited_by_user" if !has_invited_user && invited_by_user
-    return "not_friends" if !has_invited_user && !invited_by_user
+    relation = HasFriendship::Friendship.find_relation(self, user)[0]
+    relation.status if relation
   end
 
   def self.sort_by param

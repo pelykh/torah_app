@@ -38,14 +38,14 @@
 
     <div id="relation-with-user">
       <% case current_user.relation_with @user %>
-        <% when "friends" %>
-          <%= button_to "Remove from friends", remove_friend_path(@user), class: "btn btn-danger", method: :delete %>
-        <% when "not_friends" %>
-          <%= button_to "Add to friends", add_friend_path(@user), class: "btn btn-success" %>
-        <% when "invited_user" %>
-          <%= button_to "Cancel invite", remove_friend_path(@user), class: "btn btn-danger",method: :delete %>
-        <% when "invited_by_user" %>
-          <%= button_to "Accept invite", add_friend_path(@user), class: "btn btn-success" %>
+        <% when "accepted" %>
+          <%= button_to "Remove from friends", user_remove_friend_path(@user), class: "btn btn-danger", method: :delete %>
+        <% when "pending" %>
+          <%= button_to "Cancel invite", user_remove_friend_path(@user), class: "btn btn-danger",method: :delete %>
+        <% when "requested" %>
+          <%= button_to "Accept invite", user_accept_request_path(@user), class: "btn btn-success" %>
+        <% else %>
+          <%= button_to "Add to friends", user_friend_request_path(@user), class: "btn btn-success" %>
       <% end %>
     </div>
   <% end %>
