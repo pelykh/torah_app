@@ -22,7 +22,7 @@ jQuery(document).on('turbolinks:load', () => {
     });
   }
 
-if ($('#edit_user').length > 0) {
+if ($('.edit_user').length > 0) {
   $('input.time').timepicker({
     showDuration: true,
     timeFormat: 'H:i',
@@ -31,10 +31,10 @@ if ($('#edit_user').length > 0) {
 
   $('.day').datepair();
 
-  $('#edit_user').on('submit', (e) => {
-    $('.day').each((i, e) => {
-      const range = `${$(e).find('.start').val()}..${$(e).find('.end').val()}`;
-      $(e).find('#user_availability').val(range);
+  $('.edit_user').on('submit', (e) => {
+    $('.day').each((i, day) => {
+      const range = `${$(day).find('.start').val()}..${$(day).find('.end').val()}`;
+      $(day).find('#user_availability').val(range);
     });
   });
 }
