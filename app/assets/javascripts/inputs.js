@@ -48,4 +48,19 @@ function createSubjectPicker(selector) {
     });
 
     return choices;
-  }
+}
+
+function createLanguagePicker(selector) {
+  var config = {
+    removeItemButton: true,
+    maxItemCount: 5
+  };
+
+  console.log(config)
+
+  const elem = $(selector)[0];
+
+  const choices = new Choices(elem, config);
+
+  return choices;
+}

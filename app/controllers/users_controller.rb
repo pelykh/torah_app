@@ -98,7 +98,7 @@ class UsersController < ApplicationController
       s..e
     end
 
-    params.require(:user).permit(:name, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
+    params.require(:user).permit(:name, :language, :avatar, :avatar_cache, :remove_avatar, :country, :city, :state,
       :time_zone).merge({ availability: availability })
   end
 
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def search_params
-    params[:search]? params.require(:search).permit(:name, :country, :city, :state) : {}
+    params[:search]? params.require(:search).permit(:name, :country, :city, :state, :language) : {}
   end
 
   def wrong_user_id

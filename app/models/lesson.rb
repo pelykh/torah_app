@@ -8,7 +8,7 @@ class Lesson < ApplicationRecord
   validate :sender_cannot_be_busy_on_lesson_time
   validate :receiver_cannot_be_busy_on_lesson_time
   validate :time_cannot_be_in_the_past
-  validate :sender_should_be_available_on_lesson_time
+  #validate :sender_should_be_available_on_lesson_time
   validate :receiver_should_be_available_on_lesson_time
 
   before_validation :serialize_time, on: :create
@@ -68,6 +68,6 @@ class Lesson < ApplicationRecord
 
   def self.time_for current_user, user
     self.select("time, recurring").where("(sender_id = ? OR receiver_id = ? OR sender_id = ? OR receiver_id = ?) AND confirmed_at IS NOT NULL",
-      current_user.id ,current_user.id, user.id, user.id).to_json
+      current_user.id ,current_user.id, user.id, user.id)
   end
 end

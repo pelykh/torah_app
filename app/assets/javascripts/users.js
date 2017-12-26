@@ -6,7 +6,8 @@ jQuery(document).on('turbolinks:load', () => {
         name: $('#name').val(),
         country: $('#country').val(),
         city: $('#city').val(),
-        state: $('#state').val()
+        state: $('#state').val(),
+        language: $('#language').val()
       },
       filters: {
         online: $('#online').prop('checked'),
@@ -23,6 +24,8 @@ jQuery(document).on('turbolinks:load', () => {
   }
 
 if ($('.edit_user').length > 0) {
+  const languageInput = createLanguagePicker("#user_language");
+
   $('input.time').timepicker({
     showDuration: true,
     timeFormat: 'H:i',

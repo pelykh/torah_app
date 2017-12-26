@@ -23,9 +23,9 @@ class LessonsController < ApplicationController
   end
 
   def accept_invite
-    lesson = Lesson.find(params[:id])
+    lesson = Lesson.find(params[:id]).includes(:receiver)
     if lesson.receiver == current_user
-      lesson.update_attribute(:confirmed_at, DateTime.now)
+      lesson.update_attribute(:confirmed_at, Time.current)
       redirect_to user_lessons_path(current_user)
     else
       redirect_to user_lessons_path(current_user), notice: "You cannot accept his invite"
@@ -50,6 +50,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       redirect_to @user, notice: "You have invited this user to study with you"
     else
+      p params[:lesson][:starts_at_date]
       render :new
     end
   end
@@ -62,8 +63,9 @@ class LessonsController < ApplicationController
   private
 
   def lesson_time
-    Time.zone.parse("#{params[:starts_at_date]} #{params[:starts_at_time]}")..
-    Time.zone.parse("#{params[:ends_at_date]} #{params[:ends_at_time]}")
+    starts = Time.zone.parse("#{params[:starts_at_date]} #{params[:starts_at_time]}")
+    ends = Time.zone.parse("#{params[:ends_at_date]} #{params[:ends_at_time]}")
+    starts..ends
   end
 
   def lesson_params
