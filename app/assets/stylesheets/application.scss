@@ -5,6 +5,17 @@
 @import "bootstrap-datepicker";
 @import "choices_js/assets/styles/css/choices.min";
 
+#video-call-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 32px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 #check-user-availability-loader, #user-available, #user-unavailable {
   display: none;
 }

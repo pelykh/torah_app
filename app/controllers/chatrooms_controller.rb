@@ -43,6 +43,8 @@ class ChatroomsController < ApplicationController
     rooms = client.video.rooms.list(unique_name: "chatroom_#{params['chatroom_id']}")
     unless rooms.any?
       client.video.v1.rooms.create(unique_name: "chatroom_#{params['chatroom_id']}", video_codecs: 'H264')
+      @chatroom.notify_participants_about_video_call(current_user)
+
     end
 
     render json: { token: token.to_jwt }

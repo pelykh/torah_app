@@ -43,6 +43,27 @@ class Chatroom < ApplicationRecord
     create_event_message("Call has ended in #{time}", current_user)
   end
 
+  def notify_participants_about_video_call user
+    users.each do |u|
+      unless user.id == u.id
+        if u.status == "offline"
+          u.notifications.create(
+            message: "You have been invited to video call",
+            link: Rails.application.routes.url_helpers.chatroom_path(id)
+          )
+        else
+          ActionCable.server.broadcast("current_user_#{u.id}_channel",
+            type: "video_call",
+            user: user.name,
+            chatroom: {
+              url: Rails.application.routes.url_helpers.chatroom_path(id)
+            }
+          )
+        end
+      end
+    end
+  end
+
   private
 
   def create_add_participant_event_message user, current_user
