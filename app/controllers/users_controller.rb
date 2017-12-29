@@ -66,6 +66,10 @@ class UsersController < ApplicationController
     user = User.find(params[:user_id])
     if user
       current_user.friend_request(user)
+      user.notifications.create(
+        message: "#{current_user.name} wants to be your friend",
+        link: user_path(current_user)
+      )
       redirect_to user
     end
   end
@@ -74,8 +78,14 @@ class UsersController < ApplicationController
     user = User.find(params[:user_id])
     if user
       current_user.accept_request(user)
+
       current_user.create_activity(key: 'user.accept_request', owner: user)
       user.create_activity(key: 'user.accept_request', owner: current_user)
+
+      user.notifications.create(
+        message: "#{current_user.name} accepted your friend request",
+        link: user_path(current_user)
+      )
       redirect_to user, notice: "You are friends now"
     end
   end
