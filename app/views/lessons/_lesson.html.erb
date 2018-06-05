@@ -23,7 +23,7 @@
 
         <% unless lesson.confirmed_at %>
           <%= button_to "Accept", accept_lesson_invite_path(lesson.id), class: "btn btn-success" %>
-          <%= button_to "Decline", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+          <%= button_to "Decline", lesson_decline_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
         <% end %>
       </div>
     <% else %>
@@ -41,7 +41,7 @@
       </div>
 
       <% unless lesson.confirmed_at %>
-        <%= button_to "Cancel", decline_lesson_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
+        <%= button_to "Cancel", lesson_decline_invite_path(lesson.id), class: "btn btn-danger", method: :delete %>
       <% end %>
     <% end %>
 </li>
